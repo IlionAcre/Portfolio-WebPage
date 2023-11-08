@@ -1,0 +1,221 @@
+@font-face {
+  font-family: 'digital_numbers';
+  src: url('digitalnumbers-regular-webfont.woff2') format('woff2'),
+       url('digitalnumbers-regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+:root {
+    --clr-primary-100: #fff;
+    
+    --clr-accent-200: rgb(250, 194, 50);
+    --clr-accent-trn-200: rgba(250, 194, 50, .6);
+
+    --clr-accent-400: rgb(233, 41, 156);
+    --clr-accent-400: rgba(233, 41, 156, .5);
+
+    --clr-accent-900: rgb(5, 5, 5);
+
+    --clr-bg-light: rgb(47, 0, 106);
+    --clr-bg-dark: rgb(5, 5, 5);
+    --clr-bg-grad: linear-gradient(to bottom, var(--clr-bg-dark), var(--clr-bg-light));  /* Gradient bg color */
+    --clr-bg-grad-inv: linear-gradient(to bottom, var(--clr-bg-light), var(--clr-bg-dark)); /* Inverted gradient bg color */
+    --clr-bg-mid: rgb(72, 72, 72);
+
+    --ff-primary: 'Montserrat', sans-serif;
+    --ff-big-accent: 'Digital Numbers';
+
+    --ff-text: var(--ff-primary);
+    --ff-title: var(--ff-big-accent);
+
+    --fw-regular: 400;
+    --fw-semi-bold: 550;
+    --fw-bold: 700;
+
+    --fs-400: 1rem;
+    --fs-500: 1.25rem;
+    --fs-600: 1.5rem;
+    --fs-700: 2rem;
+    --fs-900: 3rem;
+
+    --fs-primary-header: var(--fs-900);
+    --fs-secondary-header: var(--fs-600);
+    --fs-section-title: var(--fs-700);
+    --fs-accent: var(--fs-500);
+    --fs-txt: var(--fs-400);
+}
+
+@media (min-width:48em) and (max-width:78em) {
+  :root{
+    --fs-400: 1.25rem;
+    --fs-500: 1.625rem;
+    --fs-600: 2rem;
+    --fs-700: 2.5rem;
+    --fs-900: 4.5rem;
+  }
+}
+
+
+ @media (min-width: 78em) {
+  :root{
+    --fs-400: 1.5rem;
+    --fs-500: 1.75rem;
+    --fs-600: 3.5rem;
+    --fs-700: 4rem;
+    --fs-900: 9rem;
+  }
+    
+ }
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin */
+* {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+    height: 100%;
+}
+/* Set core body defaults */
+body {
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture,
+svg {
+  max-width: 100%;
+  display: block;
+}
+
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Utility Classes */
+
+.fw-bold { font-weight: var(--fw-bold);}
+.fw-semi-bold { font-weight: var(--fw-semi-bold);}
+.fw-regular { font-weight: var(--fw-regular);}
+
+.fs-primary-header { 
+  font-size: var(--fs-primary-header);
+ }
+.fs-secondary-header{ 
+  font-size: var(--fs-secondary-header); 
+}
+.fs-section-title { 
+  font-size: var(--fs-section-title); 
+}
+.fs-accent { 
+  font-size: var(--fs-accent); 
+}
+.fs-txt { 
+  font-size: var(--fs-txt); 
+}
+
+.ff-header {font-family: var(--ff-title);}
+
+
+.clr-primary-100 {
+  color: var(--clr-primary-100);
+}
+
+.clr-accent-200 {
+  color: var(--clr-accent-200)
+}
+
+.clr-neon-200 {
+  color: var(--clr-primary-100);
+  text-shadow: 
+  2px 2px 0.3em var(--clr-accent-trn-200),
+  -2px -2px 0.3em var(--clr-accent-trn-200),
+  5px 5px 0.2em var(--clr-accent-trn-200),
+  -5px -5px 0.2em var(--clr-accent-trn-200);
+}
+
+.clr-accent-400 {
+  color: var(--clr-accent-400);
+}
+
+.clr-accent-900 {
+  color: var(--clr-accent-900);
+}
+
+.bg-grad {
+  background-image: var(--clr-bg-grad);
+}
+
+.bg-grad-inv {
+  background-color: var(--clr-bg-grad-inv);
+}
+
+.bg-dark {
+  background-color: var(--clr-bg-dark);
+}
+
+.bg-light {
+  background-color: var(--clr-bg-light);
+}
+
+.bg-mid {
+  background-color: var(--clr-bg-mid);
+}
+
+.btn-default {
+  background-color: var(--clr-accent-200);
+}
+
+.btn-accent {
+  background-color: var(--clr-accent-400);
+}
+
+.centered{
+  display:flex;
+  align-items: center;
+  text-align: center;
+}
