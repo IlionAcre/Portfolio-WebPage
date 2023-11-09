@@ -20,9 +20,9 @@
 
     --clr-bg-light: rgb(47, 0, 106);
     --clr-bg-dark: rgb(5, 5, 5);
+    --clr-bg-mid: rgb(72, 72, 72);
     --clr-bg-grad: linear-gradient(to bottom, var(--clr-bg-dark), var(--clr-bg-light));  /* Gradient bg color */
     --clr-bg-grad-inv: linear-gradient(to bottom, var(--clr-bg-light), var(--clr-bg-dark)); /* Inverted gradient bg color */
-    --clr-bg-mid: rgb(72, 72, 72);
 
     --ff-primary: 'Montserrat', sans-serif;
     --ff-big-accent: 'Digital Numbers';
@@ -47,7 +47,7 @@
     --fs-txt: var(--fs-400);
 }
 
-@media (min-width:48em) and (max-width:78em) {
+@media (min-width:48em) and (max-width:121.5em) {
   :root{
     --fs-400: 1.25rem;
     --fs-500: 1.625rem;
@@ -58,11 +58,11 @@
 }
 
 
- @media (min-width: 78em) {
+ @media (min-width: 121.5em) {
   :root{
     --fs-400: 1.5rem;
     --fs-500: 1.75rem;
-    --fs-600: 3.5rem;
+    --fs-600: 3rem;
     --fs-700: 4rem;
     --fs-900: 9rem;
   }
@@ -191,7 +191,7 @@ svg {
 }
 
 .bg-grad-inv {
-  background-color: var(--clr-bg-grad-inv);
+  background-image: var(--clr-bg-grad-inv);
 }
 
 .bg-dark {
@@ -214,8 +214,18 @@ svg {
   background-color: var(--clr-accent-400);
 }
 
+.margin-top-sm {
+  margin: 3vh;
+}
+
 .centered{
   display:flex;
   align-items: center;
   text-align: center;
 }
+
+.container {
+  height: 100%;
+  flex-direction: column;
+}
+
