@@ -9,13 +9,14 @@
 
 :root {
     --clr-primary-100: #fff;
-    
+
     --clr-accent-200: rgb(250, 194, 50);
     --clr-accent-trn-200: rgba(250, 194, 50, .6);
 
     --clr-accent-400: rgb(233, 41, 156);
     --clr-accent-400: rgba(233, 41, 156, .5);
 
+    --clr-primary-600:rgb(114, 114, 114);
     --clr-accent-900: rgb(5, 5, 5);
 
     --clr-bg-light: rgb(47, 0, 106);
@@ -207,7 +208,8 @@ svg {
 }
 
 .btn-default {
-  background-color: var(--clr-accent-200);
+  background-color: var(--clr-primary-600);
+  border-radius: 25px;
 }
 
 .btn-accent {

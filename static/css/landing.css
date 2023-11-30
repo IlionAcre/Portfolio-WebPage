@@ -56,19 +56,19 @@ header {
 @media (min-width: 61em) {
     .icon-menu {
         display: none;
-    }
+    }º
     .nav-list {
         display: flex;
     }
     .contact-button {
-        margin-top: calc(25vh - var(--fs-primary-header));
+        margin-top: max(10px, calc(25vh - var(--fs-primary-header)));
     }
     .main-arrow {
-        margin-top: calc(25vh - var(--fs-primary-header));
+        margin-top: max(10px, calc(25vh - var(--fs-primary-header)));
     }
 
     .socials {
-        margin-top: calc(22vh - var(--fs-primary-header))
+        margin-top: max(10px, calc(22vh - var(--fs-primary-header)));
     }
 }
 
@@ -80,7 +80,7 @@ header {
 
 .project-card {
     width: 100vw;
-    height: 275px;
+    height: 260px;
     padding: 2em 4em;
 }
 
@@ -89,4 +89,25 @@ header {
     top: -80px;
 }
 
+.project-btn {
+    position: relative;
+    display: flex;
+    bottom: -170px;
+    margin-top: 1rem;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+    min-width: 95vw;
+}
 
+.project-btn > * {
+    flex-shrink: 0;
+    width: 90px;
+    height: 35px;
+    border: none;
+}
+
+.project-description {
+    position: relative;
+    top: 20px;
+}
