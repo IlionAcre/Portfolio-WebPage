@@ -21,7 +21,7 @@
 
     --clr-bg-light: rgb(47, 0, 106);
     --clr-bg-dark: rgb(5, 5, 5);
-    --clr-bg-mid: rgb(72, 72, 72);
+    --clr-bg-mid: rgb(114, 114, 114);
     --clr-bg-grad: linear-gradient(to bottom, var(--clr-bg-dark), var(--clr-bg-light));  /* Gradient bg color */
     --clr-bg-grad-inv: linear-gradient(to bottom, var(--clr-bg-light), var(--clr-bg-dark)); /* Inverted gradient bg color */
 
@@ -48,7 +48,7 @@
     --fs-txt: var(--fs-400);
 }
 
-@media (min-width:48em) and (max-width:121.5em) {
+@media (min-width:61em) and (max-width:121.5em) {
   :root{
     --fs-400: 1.25rem;
     --fs-500: 1.625rem;
@@ -217,7 +217,7 @@ svg {
 }
 
 .margin-top-sm {
-  margin: 3vh;
+  margin: 2.5vh;
 }
 
 .centered{
@@ -231,3 +231,21 @@ svg {
   flex-direction: column;
 }
 
+.downwards-arrow {
+  height: 20vh;
+}
+
+.big {
+  display: none;
+}
+
+.little {
+  display: flex;
+}
+
+.side-bar {
+  display: hidden;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: 125px;
+}
