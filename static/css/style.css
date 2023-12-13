@@ -244,8 +244,9 @@ svg {
 }
 
 .side-bar {
-  display: hidden;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: center;
   gap: 125px;
+  height: 100%;
+  padding-bottom: 20%;
 }

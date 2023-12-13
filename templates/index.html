@@ -176,7 +176,24 @@
       </aside>
     
     </section>
-    <section class="about bg-dark">
+    <section class="personal bg-dark container centered">
+
+      <div class="about personal-block clr-neon-100">
+        <h1 class="fs-section-title clr-neon-200 fw-semi-bold">About me</h1>
+      </div>
+
+      <div class="contact personal-block">
+        <h1 class="fs-section-title clr-neon-200 fw-semi-bold">Contact me</h1>
+        <form class="contact-form centered" action="/submit_form" method="post" class="bg-mid contact-form">
+          <input class="form-input" type="text" id="name" name="name" placeholder="Name"><br>
+          <input class="form-input" type="email" id="email" name="email" placeholder="Email" type="email"><br>
+          <input class="form-input" type="email" id="email" name="email" placeholder="Subject"><br>
+          <textarea class="form-input" id="message" name="message" placeholder="Message"></textarea><br>
+  
+          <input type="submit" value="Submit">
+        </form>
+      </div>
+
       <div class="downwards-arrow">
         <img src="" alt="Downwards arrow">
       </div>

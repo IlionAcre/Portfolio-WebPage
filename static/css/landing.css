@@ -213,6 +213,10 @@ header {
     align-content: center;
 }
 
+.skill-card {
+    
+}
+
 .skills {
     display: flex;
     flex-direction: row;
@@ -231,6 +235,25 @@ header {
 .left-bar > * {
     transform: rotate(270deg);
 }
+
+
+/* Personal section */
+.personal-block {
+    width: calc(min(100%, 700px));
+    aspect-ratio: 10/7;
+}
+
+.contact-form {
+    margin-top: 10px;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.form-input {
+    width: 80%;
+}
+
+
 
 @media (min-width: 61em) {
     .little {
