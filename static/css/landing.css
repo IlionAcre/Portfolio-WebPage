@@ -238,9 +238,15 @@ header {
 
 
 /* Personal section */
+
 .personal-block {
     width: calc(min(100%, 700px));
-    aspect-ratio: 10/7;
+}
+
+.description {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    width: 80%;
 }
 
 .contact-form {
@@ -251,9 +257,24 @@ header {
 
 .form-input {
     width: 80%;
+    border-radius: 25px;
+    padding: 5px 20px;
+    border: none;
 }
 
+.form-message {
+    aspect-ratio: 10/5;
+    max-height: 20vh;
+}
 
+.form-input:focus {
+    box-shadow: 
+    2px 2px 1.3em var(--clr-accent-trn-200),
+    -2px -2px 1.3em var(--clr-primary-100),
+    5px 5px 1.3em var(--clr-primary-100),
+    -5px -5px 1.3em var(--clr-accent-trn-200);
+    outline: none;
+}
 
 @media (min-width: 61em) {
     .little {
