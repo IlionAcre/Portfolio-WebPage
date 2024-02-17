@@ -213,10 +213,6 @@ header {
     align-content: center;
 }
 
-.skill-card {
-    
-}
-
 .skills {
     display: flex;
     flex-direction: row;
@@ -237,17 +233,56 @@ header {
 }
 
 
-/* Personal section */
-
-.personal-block {
-    width: calc(min(100%, 700px));
+/* About section */
+.about {
+    position: relative;
+    
 }
 
-.description {
+.triangle {
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    height: 80%;
+    z-index: 0;
+}
+ 
+.triangle-bar {
+    position: absolute;
+    top: 0;
+    height: 5px;
+    width: 100vw;
+    border: 2px;
+}
+
+.triangle1 {
+}
+
+#triangle2 {
+    top: 15vh;
+}
+
+.about-main {
+    justify-content: center;
+    align-content: center;
+    z-index: 1;
+}
+
+.personal-block {
+    width: calc(min(70%, 700px));
+}
+
+.description-container {
+    justify-content: center;
+    align-content: center;
     margin-top: 5%;
     margin-bottom: 5%;
     width: 80%;
+    padding: calc(max(5%, 2.5rem)) calc(max(10%, 5rem));
+    border-radius: 360px;
 }
+
+/* contact section */
 
 .contact-form {
     margin-top: 10px;

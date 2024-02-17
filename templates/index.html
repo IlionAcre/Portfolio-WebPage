@@ -177,17 +177,37 @@
 
     </section>
     
-    <section class="personal bg-dark container centered">
-      <div class="about personal-block clr-neon-100 container centered">
-        <h1 class="fs-section-title clr-neon-200 fw-semi-bold">About me</h1>
-        <p class="description bg-mid clr-accent-900 fw-regular">
-          I am a data analyst and software developer with a strong foundation in maths and a keen understanding of business. 
-          My analytical prowess, coupled with my ability to problem-solve and deliver results, drives my work in creating innovative, 
-          user-friendly solutions. I am deeply curious and easy-going, thriving in environments where I can collaborate and continuously learn, 
-          always aiming to exceed expectations with my multifaceted expertise.
-        </p>
+    <section class="about bg-dark container centered" id="about">
+      <div class="triangle" id="triangle1">
+        <div class="triangle-bar border-neon-200" id="triangle1-up"></div>
+        <div class="triangle-bar border-neon-200" id="triangle1-left"></div>
+        <div class="triangle-bar border-neon-200" id="triangle1-right"></div>
       </div>
 
+      <div class="triangle" id="triangle2">
+        <div class="triangle-bar border-neon-200" id="triangle2-up"></div>
+        <div class="triangle-bar border-neon-200" id="triangle2-left"></div>
+        <div class="triangle-bar border-neon-200" id="triangle2-right"></div>
+      </div>
+
+      <div class="about-main personal-block clr-neon-100 container centered">
+        <h1 class="fs-section-title clr-neon-200 fw-semi-bold">About me</h1>
+        <div class="description-container bg-dark border-neon-400">
+          <p class="description clr-primary-100 fw-regular fs-txt">
+            I am a data analyst and software developer with a strong foundation in maths and a keen understanding of business.
+            My analytical prowess, coupled with my ability to problem-solve and deliver results, drives my work in creating innovative,
+            user-friendly solutions. I am deeply curious and easy-going, thriving in environments where I can collaborate and continuously learn,
+            always aiming to exceed expectations with my multifaceted expertise.
+          </p>
+        </div>
+      </div>
+
+      <div class="downwards-arrow">
+        <img src="" alt="Downwards arrow">
+      </div>
+    </section>
+
+    <section class="bg-dark container centered">
       <div class="contact personal-block">
         <h1 class="fs-section-title clr-neon-200 fw-semi-bold">Contact me</h1>
         <form class="contact-form centered" action="/submit_form" method="post" class="bg-mid contact-form">
@@ -199,11 +219,8 @@
           <input type="submit" value="Submit">
         </form>
       </div>
-
-      <div class="downwards-arrow">
-        <img src="" alt="Downwards arrow">
-      </div>
     </section>
   </main>
+  <script src="/static/js/static.js"></script>
 </body>
 </html>

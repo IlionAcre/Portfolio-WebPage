@@ -179,6 +179,15 @@ svg {
   -5px -5px 0.2em var(--clr-accent-trn-200);
 }
 
+.clr-neon-400 {
+  color: var(--clr-primary-100);
+  text-shadow: 
+  2px 2px 0.3em var(--clr-accent-trn-400),
+  -2px -2px 0.3em var(--clr-accent-trn-400),
+  5px 5px 0.2em var(--clr-accent-trn-400),
+  -5px -5px 0.2em var(--clr-accent-trn-400);
+}
+
 .clr-accent-400 {
   color: var(--clr-accent-400);
 }
@@ -249,4 +258,20 @@ svg {
   gap: 125px;
   height: 100%;
   padding-bottom: 20%;
+}
+
+.border-neon-200 {
+  color: var(--clr-primary-100);
+  box-shadow: 
+  0px 0px 1em 0.3em var(--clr-accent-200),
+  1.5px 0px 3em 0.3em var(--clr-accent-200);
+}
+
+.border-neon-400 {
+  color: var(--clr-primary-100);
+  box-shadow: 
+  8px 0px 2em var(--clr-accent-trn-400),
+  -8px 0px 2em var(--clr-accent-trn-400),
+  16px 0px 2em var(--clr-accent-trn-400),
+  -16px 0px 2em var(--clr-accent-trn-400);
 }
