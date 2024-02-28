@@ -252,14 +252,6 @@ svg {
   display: flex;
 }
 
-.side-bar {
-  flex-direction: column;
-  justify-content: center;
-  gap: 125px;
-  height: 100%;
-  padding-bottom: 20%;
-}
-
 .border-neon-200 {
   color: var(--clr-primary-100);
   box-shadow: 

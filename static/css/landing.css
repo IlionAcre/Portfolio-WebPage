@@ -171,6 +171,16 @@ header {
 }
 
 /* Skills */
+
+.side-bar {
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 5vh;
+    padding-bottom: 15vh;
+    position: absolute;
+    height: 80vh;
+}
+
 .skills-menu {
     margin-top: 20px;
     display: grid;
@@ -185,11 +195,27 @@ header {
 }
 
 .btn-skills {
-    width: 140px;
+    width: 20vh;
     height: 15px;
     background-color: var(--clr-bg-mid);
     border: none;
     border-radius: 25px;
+}
+
+.right-bar {
+    right: 0;
+}
+
+.right-bar > * {
+    transform: rotate(90deg);
+}
+
+.left-bar {
+    left: 0;
+}
+
+.left-bar > * {
+    transform: rotate(270deg);
 }
 
 .skills-container {
@@ -221,29 +247,21 @@ header {
 }
 
 .skills-description {
-    max-width: calc(max(50%, 450px));
-}
-
-.right-bar > * {
-    transform: rotate(90deg);
-}
-  
-.left-bar > * {
-    transform: rotate(270deg);
+    max-width: calc(max(50vw, 450px));
 }
 
 
 /* About section */
 .about {
     position: relative;
-    
+    justify-content: center;
 }
 
 .triangle {
     position: absolute;
     top: 0;
-    width: 100vw;
-    height: 80%;
+    width: 95%;
+    height: 75%;
     z-index: 0;
 }
  
@@ -251,11 +269,12 @@ header {
     position: absolute;
     top: 0;
     height: 5px;
-    width: 100vw;
+    width: 100%;
     border: 2px;
 }
 
-.triangle1 {
+#triangle1 {
+    top: 5vh;
 }
 
 #triangle2 {
@@ -266,20 +285,19 @@ header {
     justify-content: center;
     align-content: center;
     z-index: 1;
-}
-
-.personal-block {
-    width: calc(min(70%, 700px));
-}
-
-.description-container {
-    justify-content: center;
-    align-content: center;
-    margin-top: 5%;
-    margin-bottom: 5%;
-    width: 80%;
-    padding: calc(max(5%, 2.5rem)) calc(max(10%, 5rem));
+    width: calc(min(70%, 1000px));
+    height: fit-content;
+    padding: 15vh 0;
     border-radius: 360px;
+    max-height: 80vh;
+}
+
+.description {
+    width: 80%;
+    margin-top: 2rem;
+    max-height: 60vh;
+    overflow: scroll;
+    flex-shrink: 0;
 }
 
 /* contact section */
@@ -330,10 +348,12 @@ header {
 
     .skill-card {
         width: 17.5vw;
-        height: 14vw;
+        height: auto;
+        max-width: 215px;
+        aspect-ratio: 1.25;
     }
 
     .skills-description {
-        max-width: none;
+        max-width: 50vw;
     }
 }
