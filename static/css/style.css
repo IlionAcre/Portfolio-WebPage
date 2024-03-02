@@ -51,7 +51,7 @@
 @media (min-width:61em) and (max-width:121.5em) {
   :root{
     --fs-400: 1.25rem;
-    --fs-500: 1.625rem;
+    --fs-500: 1.425rem;
     --fs-600: 2rem;
     --fs-700: 2.5rem;
     --fs-900: 4.5rem;
@@ -221,12 +221,8 @@ svg {
   border-radius: 25px;
 }
 
-.btn-accent {
-  background-color: var(--clr-accent-400);
-}
-
 .margin-top-sm {
-  margin: 2.5vh;
+  margin: 2.5%;
 }
 
 .centered{
@@ -240,8 +236,12 @@ svg {
   flex-direction: column;
 }
 
+section {
+  min-height: 600px;
+}
+
 .downwards-arrow {
-  height: 20vh;
+  height: 20%;
 }
 
 .big {
@@ -266,4 +266,105 @@ svg {
   -8px 0px 2em var(--clr-accent-trn-400),
   16px 0px 2em var(--clr-accent-trn-400),
   -16px 0px 2em var(--clr-accent-trn-400);
+}
+
+
+/* Buttons */
+
+.btn-neon {
+  display: inline-block;
+  position: relative;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 0.25em 1em;
+  border-radius: 0.35em;
+
+  transition: background-color 100ms linear;
+}
+
+.btn-neon::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+
+  opacity: 0;
+  transition: opacity 100ms linear;
+}
+
+.btn-neon:hover::after,
+.btn-neon:focus::after,
+.btn-neon:hover::before,
+.btn-neon:focus::before {
+  opacity: 1;
+}
+
+
+.btn-accent {
+  color: var(--clr-accent-400);
+  border: var(--clr-accent-400) .25em solid;
+
+  text-shadow: 
+      0 0 0.6em hsl(0 0% 100% / 0.4),
+      0 0 0.95em currentColor;
+  box-shadow: 
+      0 0 0.5em 0 var(--clr-accent-400),
+      inset 0 0 0.5em 0 var(--clr-accent-400);
+}
+
+.btn-accent::before {
+  pointer-events: none;
+  content: "";
+  position: absolute;
+  
+  top: 120%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+
+  transform: perspective(1.5em) rotateX(40deg) scale(1, 0.35);
+  filter: blur(1em);
+  opacity: .7;
+  background: var(--clr-accent-400);
+}
+
+.btn-accent::after {
+  box-shadow: 0 0 2em 0.5em var(--clr-accent-400);
+}
+
+.btn-accent:hover,
+.btn-accent:focus {
+  background: var(--clr-accent-400);
+  color: var(--clr-bg-dark);
+  text-shadow: none;
+}
+
+
+.btn-regular-200 {
+  color: var(--clr-accent-200);
+  border: var(--clr-accent-200) .25em solid;
+
+  text-shadow: 
+      0 0 0.6em hsl(0 0% 100% / 0.4),
+      0 0 0.95em currentColor;
+  box-shadow: 
+      0 0 0.5em 0 var(--clr-accent-200),
+      inset 0 0 0.5em 0 var(--clr-accent-200);
+}
+
+.btn-regular-200::before {
+  background: var(--clr-accent-200);
+}
+
+.btn-regular-200::after {
+  box-shadow: 0 0 2em 0.5em var(--clr-accent-200);
+}
+
+.btn-regular-200:hover,
+.btn-regular-200:focus {
+  background: var(--clr-accent-200);
+  color: var(--clr-bg-dark);
+  text-shadow: none;
 }

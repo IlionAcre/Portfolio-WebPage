@@ -8,6 +8,7 @@ header {
     min-width: 100%;
 }
 
+/* HERO SECTION */
 .main-nav {
     display: flex;
     padding: 1em 2em;
@@ -51,7 +52,6 @@ header {
     margin-top: calc(10vh - var(--fs-primary-header));
     background-color: var(--clr-primary-100);
 }
-
 
 @media (min-width: 61em) {
     .icon-menu {
@@ -143,8 +143,8 @@ header {
 
 .project-card-big {
     margin-top: 15px;
-    width: 60vw;
-    height: 50vh;
+    width: 750px;
+    height: 400px;
     padding: 2em 4em;
 }
 
@@ -167,7 +167,7 @@ header {
 
 .project-description-big {
     margin-top: 30px;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 /* Skills */
@@ -197,7 +197,6 @@ header {
 .btn-skills {
     width: 20vh;
     height: 15px;
-    background-color: var(--clr-bg-mid);
     border: none;
     border-radius: 25px;
 }
@@ -220,13 +219,14 @@ header {
 
 .skills-container {
     display: grid;
-    grid-template-rows: auto;
-    grid-template-columns: repeat(2, 1fr);
-    grid-auto-flow: row;
     margin-top: 30px;
     column-gap: 50px;
     row-gap: 10px;
-    overflow: scroll;
+    overflow: auto;
+
+    width: min(350px, 85vw);
+    grid-template-columns: repeat(auto-fit, 120px);
+    justify-content: center;
 }
 
 .skill-card {
@@ -296,7 +296,7 @@ header {
     width: 80%;
     margin-top: 2rem;
     max-height: 60vh;
-    overflow: scroll;
+    overflow: auto;
     flex-shrink: 0;
 }
 
@@ -329,7 +329,7 @@ header {
     outline: none;
 }
 
-@media (min-width: 61em) {
+@media (min-width: 42em) {
     .little {
         display: none;
     }
@@ -339,17 +339,17 @@ header {
     }
 
     .skills-container {
-        grid-template-columns: auto;
-        grid-template-rows: repeat(2, 1fr);
-        grid-auto-flow: column;
+        width: 70vw;
+        grid-template-columns: repeat(auto-fit, min(17.5vw, 180px));
         column-gap: 10px;
         row-gap: 50px;
+        justify-content: center;
     }
 
     .skill-card {
-        width: 17.5vw;
+        width: max(17.5vw, 120px);
         height: auto;
-        max-width: 215px;
+        max-width: 180px;
         aspect-ratio: 1.25;
     }
 
