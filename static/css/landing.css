@@ -25,50 +25,56 @@ header {
 }
 
 .icon-menu {
-    display: block;
+    display: block; 
 }
 
 .title-container {
-    margin-top: 22vh;
+    margin-top: max(22svh, calc(var(--container-min-height)*0.22));
     max-width: 95%;
-    overflow: hidden;
 }
 
 .subtitle-container {
-    margin-top: 5vh;
+    margin-top: max(5svh, calc(var(--container-min-height)*0.05));
 }
 
 .socials {
     position: absolute;
     left: 0;
-    margin-top: 10vh;
+    margin-top: max(10svh, calc(var(--container-min-height)*0.1));
 }
 
 .contact-button {
-    margin-top: calc(30vh - var(--fs-primary-header));
+    margin-top: calc(max(30svh, calc(var(--container-min-height)*0.3)) - var(--fs-primary-header));
 }
 
 .main-arrow {
-    margin-top: calc(10vh - var(--fs-primary-header));
     background-color: var(--clr-primary-100);
+    opacity: 0;
 }
 
 @media (min-width: 61em) {
     .icon-menu {
         display: none;
-    }º
+    }
+
+    .main-nav {
+        display: flex;
+    }
+
     .nav-list {
         display: flex;
     }
+
     .contact-button {
-        margin-top: max(10px, calc(25vh - var(--fs-primary-header)));
+        margin-top: max(10px, calc(max(25svh, calc(var(--container-min-height)*0.25)) - var(--fs-primary-header)));
     }
+    
     .main-arrow {
-        margin-top: max(10px, calc(25vh - var(--fs-primary-header)));
+
     }
 
     .socials {
-        margin-top: max(10px, calc(22vh - var(--fs-primary-header)));
+        margin-top: max(10px, calc(max(25svh, calc(var(--container-min-height)*0.25)) - var(--fs-primary-header)));
     }
 }
 
@@ -134,7 +140,7 @@ header {
 }
 
 .project-whole-big {
-    margin-top: 4vh;
+    margin-top: max(4svh, calc(var(--container-min-height)*0.04));
     display: flex;
     flex-direction: column;
     align-content: center;
@@ -175,10 +181,10 @@ header {
 .side-bar {
     flex-direction: column;
     justify-content: space-between;
-    padding-top: 5vh;
-    padding-bottom: 15vh;
+    padding-top: max(5svh, calc(var(--container-min-height)*0.05));
+    padding-bottom: max(15svh, calc(var(--container-min-height)*0.15));
     position: absolute;
-    height: 80vh;
+    height: 80%;
 }
 
 .skills-menu {
@@ -195,7 +201,7 @@ header {
 }
 
 .btn-skills {
-    width: 20vh;
+    width: max(20svh, calc(var(--container-min-height)*0.20));
     height: 15px;
     border: none;
     border-radius: 25px;
@@ -274,11 +280,11 @@ header {
 }
 
 #triangle1 {
-    top: 5vh;
+    top: max(5svh, calc(var(--container-min-height)*0.05));
 }
 
 #triangle2 {
-    top: 15vh;
+    top: max(15svh, calc(var(--container-min-height)*0.15));
 }
 
 .about-main {
@@ -287,15 +293,15 @@ header {
     z-index: 1;
     width: calc(min(70%, 1000px));
     height: fit-content;
-    padding: 15vh 0;
+    padding: max(15svh, calc(var(--container-min-height)*0.15)) 0;
     border-radius: 360px;
-    max-height: 80vh;
+    max-height: max(80svh, calc(var(--container-min-height)*0.8));
 }
 
 .description {
     width: 80%;
     margin-top: 2rem;
-    max-height: 60vh;
+    max-height: max(60svh, calc(var(--container-min-height)*0.6));
     overflow: auto;
     flex-shrink: 0;
 }
@@ -317,7 +323,7 @@ header {
 
 .form-message {
     aspect-ratio: 10/5;
-    max-height: 20vh;
+    max-height: 20%;
 }
 
 .form-input:focus {

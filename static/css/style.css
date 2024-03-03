@@ -46,6 +46,8 @@
     --fs-section-title: var(--fs-700);
     --fs-accent: var(--fs-500);
     --fs-txt: var(--fs-400);
+
+    --container-min-height: 600px;
 }
 
 @media (min-width:61em) and (max-width:121.5em) {
@@ -171,12 +173,26 @@ svg {
 }
 
 .clr-neon-200 {
-  color: var(--clr-primary-100);
+  
+  color: transparent;
+  -webkit-text-stroke: 1px var(--clr-accent-200); /* Define stroke width and color */
+  text-stroke: 1px var(--clr-accent-200); /* Non-prefixed version for future compatibility */
+
   text-shadow: 
-  2px 2px 0.3em var(--clr-accent-trn-200),
-  -2px -2px 0.3em var(--clr-accent-trn-200),
-  5px 5px 0.2em var(--clr-accent-trn-200),
-  -5px -5px 0.2em var(--clr-accent-trn-200);
+  0.05em 0.05em 0.6em var(--clr-accent-trn-200),
+  -0.05em -0.05em 0.6em var(--clr-accent-trn-200),
+  0.12em 0.12em 0.2em var(--clr-accent-trn-200),
+  -0.12em -0.12em 0.2em var(--clr-accent-trn-200);
+}
+
+.clr-neon-200:hover {
+  color: var(--clr-accent-200);
+
+  text-shadow: 
+  0.05em 0.05em 1em var(--clr-accent-200),
+  -0.05em -0.05em 1em var(--clr-accent-200),
+  0.12em 0.12em 0.4em var(--clr-accent-200),
+  -0.12em -0.12em 0.4em var(--clr-accent-200);
 }
 
 .clr-neon-400 {
@@ -222,7 +238,7 @@ svg {
 }
 
 .margin-top-sm {
-  margin: 2.5%;
+  margin: max(2.5svh, calc(var(--container-min-height)*0.025));
 }
 
 .centered{
@@ -237,11 +253,11 @@ svg {
 }
 
 section {
-  min-height: 600px;
+  min-height: 700px;
 }
 
 .downwards-arrow {
-  height: 20%;
+  height: 20svh;
 }
 
 .big {
