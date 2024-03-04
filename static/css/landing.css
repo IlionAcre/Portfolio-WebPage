@@ -68,7 +68,7 @@ header {
     .contact-button {
         margin-top: max(10px, calc(max(25svh, calc(var(--container-min-height)*0.25)) - var(--fs-primary-header)));
     }
-    
+
     .main-arrow {
 
     }
@@ -263,11 +263,29 @@ header {
     justify-content: center;
 }
 
+.trapezium {
+    position: absolute;
+    width: min(97%, 1200px);
+    height: max(20svh, calc(var(--container-min-height)*0.2));
+    z-index: 1;
+    clip-path: polygon(21% 0, 81% 0, 100% 10%, 0 10%);
+    background-color: var(--clr-accent-200);
+    filter: blur(500px);
+}
+
+.trapezium-1 {
+    top: 0;
+}
+
+.trapezium-2 {
+    top:max(13svh, calc(var(--container-min-height)* 0.13));
+}
+
 .triangle {
     position: absolute;
     top: 0;
-    width: 95%;
-    height: 75%;
+    width: min(97%, 1200px);
+    height: 80%;
     z-index: 0;
 }
  
@@ -279,27 +297,58 @@ header {
     border: 2px;
 }
 
+.triangle-bar {
+    background: var(--clr-accent-trn-200);
+    box-shadow: 
+    0px 0px 1em 0.3em var(--clr-accent-trn-200),
+    1.5px 0px 3em 0.3em var(--clr-accent-trn-200);
+}
+
+.triangle-up {
+    overflow: hidden;
+}
+
 #triangle1 {
-    top: max(5svh, calc(var(--container-min-height)*0.05));
+    top: max(2svh, calc(var(--container-min-height)*0.02));
 }
 
 #triangle2 {
     top: max(15svh, calc(var(--container-min-height)*0.15));
+    background-color: var(--clr-bg-dark);
+}
+
+#triangle2::after {
+    pointer-events: none;
+    content: "";
+    position: absolute;
+    
+    top: 50%;
+    left: 35%;
+    right: 35%;
+    height: 100%;
+
+    border-radius: 360px;
+    transform: perspective(15em) rotateX(85deg) scale(1, 0.1);
+
+    filter: blur(5em);
+    opacity: .7;
+    background: var(--clr-accent-trn-200);
 }
 
 .about-main {
+    margin-top: max(2svh, calc(var(--container-min-height)*0.02));
     justify-content: center;
     align-content: center;
     z-index: 1;
-    width: calc(min(70%, 1000px));
+    width: calc(min(80%, 680px));
     height: fit-content;
     padding: max(15svh, calc(var(--container-min-height)*0.15)) 0;
     border-radius: 360px;
-    max-height: max(80svh, calc(var(--container-min-height)*0.8));
+    max-height: max(90svh, calc(var(--container-min-height)*0.8));
 }
 
 .description {
-    width: 80%;
+    width: 75%;
     margin-top: 2rem;
     max-height: max(60svh, calc(var(--container-min-height)*0.6));
     overflow: auto;
@@ -307,31 +356,85 @@ header {
 }
 
 /* contact section */
+.contact {
+    justify-content: center;
+}
+
 
 .contact-form {
-    margin-top: 10px;
+    margin-top: 30px;
     flex-direction: column;
     row-gap: 10px;
 }
 
-.form-input {
-    width: 80%;
-    border-radius: 25px;
-    padding: 5px 20px;
+.wrapper {
+    position: relative;
+    width: 35em;
+    height: 45em;
+    background: var(--clr-bg-dark);
+    box-shadow: 0 0 50px var(--clr-accent-400);
+    border-radius: 20px;
+    padding: 40px;
+}
+
+.form-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.input-group {
+    position: relative;
+    margin: 30px 0;
+    border-bottom: 2px solid var(--clr-primary-100);
+}
+
+.input-group label {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    transition: .5s;
+}
+ 
+.input-group textarea {
+    border: 2px solid var(--clr-primary-100);
+}
+
+.input-group input {
+    width: 320px;
+    height: 40px;
     border: none;
 }
 
-.form-message {
-    aspect-ratio: 10/5;
-    max-height: 20%;
+.input-group input,
+.input-group textarea {
+    padding: 0 5px;
+    background: transparent;
+    outline: none;
+    color: var(--clr-primary-100)
 }
 
-.form-input:focus {
-    box-shadow: 
-    2px 2px 1.3em var(--clr-accent-trn-200),
-    -2px -2px 1.3em var(--clr-primary-100),
-    5px 5px 1.3em var(--clr-primary-100),
-    -5px -5px 1.3em var(--clr-accent-trn-200);
+.input-group input:focus~label,
+.input-group input:valid~label,
+.input-group textarea:focus~label,
+.input-group textarea:valid~label {
+    top: -5px;
+}
+
+.contact-btn {
+    position: relative;
+    width: 100%;
+    height: 40px;
+    background: var(--clr-accent-400);
+    box-shadow: 0 0 10px var(--clr-accent-trn-400);
+    color: var(--clr-bg-dark);
+    cursor: pointer;
+    border-radius: 30px;
+    border: none;
     outline: none;
 }
 
@@ -361,5 +464,10 @@ header {
 
     .skills-description {
         max-width: 50vw;
+    }
+
+    .about-main {
+        margin-top: max(7svh, calc(var(--container-min-height)*0.07));
+        width: calc(min(70%, 680px));
     }
 }

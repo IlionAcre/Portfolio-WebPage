@@ -39,7 +39,7 @@
         <a href="#"><h4 class="fs-txt fw-semi-bold">LOGO</h4></a>
         <a href="#"><h4 class="fs-txt fw-semi-bold">LOGO</h4></a>
       </aside>
-      <a class="btn-neon btn-accent contact-button fs-accent fw-bold">Contact Me</a>
+      <a class="btn-neon btn-accent contact-button fs-secondary-header fw-bold">Contact Me</a>
       
       <div class="downwards-arrow main-arrow">
         <img src="" alt="Downwards arrow main-arrow">
@@ -182,16 +182,20 @@
     </section>
     
     <section class="about bg-dark container centered" id="about">
+      <div class="trapezium trapezium-1 border-neon-200"></div>
+
       <div class="triangle" id="triangle1">
-        <div class="triangle-bar border-neon-200" id="triangle1-up"></div>
-        <div class="triangle-bar border-neon-200" id="triangle1-left"></div>
-        <div class="triangle-bar border-neon-200" id="triangle1-right"></div>
+        <div class="triangle-bar" id="triangle1-up"></div>
+        <div class="triangle-bar triangle-side" id="triangle1-left"></div>
+        <div class="triangle-bar triangle-side" id="triangle1-right"></div>
       </div>
 
+      <div class="trapezium trapezium-2 border-neon-200"></div>
+
       <div class="triangle" id="triangle2">
-        <div class="triangle-bar border-neon-200" id="triangle2-up"></div>
-        <div class="triangle-bar border-neon-200" id="triangle2-left"></div>
-        <div class="triangle-bar border-neon-200" id="triangle2-right"></div>
+        <div class="triangle-bar" id="triangle2-up"></div>
+        <div class="triangle-bar triangle-side" id="triangle2-left"></div>
+        <div class="triangle-bar triangle-side" id="triangle2-right"></div>
       </div>
 
       <div class="about-main border-neon-400 bg-dark container centered">
@@ -208,18 +212,35 @@
     </div>
     </section>
 
-    <section class="bg-dark container centered">
-      <div class="contact personal-block">
-        <h1 class="fs-section-title clr-neon-200 fw-semi-bold">CONTACT ME</h1>
-        <form class="contact-form centered" action="/submit_form" method="post" class="bg-mid contact-form">
-          <input class="form-input bg-mid" type="text" id="name" name="name" placeholder="Name"><br>
-          <input class="form-input bg-mid" type="email" id="email" name="email" placeholder="Email" type="email"><br>
-          <input class="form-input bg-mid" type="email" id="email" name="email" placeholder="Subject"><br>
-          <textarea class="form-input form-message bg-mid" id="message" name="message" placeholder="Message"></textarea><br>
-  
-          <input type="submit" value="Submit">
-        </form>
+    <section class="bg-dark contact container centered">
+      <div class="contact-main personal-block">
+        
+        <div class="wrapper">
+          <div class="form-wrapper contact-form clr-primary-100">
+            <h1 class="fs-section-title clr-neon-200 fw-semi-bold">CONTACT ME</h1>
+            <form action="" class="fs-txt">
+              <div class="input-group">
+                <input name="name" type="text" class="form-input bg-mid" required>
+                <label for="">Name</label>
+              </div>
+              <div class="input-group">
+                <input name="email" type="text" class="form-input bg-mid" required>
+                <label for="">Email</label>
+              </div>
+              <div class="input-group">
+                <input name="subject" type="text" class="form-input bg-mid" required>
+                <label for="">Subject</label>
+              </div>
+              <div class="input-group message">
+                <textarea name="emailContent" rows="4" cols="30" class="form-input bg-mid" required></textarea>
+                <label for="">Message</label>
+              </div>
+              <button name="submit" type="submit" class="contact-btn">Contact Me</button>
+            </form>
+          </div>
+        </div>
       </div>
+      <div></div>
     </section>
   </main>
   <script src="/static/js/static.js"></script>
