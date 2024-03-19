@@ -356,28 +356,25 @@ header {
 }
 
 /* contact section */
+
 .contact {
     justify-content: center;
 }
 
-
-.contact-form {
-    margin-top: 30px;
-    flex-direction: column;
-    row-gap: 10px;
-}
-
 .wrapper {
     position: relative;
-    width: 35em;
-    height: 45em;
+    padding-top: 2em;
+    padding-bottom: 3em;
+    padding-inline: 4em;
     background: var(--clr-bg-dark);
     box-shadow: 0 0 50px var(--clr-accent-400);
     border-radius: 20px;
-    padding: 40px;
+    width: 90%;
+    max-width: 30em;
 }
 
 .form-wrapper {
+    flex-direction: column;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -385,10 +382,16 @@ header {
     height: 100%;
 }
 
+.contact-form {
+    width: 100%;
+}
+
 .input-group {
     position: relative;
-    margin: 30px 0;
+    margin: 2em 0;
     border-bottom: 2px solid var(--clr-primary-100);
+    flex-grow: 0;
+    width: 100%;
 }
 
 .input-group label {
@@ -400,13 +403,27 @@ header {
     transition: .5s;
 }
  
+.border-container {
+    position: relative;
+}
+.message {
+    border: none;
+    margin-block: 3em;
+}
+
+.message label {
+    top: 1em;
+}
+
 .input-group textarea {
     border: 2px solid var(--clr-primary-100);
+    width: 100%;
+    height: 8em;
 }
 
 .input-group input {
-    width: 320px;
-    height: 40px;
+    width: 100%;
+    height: 2em;
     border: none;
 }
 
@@ -419,23 +436,22 @@ header {
 }
 
 .input-group input:focus~label,
-.input-group input:valid~label,
+.input-group input:valid~label {
+    top: -5px;
+}
+
 .input-group textarea:focus~label,
 .input-group textarea:valid~label {
-    top: -5px;
+    top: -1em;
+}
+
+.first-input {
+    margin-top: 1em;
 }
 
 .contact-btn {
     position: relative;
     width: 100%;
-    height: 40px;
-    background: var(--clr-accent-400);
-    box-shadow: 0 0 10px var(--clr-accent-trn-400);
-    color: var(--clr-bg-dark);
-    cursor: pointer;
-    border-radius: 30px;
-    border: none;
-    outline: none;
 }
 
 @media (min-width: 42em) {

@@ -38,7 +38,7 @@
     --fs-400: 1rem;
     --fs-500: 1.25rem;
     --fs-600: 1.5rem;
-    --fs-700: 2rem;
+    --fs-700: 2.5rem;
     --fs-900: 3rem;
 
     --fs-primary-header: var(--fs-900);
@@ -311,9 +311,7 @@ section {
 }
 
 .btn-neon:hover::after,
-.btn-neon:focus::after,
-.btn-neon:hover::before,
-.btn-neon:focus::before {
+.btn-neon:focus::after {
   opacity: 1;
 }
 
@@ -360,8 +358,7 @@ section {
 
 .btn-regular-200 {
   color: var(--clr-accent-200);
-  border: var(--clr-accent-200) .25em solid;
-
+  border: var(--clr-accent-trn-200) .15em solid;
   text-shadow: 
       0 0 0.6em hsl(0 0% 100% / 0.4),
       0 0 0.95em currentColor;
