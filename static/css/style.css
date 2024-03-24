@@ -241,6 +241,10 @@ svg {
   margin: max(2.5svh, calc(var(--container-min-height)*0.025));
 }
 
+.margin-top-md {
+  margin-top: max(5svh, calc(var(--container-min-height)*0.05));
+}
+
 .centered{
   display:flex;
   align-items: center;
