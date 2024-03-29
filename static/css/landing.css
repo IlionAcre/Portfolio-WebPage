@@ -24,6 +24,10 @@ header {
     gap: 2em;
 }
 
+.nav-list > * {
+    cursor: pointer;
+}
+
 .icon-menu {
     display: block; 
 }
@@ -76,100 +80,50 @@ header {
 
 
 /* Projects little*/
-.projects-big {
-    display: none;
-}
-
-.project-whole-little {
-    display: flex;
+.project {
     flex-direction: column;
-    align-content: center;
-    justify-content: space-evenly;
+    border-radius: 60px;
     max-width: 550px;
+    padding-block: 2em;
+    
+    justify-content: space-evenly;
+    height: 100%;
+
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
 
-.project-carousel-little{
-    margin-top: 5px;
-    .project-whole-big {
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    justify-content: space-between;
-}
-
-}
-
-.project-card-little {
+.project-card {
     margin-top: 15px;
     width: 100vw;
     height: 250px;
     padding: 2em 4em;
-    max-width: 550px;
+    width: 100%;
 }
 
-
-.project-btns-little {
+.project-btns {
     display: flex;
     margin-top: 1rem;
     gap: 15px;
     flex-wrap: wrap;
     justify-content: center;
-    min-width: 95vw;
+    min-width: 95%;
 }
 
-.project-btns-little > * {
+.project-btns > * {
     flex-shrink: 0;
     width: 90px;
     height: 35px;
     border: none;
 }
 
-.project-description-little {
-    margin-top: 30px;
-}
-
-/* projects big */
-
-.project-carousel-big{
-    margin-top: 5px;
-    flex-direction: column;
-}
-
-.project-whole-big {
-    margin-top: max(4svh, calc(var(--container-min-height)*0.04));
-    align-content: center;
-    justify-content: space-between;
-}
-
-.project-card-big {
-    margin-top: 15px;
-    width: 900px;
-    height: 500px;
-    padding: 2em 4em;
-    position: relative;
-}
-
-
-.project-btns-big {
-    display: flex;
-    margin-top: 1rem;
-    gap: 15px;
-    flex-wrap: wrap;
-    justify-content: center;
-    min-width: 95vw;
-}
-
-.project-btns-big > * {
-    flex-shrink: 0;
-    width: 90px;
-    height: 35px;
-    border: none;
-}
-
-.project-description-big {
-    margin-top: 30px;
-    overflow-y: auto;
+.project-description {
+    width: 90%;
 }
 
 

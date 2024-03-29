@@ -50,7 +50,7 @@
     --container-min-height: 600px;
 }
 
-@media (min-width:61em) and (max-width:121.5em) {
+@media (min-width:61em) {
   :root{
     --fs-400: 1.25rem;
     --fs-500: 1.425rem;
@@ -60,6 +60,16 @@
   }
 }
 
+/*
+@media (min-width:61em) and (max-width:121.5em) {
+  :root{
+    --fs-400: 1.25rem;
+    --fs-500: 1.425rem;
+    --fs-600: 2rem;
+    --fs-700: 3.5rem;
+    --fs-900: 6rem;
+  }
+}
 
  @media (min-width: 121.5em) {
   :root{
@@ -71,6 +81,7 @@
   }
     
  }
+ */
 
 /* Box sizing rules */
 *,
@@ -175,14 +186,8 @@ svg {
 .clr-neon-200 {
   
   color: transparent;
-  -webkit-text-stroke: 1px var(--clr-accent-200); /* Define stroke width and color */
-  text-stroke: 1px var(--clr-accent-200); /* Non-prefixed version for future compatibility */
-
-  text-shadow: 
-  0.05em 0.05em 0.6em var(--clr-accent-trn-200),
-  -0.05em -0.05em 0.6em var(--clr-accent-trn-200),
-  0.12em 0.12em 0.2em var(--clr-accent-trn-200),
-  -0.12em -0.12em 0.2em var(--clr-accent-trn-200);
+  -webkit-text-stroke: 2px var(--clr-accent-200); /* Define stroke width and color */
+  text-stroke: 2px var(--clr-accent-200); /* Non-prefixed version for future compatibility */
 }
 
 .clr-neon-200:hover {
