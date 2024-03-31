@@ -80,14 +80,102 @@ header {
 
 
 /* Projects little*/
+.carousel-track-container,
+.carousel-track,
+.carousel-slide,
+.project {
+    height: 100%;
+}
+
+.carousel {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.carousel-track-container {
+    position: relative;
+    overflow: hidden;
+    -webkit-mask: linear-gradient(
+        90deg,
+        transparent,
+        white 20%,
+        white 80%,
+        transparent
+    );
+    mask: linear-gradient(
+        90deg,
+        transparent,
+        white 20%,
+        white 80%,
+        transparent
+    );
+}
+
+.carousel-track {
+    list-style: none;
+    position: relative;
+    transition: transform 250ms ease-in;
+}
+
+.carousel-slide {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+}
+
+.carousel-btn > svg path {
+    fill: white;
+}
+
+.carousel-left {
+    left: 0;
+}
+
+.carousel-right {
+    right: 0;
+    z-index: 999;
+}
+
+.carousel-nav {
+    display: flex;
+    justify-content: center;
+    padding-block: 1em;
+}
+
+.carousel-indicator {
+    border: 0;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.3);
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+.current-slide-indicator {
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
 .project {
     flex-direction: column;
     border-radius: 60px;
-    max-width: 550px;
+    width: 550px;
     padding-block: 2em;
+
     
     justify-content: space-evenly;
-    height: 100%;
 
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
     backdrop-filter: blur(10px);
@@ -97,10 +185,13 @@ header {
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
+.current-slide {
+    transition: .5s;
+}
+
 
 .project-card {
     margin-top: 15px;
-    width: 100vw;
     height: 250px;
     padding: 2em 4em;
     width: 100%;
@@ -126,6 +217,11 @@ header {
     width: 90%;
 }
 
+@media (max-width:61em) {
+    .project {
+        width: 350px;
+    }
+}
 
 /* Skills */
 
