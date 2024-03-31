@@ -94,21 +94,42 @@ header {
     margin: 0 auto;
 }
 
+.mask-container {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    /* Apply your gradient background here */
+    -webkit-mask: linear-gradient(
+        90deg,
+        transparent,
+        black 20%,
+        black 80%,
+        transparent
+    );
+    mask: linear-gradient(
+        90deg,
+        transparent,
+        black 20%,
+        black 80%,
+        transparent
+    );
+  }
+
 .carousel-track-container {
     position: relative;
     overflow: hidden;
     -webkit-mask: linear-gradient(
         90deg,
         transparent,
-        white 20%,
-        white 80%,
+        black 20%,
+        black 80%,
         transparent
     );
     mask: linear-gradient(
         90deg,
         transparent,
-        white 20%,
-        white 80%,
+        black 20%,
+        black 80%,
         transparent
     );
 }
@@ -116,6 +137,7 @@ header {
 .carousel-track {
     list-style: none;
     position: relative;
+    left: 50%;
     transition: transform 250ms ease-in;
 }
 
@@ -129,15 +151,23 @@ header {
 .carousel-btn {
     position: absolute;
     top: 50%;
+    height: 100%;
     transform: translateY(-50%);
     background: transparent;
     border: 0;
     cursor: pointer;
 }
 
+.carousel-btn:hover,
+.carousel-btn:focus {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+
 .carousel-btn > svg path {
     fill: white;
 }
+
 
 .carousel-left {
     left: 0;
@@ -173,7 +203,6 @@ header {
     border-radius: 60px;
     width: 550px;
     padding-block: 2em;
-
     
     justify-content: space-evenly;
 
@@ -183,10 +212,14 @@ header {
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.18);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+
+    transform: translateX(-50%) scale(0.8);
 }
 
 .current-slide {
     transition: .5s;
+    scale: 120%;
+    transform: translateX(7.2%);
 }
 
 
@@ -219,7 +252,11 @@ header {
 
 @media (max-width:61em) {
     .project {
-        width: 350px;
+        width: max(350px, 55vw);
+    }
+    .mask-container {
+        -webkit-mask: none;
+        mask: none;
     }
 }
 
