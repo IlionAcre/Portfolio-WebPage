@@ -29,7 +29,6 @@ const newSlides = Array.from(track.children);
 const lengthLimit = slides.length + (Math.floor(newSlides.length / 4));
 const halfLength = (Math.ceil(newSlides.length / 4));
 const rightLimit = (halfLength) * slideWidth * - 1;
-console.log(rightLimit);
 
 
 const setSlidePosition = (slide, index) => {
@@ -41,7 +40,6 @@ const setSlidePosition = (slide, index) => {
         const newIndex = index - (lengthLimit);
         slide.style.left = rightLimit + slideWidth * newIndex + "px";
     }
-    console.log(slide);
 }
 
 newSlides.forEach(setSlidePosition);

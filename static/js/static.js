@@ -52,3 +52,65 @@ setupResizeListener("triangle1", "triangle1-right", 'right');
 
 setupResizeListener("triangle2", "triangle2-left", 'left');
 setupResizeListener("triangle2", "triangle2-right", 'right');
+
+
+// Filter buttons
+
+const skillsContainer = document.querySelector(".skills-wrapper");
+
+
+const allBtn = skillsContainer.querySelector(".all") 
+const allBtns = skillsContainer.querySelectorAll(".all") 
+
+function checkAll(){
+  const allButtons = skillsContainer.querySelectorAll(".btn-check:not(.all)");
+  for (const item of allButtons) {
+    if (!item.classList.contains("btn-check--checked")){
+      console.log(item.classList);
+      return false;
+    }
+  };
+  return true;
+}
+
+function toggleCheckbox(tag) {
+  const targetButtons = skillsContainer.querySelectorAll(tag);
+  const targetButton = skillsContainer.querySelector(tag);
+
+  if (tag != ".all") {
+    targetButtons.forEach(item => {
+      item.classList.toggle("btn-check--checked");
+    });
+    if (checkAll()) {
+      allBtns.forEach (item => {
+        console.log(checkAll());
+        item.classList.add("btn-check--checked");
+      });
+    } else {
+      allBtns.forEach (item => {
+        console.log(checkAll());
+        item.classList.remove("btn-check--checked");
+      });
+    }
+    
+    
+  } else {
+    if (checkAll()) {
+      allBtns.forEach (item => {
+        skillsContainer.querySelectorAll(".btn-check").forEach(item => {
+          item.classList.remove("btn-check--checked");
+          });
+      });
+    } else {
+      allBtns.forEach (item => {
+        skillsContainer.querySelectorAll(".btn-check").forEach(item => {
+        item.classList.add("btn-check--checked");
+        });
+      });
+    }
+    
+  }
+
+  
+  
+}

@@ -16,10 +16,11 @@
       <a href="#" class="icon-logo"><h4 class="fs-accent fw-semi-bold">LOGO</h4></a>
       <nav class="nav-bar">
         <ul role="list" class="nav-list clr-primary-100 fs-accent fw-semi-bold">
-          <li>Home</li>
-          <li>About</li>
-          <li>Work</li>
-          <li>Contact</li>
+          <li><a href="{{ url_for('.home', _anchor='home') }}" class="nav-btn">Home</a></li>
+          <li><a href="{{ url_for('.projects', _anchor='projects') }}" class="nav-btn">Projects</a></li>
+          <li><a href="{{ url_for('.skills', _anchor='skills') }}" class="nav-btn">Skills</a></li>
+          <li><a href="{{ url_for('.about', _anchor='about') }}" class="nav-btn">About</a></li>
+          <li><a href="{{ url_for('.contact', _anchor='contact') }}" class="nav-btn">Contact</a></li>
         </ul>
       </nav>
       <a href="#" class="icon-menu"><h4 class="fs-accent fw-semi-bold">MENU</h4></a>
@@ -27,7 +28,7 @@
   </header>
 
   <main>
-    <section class="hero bg-grad centered container">
+    <section class="home hero bg-grad centered container" id="home">
       <div class="title-container">
         <h1 class="ff-header clr-neon-200 fs-primary-header">FABIAN CONTRERAS</h1></div>
       <div> 
@@ -39,14 +40,14 @@
         <a href="#"><h4 class="fs-txt fw-semi-bold">LOGO</h4></a>
         <a href="#"><h4 class="fs-txt fw-semi-bold">LOGO</h4></a>
       </aside>
-      <a class="btn-neon btn-accent contact-button fs-secondary-header fw-bold">Contact Me</a>
+      <a href="{{ url_for('.contact', _anchor='contact') }}" class="btn-neon btn-accent contact-button fs-secondary-header fw-bold">Contact Me</a>
       
       <div class="downwards-arrow main-arrow">
         <img src="" alt="Downwards arrow main-arrow">
       </div>
     </section>
 
-    <section class="centered container bg-grad-inv">
+    <section class="projects centered container bg-grad-inv" id="projects">
       <h1 class="fs-section-title clr-neon-200 fw-bold margin-top-sm">Projects</h1>
 
       <div class="carousel">
@@ -158,92 +159,93 @@
       </div>
     </section>
 
-    <section class="skills container centered bg-dark">
+    <section class="skills container centered bg-dark" id="skills">
 
-      <aside class="left-bar big side-bar fw-bold fs-accent">
-        <div class="skills-menu-btn centered">
-          <span class="skills-btn-text clr-primary-100">Languages</span>
-          <a class="btn-skills btn-neon btn-regular-200"></a>
-        </div>
-        <div class="skills-menu-btn centered fw-bold fs-accent">
-          <span class="skills-btn-text clr-primary-100">Web dev</span>
-          <a class="btn-skills btn-neon btn-regular-200"></a>
-        </div>
-        <div class="skills-menu-btn centered fw-bold fs-accent">
-          <span class="skills-btn-text clr-primary-100">Analysis</span>
-          <a class="btn-skills btn-neon btn-regular-200"></a>
-        </div>
-      </aside>
-
-      <div class="skills-content container centered">
-        <h1 class="fs-section-title clr-neon-200 fw-bold margin-top-sm">SKILLS</h1>
-        <p class="fs-txt clr-primary-100 fw-regular skills-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.
-          Aliquam in hendrerit urna. Pellentesque sit amet sapien</p>
-        <div class="skills-menu little">
+      <div class="skills-wrapper">
+        <aside class="left-bar big side-bar fw-bold fs-accent">
           <div class="skills-menu-btn centered">
+            <span class="skills-btn-text clr-primary-100">D. Analysis</span>
+            <button class="btn-skills btn-neon btn-check d-analysis" onclick="toggleCheckbox('.d-analysis')"></button>
+          </div>
+          <div class="skills-menu-btn centered fw-bold fs-accent">
             <span class="skills-btn-text clr-primary-100">All</span>
-            <button class="btn-skills"></button>
+            <button class="btn-skills btn-neon btn-check all" onclick="toggleCheckbox('.all')"></button>
           </div>
+          <div class="skills-menu-btn centered fw-bold fs-accent">
+            <span class="skills-btn-text clr-primary-100">Development</span>
+            <button class="btn-skills btn-neon btn-check development" onclick="toggleCheckbox('.development')"></button>
+          </div>
+        </aside>
+        <div class="skills-content container centered">
+          <h1 class="fs-section-title clr-neon-200 fw-bold margin-top-sm">SKILLS</h1>
+          <p class="fs-txt clr-primary-100 fw-regular skills-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.
+            Aliquam in hendrerit urna. Pellentesque sit amet sapien</p>
+          <div class="skills-menu little">
+            <div class="skills-menu-btn centered">
+              <span class="skills-btn-text clr-primary-100">All</span>
+              <button class="btn-skills"></button>
+            </div>
+            <div class="skills-menu-btn centered">
+              <span class="skills-btn-text clr-primary-100">Filter</span>
+              <button class="btn-skills"></button>
+            </div>
+          </div>
+        
+        
+          <div class="skills-container">
+            <div class="skill-card bg-mid">
+              <img src="" alt="skill-image">
+              <p class="fs-txt clr-accent-900 fw-bold">Python</p>
+            </div>
+            <div class="skill-card bg-mid">
+              <img src="" alt="skill-image">
+              <p class="fs-txt clr-accent-900 fw-bold">Python</p>
+            </div>
+            <div class="skill-card bg-mid">
+              <img src="" alt="skill-image">
+              <p class="fs-txt clr-accent-900 fw-bold">Python</p>
+            </div>
+            <div class="skill-card bg-mid">
+              <img src="" alt="skill-image">
+              <p class="fs-txt clr-accent-900 fw-bold">Python</p>
+            </div>
+            <div class="skill-card bg-mid">
+              <img src="" alt="skill-image">
+              <p class="fs-txt clr-accent-900 fw-bold">Python</p>
+            </div>
+            <div class="skill-card bg-mid">
+              <img src="" alt="skill-image">
+              <p class="fs-txt clr-accent-900 fw-bold">Python</p>
+            </div>
+            <div class="skill-card bg-mid">
+              <img src="" alt="skill-image">
+              <p class="fs-txt clr-accent-900 fw-bold">Python</p>
+            </div>
+            <div class="skill-card bg-mid">
+              <img src="" alt="skill-image">
+              <p class="fs-txt clr-accent-900 fw-bold">Python</p>
+            </div>
+          </div>
+          <div class="downwards-arrow">
+            <img src="" alt="Downwards arrow">
+          </div>
+        </div>
+        
+        <aside class="right-bar big side-bar fw-bold fs-accent">
           <div class="skills-menu-btn centered">
-            <span class="skills-btn-text clr-primary-100">Filter</span>
-            <button class="btn-skills"></button>
+            <span class="skills-btn-text clr-primary-100">D. Analysis</span>
+            <button class="btn-skills btn-neon btn-check d-analysis" onclick="toggleCheckbox('.d-analysis')"></button>
           </div>
-        </div>
-        
-        
-        <div class="skills-container">
-          <div class="skill-card bg-mid">
-            <img src="" alt="skill-image">
-            <p class="fs-txt clr-accent-900 fw-bold">Python</p>
+          <div class="skills-menu-btn centered fw-bold fs-accent">
+            <span class="skills-btn-text clr-primary-100">All</span>
+            <button class="btn-skills btn-neon btn-check all" onclick="toggleCheckbox('.all')"></button>
           </div>
-          <div class="skill-card bg-mid">
-            <img src="" alt="skill-image">
-            <p class="fs-txt clr-accent-900 fw-bold">Python</p>
+          <div class="skills-menu-btn centered fw-bold fs-accent">
+            <span class="skills-btn-text clr-primary-100">Development</span>
+            <button class="btn-skills btn-neon btn-check development" onclick="toggleCheckbox('.development')"></button>
           </div>
-          <div class="skill-card bg-mid">
-            <img src="" alt="skill-image">
-            <p class="fs-txt clr-accent-900 fw-bold">Python</p>
-          </div>
-          <div class="skill-card bg-mid">
-            <img src="" alt="skill-image">
-            <p class="fs-txt clr-accent-900 fw-bold">Python</p>
-          </div>
-          <div class="skill-card bg-mid">
-            <img src="" alt="skill-image">
-            <p class="fs-txt clr-accent-900 fw-bold">Python</p>
-          </div>
-          <div class="skill-card bg-mid">
-            <img src="" alt="skill-image">
-            <p class="fs-txt clr-accent-900 fw-bold">Python</p>
-          </div>
-          <div class="skill-card bg-mid">
-            <img src="" alt="skill-image">
-            <p class="fs-txt clr-accent-900 fw-bold">Python</p>
-          </div>
-          <div class="skill-card bg-mid">
-            <img src="" alt="skill-image">
-            <p class="fs-txt clr-accent-900 fw-bold">Python</p>
-          </div>
-        </div>
-        <div class="downwards-arrow">
-          <img src="" alt="Downwards arrow">
-        </div>
+        </aside>
       </div>
-      
-      <aside class="right-bar big side-bar fw-bold fs-accent">
-        <div class="skills-menu-btn centered">
-          <span class="skills-btn-text clr-primary-100">Others</span>
-          <a class="btn-skills btn-neon btn-regular-200"></a>
-        </div>
-        <div class="skills-menu-btn centered fw-bold fs-accent">
-          <span class="skills-btn-text clr-primary-100">Soft-Skills</span>
-          <a class="btn-skills btn-neon btn-regular-200"></a>
-        </div>
-        <div class="skills-menu-btn centered fw-bold fs-accent">
-          <span class="skills-btn-text clr-primary-100">All</span>
-          <a class="btn-skills btn-neon btn-regular-200"></a>
-        </div>
-      </aside>
 
     </section>
     
@@ -278,9 +280,9 @@
     </div>
     </section>
 
-    <section class="bg-dark contact container centered">
+    <section class="bg-dark contact container centered" id="contact">
       <div class="wrapper fs-txt">
-        <div class="form-wrapper clr-primary-100">
+        <div class="form-wrapper clr-primary-100 fs-txt">
           <h1 class="fs-section-title clr-neon-200 fw-semi-bold">CONTACT</h1>
           <form action="" class="contact-form fs-txt">
             <div class="input-group first-input">
@@ -308,5 +310,6 @@
   </main>
   <script src="/static/js/static.js"></script>
   <script src="/static/js/carousel.js"></script>
+
 </body>
 </html>

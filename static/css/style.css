@@ -262,7 +262,8 @@ svg {
 }
 
 section {
-  min-height: 700px;
+  min-height: 800px;
+  overflow-x: auto;
 }
 
 .downwards-arrow {
@@ -418,3 +419,4 @@ section {
   color: var(--clr-bg-dark);
   text-shadow: none;
 }
+
