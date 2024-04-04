@@ -114,3 +114,12 @@ function toggleCheckbox(tag) {
   
   
 }
+
+
+function toggleLight(element) {
+  element.classList.toggle("enlightened");
+}
+
+function toggleTextLight(element) {
+  element.classList.toggle("enlightened-text");
+}

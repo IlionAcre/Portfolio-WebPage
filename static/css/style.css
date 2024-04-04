@@ -188,6 +188,7 @@ svg {
   color: transparent;
   -webkit-text-stroke: 2px var(--clr-accent-200); /* Define stroke width and color */
   text-stroke: 2px var(--clr-accent-200); /* Non-prefixed version for future compatibility */
+  cursor: pointer;
 }
 
 .clr-neon-200:hover {
@@ -419,4 +420,3 @@ section {
   color: var(--clr-bg-dark);
   text-shadow: none;
 }
-
