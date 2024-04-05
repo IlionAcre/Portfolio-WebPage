@@ -310,6 +310,13 @@ header {
     border-radius: 25px;
 }
 
+.btn-skills--little {
+    width: max(20svh, calc(var(--container-min-height)*0.20));
+    max-width: 40vh;
+    height: 15px;
+    border-radius: 25px;
+}
+
 .right-bar {
     right: 0;
     transform: translateX(100%);
@@ -439,10 +446,11 @@ header {
 .end-bar {
     position: absolute;
     bottom: 5%;
-    width: 50%;
-    height: 0.5%;
+    width: 95%;
+    height: 2px;
     border-color: var(--clr-accent-trn-200);
     border-radius: 360px;
+    padding: 0;
 }
 
 
@@ -665,6 +673,12 @@ header {
         max-width: 50vw;
     }
 
+    .end-bar {  
+        width: 50%;
+        height: 0.5%;
+        bottom: 10%;
+    }
+
     .about-main {
         margin-top: max(5svh, calc(var(--container-min-height)*0.05));
         width: calc(min(70%, 680px));
@@ -676,7 +690,6 @@ header {
 }
 
 .enlightened {
-    background: var(--clr-accent-200);
     border-color: var(--clr-accent-200);
 }
   

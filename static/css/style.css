@@ -184,7 +184,6 @@ svg {
 }
 
 .clr-neon-200 {
-  
   color: transparent;
   -webkit-text-stroke: 2px var(--clr-accent-200); /* Define stroke width and color */
   text-stroke: 2px var(--clr-accent-200); /* Non-prefixed version for future compatibility */
