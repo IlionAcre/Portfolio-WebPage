@@ -15,8 +15,7 @@
     <div class="main-nav">
       <a href="#" class="icon-logo"><h4 class="fs-accent fw-semi-bold">LOGO</h4></a>
       <nav class="nav-bar">
-        <button class="mobile-nav-toggle" aria-controls="primary-nav" aria-expanded="false"></button>
-        <ul id="primary-nav" role="list" class="nav-list clr-primary-100 fs-accent fw-semi-bold" data-visible="false">
+        <ul role="list" class="nav-list clr-primary-100 fs-accent fw-semi-bold">
           <li><a href="{{ url_for('.home', _anchor='home') }}" class="nav-btn">Home</a></li>
           <li><a href="{{ url_for('.projects', _anchor='projects') }}" class="nav-btn">Projects</a></li>
           <li><a href="{{ url_for('.skills', _anchor='skills') }}" class="nav-btn">Skills</a></li>
@@ -24,12 +23,13 @@
           <li><a href="{{ url_for('.contact', _anchor='contact') }}" class="nav-btn">Contact</a></li>
         </ul>
       </nav>
+      <a href="#" class="icon-menu"><h4 class="fs-accent fw-semi-bold">MENU</h4></a>
     </div>
   </header>
 
   <main>
     <section class="home hero bg-grad centered container" id="home">
-      <div class="title-container fs-primary-header">
+      <div class="title-container">
         <h1 class="ff-header clr-neon-200 fs-primary-header" onclick="toggleTextLight(this)">FABIAN CONTRERAS</h1></div>
       <div> 
       <div class="subtitle-container">
@@ -310,7 +310,6 @@
       <div></div>
     </section>
   </main>
-
   <script src="/static/js/static.js"></script>
   <script src="/static/js/carousel.js"></script>
 

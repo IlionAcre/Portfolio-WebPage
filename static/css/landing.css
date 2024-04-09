@@ -14,8 +14,6 @@ header {
     display: flex;
     padding: 1em 2em;
     justify-content: space-between;
-
-    overflow-x: hidden;
 }
 
 .nav-bar {
@@ -23,7 +21,7 @@ header {
 }
 
 .nav-list {
-    display: flex;
+    display: none;
     gap: 2em;
 }
 
@@ -31,8 +29,7 @@ header {
     text-decoration: none;
 }
 
-.nav-btn:visited,
-.nav-btn:link {
+.nav-btn:visited {
     color: currentColor;
 }
 
@@ -46,8 +43,8 @@ header {
     0.5em 0px 1.4em var(--clr-accent-trn-200);
 }
 
-.mobile-nav-toggle {
-    display: none; 
+.icon-menu {
+    display: block; 
 }
 
 .title-container {
@@ -62,11 +59,11 @@ header {
 .socials {
     position: absolute;
     left: 0;
-    margin-top: max(10px, calc(max(25svh, calc(var(--container-min-height)*0.25)) - var(--fs-primary-header)));
+    margin-top: max(10svh, calc(var(--container-min-height)*0.1));
 }
 
 .contact-button {
-    margin-top: max(10px, calc(max(25svh, calc(var(--container-min-height)*0.25)) - var(--fs-primary-header)));
+    margin-top: calc(max(30svh, calc(var(--container-min-height)*0.3)) - var(--fs-primary-header));
 }
 
 .main-arrow {
@@ -74,52 +71,26 @@ header {
     opacity: 0;
 }
 
-@media (max-width: 61em) {
+@media (min-width: 61em) {
+    .icon-menu {
+        display: none;
+    }
+
+    .main-nav {
+        display: flex;
+    }
 
     .nav-list {
-        position: fixed;
-        inset: 0 0 0 30%;
-        flex-direction: column;
-        padding: min(30vh, 10rem) 2em;
-
-        background: hsl(0 0% 0% / 0.1);
-        backdrop-filter: blur(1em);
-        z-index: 1000;
-        
-        
-        transform: translateX(100%);
-        transition: 350ms ease-out;
-    }
-
-    .nav-list[data-visible="true"] {
-        transform: translateX(0%);
-    }
-
-    .mobile-nav-toggle {
-        display: block;
-        position: absolute;
-        z-index: 9999;
-        background-color: transparent;
-        background: url("/static/images/menu-open.svg");
-        background-repeat: no-repeat;
-        border: 0;
-        width: 2rem;
-        aspect-ratio: 1;
-        top: 2rem;
-        right: 2rem;
-        cursor: pointer;
-    }
-
-    .mobile-nav-toggle[area-expanded="true"] {
-        background-image: url("/static/images/menu-close.svg");
+        display: flex;
     }
 
     .contact-button {
-        margin-top: calc(max(30svh, calc(var(--container-min-height)*0.3)) - var(--fs-primary-header));
+        margin-top: max(10px, calc(max(25svh, calc(var(--container-min-height)*0.25)) - var(--fs-primary-header)));
     }
 
     .socials {
-        margin-top: max(10svh, calc(var(--container-min-height)*0.1));    }
+        margin-top: max(10px, calc(max(25svh, calc(var(--container-min-height)*0.25)) - var(--fs-primary-header)));
+    }
 }
 
 
