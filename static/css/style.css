@@ -419,3 +419,27 @@ section {
   color: var(--clr-bg-dark);
   text-shadow: none;
 }
+
+::-webkit-scrollbar {
+  width: .7em;
+  height: .5em;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--clr-bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--clr-bg-mid);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(200, 200, 200);
+}
+
+@supports (scrollbar-color: red blue) {
+  * {
+      scrollbar-color: var(--clr-bg-mid) var(--clr-bg-dark);
+      scrollbar-width: thin;
+  }
+}
