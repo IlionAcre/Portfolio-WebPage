@@ -124,6 +124,10 @@ function toggleTextLight(element) {
   element.classList.toggle("enlightened-text");
 }
 
+function toggleTitleLight(element) {
+  element.classList.toggle("enlightened-title");
+}
+
 
 //nav-bar
 
