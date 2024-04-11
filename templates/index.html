@@ -309,6 +309,25 @@
       </div>
       <div></div>
     </section>
+
+    <div class="footer">
+      <div class="footer-bar" onclick="toggleLight(this)"></div>
+      <div class="icons">
+
+      </div>
+      <div class="footer-nav">
+        <ul class="footer-btns clr-primary-100">
+          <li><a href="{{ url_for('.home', _anchor='home') }}" class="nav-btn">Home</a></li>
+          <li><a href="{{ url_for('.projects', _anchor='projects') }}" class="nav-btn">Projects</a></li>
+          <li><a href="{{ url_for('.skills', _anchor='skills') }}" class="nav-btn">Skills</a></li>
+          <li><a href="{{ url_for('.about', _anchor='about') }}" class="nav-btn">About</a></li>
+          <li><a href="{{ url_for('.contact', _anchor='contact') }}" class="nav-btn">Contact</a></li>
+        </ul>
+      </div>
+      <div class="copyright">
+        <h3 class="fw-regular clr-primary-100">Copyright ©2024 Fabian Contreras.</h3>
+      </div>
+    </div>
   </main>
 
   <script src="/static/js/static.js"></script>
