@@ -71,7 +71,7 @@ instance/
 # Sphinx documentation
 docs/_build/
 
-config.env
+.env
 
 # PyBuilder
 .pybuilder/
