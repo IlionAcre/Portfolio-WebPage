@@ -7,12 +7,9 @@ load_dotenv()
 headers = {
     "Authorization" : os.getenv('PT')
 }
-print(os.getenv("SP"))
 skills = requests.get(os.getenv("SP"), headers=headers).text
 projects = requests.get(os.getenv("PP"), headers=headers).text
 
-print(skills)
-print(projects)
 
 app = Flask(__name__)
 

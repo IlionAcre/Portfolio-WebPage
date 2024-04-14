@@ -77,6 +77,10 @@ docs/_build/
 .pybuilder/
 target/
 
+
+token.json
+credentials.json
+
 # Jupyter Notebook
 .ipynb_checkpoints
 
