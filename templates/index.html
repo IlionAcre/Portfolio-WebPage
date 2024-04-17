@@ -37,8 +37,16 @@
         <h2 class="clr-primary-100 fs-secondary-header">Data Analyst</h2>
       
       <aside class="socials">
-        <a href="#"><h4 class="fs-txt fw-semi-bold">LOGO</h4></a>
-        <a href="#"><h4 class="fs-txt fw-semi-bold">LOGO</h4></a>
+        <a href="#">
+          <svg class="social-icon" xmlns="{{ svg_info }}" width="50" height="50" viewBox="0 0 24 24">
+              <path d="{{ ico_social['icon-Github'] }}"/>
+          </svg>
+        </a>
+        <a href="#">
+          <svg class="social-icon" xmlns="{{ svg_info }}" width="50" height="50" viewBox="0 0 24 24">
+              <path d="{{ ico_social['icon-Linkedin'] }}"/>
+          </svg>
+        </a>
       </aside>
       <a href="{{ url_for('.contact', _anchor='contact') }}" class="btn-neon btn-accent contact-button fs-secondary-header fw-bold">Contact Me</a>
       
@@ -60,81 +68,26 @@
         <div class="mask-container">
           <div class="carousel-track-container">
             <ul class="carousel-track">
-              <li class="carousel-slide current-slide">
-                <div class="project centered fs-txt">
-                  <h2 class="fs-accent clr-primary-100 fw-semi-bold project-card-title">PROJECT TITLE</h2>
-                  <div class="project-card bg-mid">
-                    <img src="" alt="project_page">
-                  </div>
-                  <div class="project-btns">
-                    <button class="btn-default clr-primary-100">a</button>
-                    <button class="btn-default clr-primary-100">a</button>
-                    <button class="btn-default clr-primary-100">a</button>
-                    <button class="btn-default clr-primary-100">a</button>
-                  </div>
-                  <p class="project-description clr-primary-100 fs-txt">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis, ratione iure unde optio aspernatur magnam earum, reiciendis maxime, sed hic consequuntur labore vero laudantium mollitia ullam officia quod beatae. Quod adipisci a tempore quibusdam deserunt beatae!</p>
-                </div>
-              </li>
-              <li class="carousel-slide">
-                <div class="project centered fs-txt">
-                  <h2 class="fs-accent clr-primary-100 fw-semi-bold project-card-title">PROJECT TITLE</h2>
-                  <div class="project-card bg-mid">
-                    <img src="" alt="project_page">
-                  </div>
-                  <div class="project-btns">
-                    <button class="btn-default clr-primary-100">a</button>
-                    <button class="btn-default clr-primary-100">a</button>
-                    <button class="btn-default clr-primary-100">a</button>
-                    <button class="btn-default clr-primary-100">a</button>
-                  </div>
-                  <p class="project-description clr-primary-100 fs-txt">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis, ratione iure unde optio aspernatur magnam earum, reiciendis maxime, sed hic consequuntur labore vero laudantium mollitia ullam officia quod beatae. Quod adipisci a tempore quibusdam deserunt beatae!</p>
-                </div>
-              </li>
-              <li class="carousel-slide">
-                <div class="project centered fs-txt">
-                  <h2 class="fs-accent clr-primary-100 fw-semi-bold project-card-title">PROJECT TITLE</h2>
-                  <div class="project-card bg-mid">
-                    <img src="" alt="project_page">
-                  </div>
-                  <div class="project-btns">
-                    <button class="btn-default clr-primary-100">a</button>
-                    <button class="btn-default clr-primary-100">a</button>
-                    <button class="btn-default clr-primary-100">a</button>
-                    <button class="btn-default clr-primary-100">a</button>
-                  </div>
-                  <p class="project-description clr-primary-100 fs-txt">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis, ratione iure unde optio aspernatur magnam earum, reiciendis maxime, sed hic consequuntur labore vero laudantium mollitia ullam officia quod beatae. Quod adipisci a tempore quibusdam deserunt beatae!</p>
-                </div>
-              </li>
-              <li class="carousel-slide">
-                <div class="project centered fs-txt">
-                  <h2 class="fs-accent clr-primary-100 fw-semi-bold project-card-title">PROJECT TITLE</h2>
-                  <div class="project-card bg-mid">
-                    <img src="" alt="project_page">
-                  </div>
-                  <div class="project-btns">
-                    <button class="btn-default clr-primary-100">a</button>
-                    <button class="btn-default clr-primary-100">a</button>
-                    <button class="btn-default clr-primary-100">a</button>
-                    <button class="btn-default clr-primary-100">a</button>
-                  </div>
-                  <p class="project-description clr-primary-100 fs-txt">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis, ratione iure unde optio aspernatur magnam earum, reiciendis maxime, sed hic consequuntur labore vero laudantium mollitia ullam officia quod beatae. Quod adipisci a tempore quibusdam deserunt beatae!</p>
-                </div>
-              </li>
-              <li class="carousel-slide">
-                <div class="project centered fs-txt">
-                  <h2 class="fs-accent clr-primary-100 fw-semi-bold project-card-title">PROJECT TITLE</h2>
-                  <div class="project-card bg-mid">
-                    <img src="" alt="project_page">
-                  </div>
-                  <div class="project-btns">
-                    <button class="btn-default clr-primary-100">a</button>
-                    <button class="btn-default clr-primary-100">a</button>
-                    <button class="btn-default clr-primary-100">a</button>
-                    <button class="btn-default clr-primary-100">a</button>
-                  </div>
-                  <p class="project-description clr-primary-100 fs-txt">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis, ratione iure unde optio aspernatur magnam earum, reiciendis maxime, sed hic consequuntur labore vero laudantium mollitia ullam officia quod beatae. Quod adipisci a tempore quibusdam deserunt beatae!</p>
-                </div>
-              </li>
+              {% for project in projects %}
+                {% if project["id"] == 2%}
+                  <li class="carousel-slide current-slide">
+                {% else %}
+                  <li class="carousel-slide">
+                {% endif %}
+                    <div class="project centered fs-txt">
+                      <h2 class="fs-accent clr-primary-100 fw-semi-bold project-card-title">{{ project["title"] }}</h2>
+                      <div class="project-card bg-mid">
+                        <img class= "project-img" src="/static/images/project_ss_{{ project['id'] -1 }}.PNG" alt="project_page">
+                      </div>
+                      <div class="project-btns">
+                        {% for skill in project["skills"].split("-") %}
+                          <button class="btn-default clr-primary-100">{{ skill }}</button>
+                        {% endfor %}
+                      </div>
+                      <p class="project-description clr-primary-100 fs-txt">{{ project["description"] }}</p>
+                    </div>
+                  </li>
+              {% endfor %}
             </ul>
           </div>
         </div>
@@ -147,19 +100,19 @@
       </div>
       
       <div class="carousel-nav">
-        <button class="carousel-indicator current-slide-indicator"></button>
-        <button class="carousel-indicator"></button>
-        <button class="carousel-indicator"></button>
-        <button class="carousel-indicator"></button>
-        <button class="carousel-indicator"></button>
+        {% for project in projects %}
+          {% if project["id"] == 2 %}
+            <button class="carousel-indicator current-slide-indicator"></button>
+          {% else %}
+            <button class="carousel-indicator"></button>
+          {% endif %}        
+        {% endfor %}
       </div>
 
-      <div class="downwards-arrow">
-        <img src="" alt="Downwards arrow">
-      </div>
+      <div class="downwards-arrow projects-end"></div>
     </section>
 
-    <section class="skills container centered bg-dark" id="skills">
+    <section class="skills container centered bg-dark" id="skills"> 
 
       <div class="skills-wrapper">
         <aside class="left-bar big side-bar fw-bold fs-accent">
@@ -176,7 +129,9 @@
             <button class="btn-skills btn-neon btn-check development" onclick="toggleCheckbox('.development')"></button>
           </div>
         </aside>
+
         <div class="skills-content container centered">
+
           <h1 class="fs-section-title clr-neon-200 fw-bold margin-top-sm" onclick="toggleTextLight(this)">SKILLS</h1>
           <p class="fs-txt clr-primary-100 fw-regular skills-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.
             Aliquam in hendrerit urna. Pellentesque sit amet sapien</p>
@@ -193,38 +148,12 @@
         
         
           <div class="skills-container">
-            <div class="skill-card bg-mid">
-              <img src="" alt="skill-image">
-              <p class="fs-txt clr-accent-900 fw-bold">Python</p>
-            </div>
-            <div class="skill-card bg-mid">
-              <img src="" alt="skill-image">
-              <p class="fs-txt clr-accent-900 fw-bold">Python</p>
-            </div>
-            <div class="skill-card bg-mid">
-              <img src="" alt="skill-image">
-              <p class="fs-txt clr-accent-900 fw-bold">Python</p>
-            </div>
-            <div class="skill-card bg-mid">
-              <img src="" alt="skill-image">
-              <p class="fs-txt clr-accent-900 fw-bold">Python</p>
-            </div>
-            <div class="skill-card bg-mid">
-              <img src="" alt="skill-image">
-              <p class="fs-txt clr-accent-900 fw-bold">Python</p>
-            </div>
-            <div class="skill-card bg-mid">
-              <img src="" alt="skill-image">
-              <p class="fs-txt clr-accent-900 fw-bold">Python</p>
-            </div>
-            <div class="skill-card bg-mid">
-              <img src="" alt="skill-image">
-              <p class="fs-txt clr-accent-900 fw-bold">Python</p>
-            </div>
-            <div class="skill-card bg-mid">
-              <img src="" alt="skill-image">
-              <p class="fs-txt clr-accent-900 fw-bold">Python</p>
-            </div>
+            {% for skill in skills %}
+              <div class="skill-card bg-mid">
+                <img src="/static/images/skill-{{ skill['name' ]}}.SVG" alt="{{ skill['name'] }}-Icon">
+                <p class="fs-txt clr-accent-900 fw-bold">{{ skill["name"] }}</p>
+              </div>
+            {% endfor %}
           </div>
           <div class="downwards-arrow">
             <img src="" alt="Downwards arrow">
@@ -312,7 +241,26 @@
 
     <div class="footer">
       <div class="icons">
-
+        <a href="#">
+          <svg class="social-icon footer-icon" xmlns="{{ svg_info }}" viewBox="0 0 24 24">
+              <path d="{{ ico_social['icon-Discord'] }}"/>
+          </svg>
+        </a>
+        <a href="#">
+          <svg class="social-icon footer-icon" xmlns="{{ svg_info }}" viewBox="0 0 512 512">
+            <path d="M256 0c141.385 0 256 114.615 256 256S397.385 512 256 512 0 397.385 0 256 114.615 0 256 0z"/>
+            <path fill="#000000" fill-rule="nonzero" d="M318.64 157.549h33.401l-72.973 83.407 85.85 113.495h-67.222l-52.647-68.836-60.242 68.836h-33.423l78.052-89.212-82.354-107.69h68.924l47.59 62.917 55.044-62.917zm-11.724 176.908h18.51L205.95 176.493h-19.86l120.826 157.964z"/>          </svg>
+        </a>
+        <a href="#">
+          <svg class="social-icon footer-icon" xmlns="{{ svg_info }}" viewBox="0 0 24 24">
+              <path d="{{ ico_social['icon-Linkedin'] }}"/>
+          </svg>
+        </a>
+        <a href="#">
+          <svg class="social-icon footer-icon" xmlns="{{ svg_info }}" viewBox="0 0 24 24">
+            <path d="{{ ico_social['icon-Discord'] }}"/>
+          </svg>
+        </a>
       </div>
       <div class="footer-nav">
         <ul class="footer-btns clr-primary-100">

@@ -112,7 +112,18 @@ header {
 .socials {
     position: absolute;
     left: 0;
-    margin-top: max(10px, calc(max(15svh, calc(var(--container-min-height)*0.15)) - var(--fs-primary-header)));
+    margin-top: max(10px, calc(max(10svh, calc(var(--container-min-height)*0.10)) - var(--fs-primary-header)));
+}
+
+.social-icon {
+    fill: var(--clr-primary-100);
+    margin-block: 0.5rem;
+}
+
+.social-icon:hover,
+.social-icon:focus {
+    fill: var(--clr-accent-200);
+    filter: drop-shadow(0px 0px 1em var(--clr-accent-200));
 }
 
 .contact-button {
@@ -306,6 +317,7 @@ header {
 }
 
 .project {
+    display: flex;
     flex-direction: column;
     border-radius: 60px;
     width: 550px;
@@ -329,11 +341,14 @@ header {
     transform: translateX(8.5%);
 }
 
-
 .project-card {
     margin-top: 15px;
     height: 250px;
-    padding: 2em 4em;
+    width: 100%;
+}
+
+.project-img {
+    max-height: 100%;
     width: 100%;
 }
 
@@ -355,6 +370,10 @@ header {
 
 .project-description {
     width: 90%;
+}
+
+.projects-end {
+    height: 10%;
 }
 
 @media (max-width:47em) {
@@ -809,6 +828,7 @@ header {
 /* FOOTER */
 
 .footer {
+    font-size: var(--fs-txt);
     display: flex;
     position: relative;
     flex-direction: column;
@@ -818,12 +838,18 @@ header {
     background: var(--clr-bg-dark);
 }
 
-
 .icons {
-    margin-top: 2em;
-    border: 1px solid var(--clr-primary-100);
+    display: flex;
+    align-items: center;
+    margin-top: 3em;
+    margin-bottom: 1em;
     height: 30px;
-    width: 120px;
+}
+
+.footer-icon {
+    width: 40px;
+    height: 40px;
+    margin-inline: 1rem;
 }
 
 .footer-nav {
