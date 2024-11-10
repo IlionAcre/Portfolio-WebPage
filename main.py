@@ -10,7 +10,8 @@ def home():
                            projects=project_list, 
                            ico_social=icons["social"], 
                            ico_skill=icons["skill"],
-                           svg_info="http://www.w3.org/2000/svg")
+                           svg_info="http://www.w3.org/2000/svg",
+                           icons=icons)
 
 @app.route('/projects')
 def projects():
@@ -20,7 +21,8 @@ def projects():
                            projects=project_list, 
                            ico_social=icons["social"], 
                            ico_skill=icons["skill"],
-                           svg_info="http://www.w3.org/2000/svg")
+                           svg_info="http://www.w3.org/2000/svg",
+                           icons=icons)
 
 @app.route('/skills')
 def skills():
@@ -30,7 +32,8 @@ def skills():
                            projects=project_list, 
                            ico_social=icons["social"], 
                            ico_skill=icons["skill"],
-                           svg_info="http://www.w3.org/2000/svg")
+                           svg_info="http://www.w3.org/2000/svg",
+                           icons=icons)
 
 @app.route('/about')
 def about():
@@ -40,7 +43,8 @@ def about():
                            projects=project_list, 
                            ico_social=icons["social"], 
                            ico_skill=icons["skill"],
-                           svg_info="http://www.w3.org/2000/svg")
+                           svg_info="http://www.w3.org/2000/svg",
+                           icons=icons)
 
 @app.route('/contact')
 def contact():
@@ -50,7 +54,9 @@ def contact():
                            projects=project_list, 
                            ico_social=icons["social"], 
                            ico_skill=icons["skill"],
-                           svg_info="http://www.w3.org/2000/svg")
+                           svg_info="http://www.w3.org/2000/svg",
+                           icons=icons)
 
 if __name__ == "__main__":
+    print(icons)
     app.run(port=5500, host="0.0.0.0", debug=True)

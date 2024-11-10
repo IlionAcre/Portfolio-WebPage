@@ -13,7 +13,11 @@
 <body>
   <header class="primary-header">
     <div class="main-nav">
-      <a href="#" class="icon-logo"><h4 class="fs-accent fw-semi-bold">LOGO</h4></a>
+      <a href="#">
+        <svg class="social-icon" xmlns="{{ svg_info }}" width="50" height="50" viewBox="0 0 24 24">
+            <path d="{{ ico_social['icon-Logo'] }}"/>
+        </svg>
+      </a>
       <nav class="nav-bar">
         <button class="mobile-nav-toggle" aria-controls="primary-nav" aria-expanded="false"></button>
         <ul id="primary-nav" role="list" class="nav-list clr-primary-100 fs-accent fw-semi-bold" data-visible="false">
@@ -33,7 +37,7 @@
         <h1 class="header ff-header clr-neon-200 fs-primary-header">FABIAN CONTRERAS</h1></div>
       <div> 
       <div class="subtitle-container">
-        <h2 class="clr-primary-100 fs-secondary-header">Full-Stack Developer</h2>
+        <h2 class="clr-primary-100 fs-secondary-header">Python Developer</h2>
         <h2 class="clr-primary-100 fs-secondary-header">Data Analyst</h2>
       
       <aside class="socials">
@@ -117,7 +121,7 @@
       <div class="skills-wrapper">
         <aside class="left-bar big side-bar fw-bold fs-accent">
           <div class="skills-menu-btn centered">
-            <span class="skills-btn-text clr-primary-100">D. Analysis</span>
+            <span class="skills-btn-text clr-primary-100">Technical</span>
             <button class="btn-skills btn-neon btn-check d-analysis" onclick="toggleCheckbox('.d-analysis')"></button>
           </div>
           <div class="skills-menu-btn centered fw-bold fs-accent">
@@ -125,7 +129,7 @@
             <button class="btn-skills btn-neon btn-check all" onclick="toggleCheckbox('.all')"></button>
           </div>
           <div class="skills-menu-btn centered fw-bold fs-accent">
-            <span class="skills-btn-text clr-primary-100">Development</span>
+            <span class="skills-btn-text clr-primary-100">Soft</span>
             <button class="btn-skills btn-neon btn-check development" onclick="toggleCheckbox('.development')"></button>
           </div>
         </aside>
@@ -137,16 +141,30 @@
             Aliquam in hendrerit urna. Pellentesque sit amet sapien</p>
           <div class="skills-menu little">
             <div class="skills-menu-btn centered">
-              <span class="skills-btn-text clr-primary-100">Web Dev</span>
+              <span class="skills-btn-text clr-primary-100">Technical</span>
               <button class="btn-skills--little btn-check btn-neon development" onclick="toggleCheckbox('.development')"></button>
             </div>
             <div class="skills-menu-btn centered">
-              <span class="skills-btn-text clr-primary-100">Analyis</span>
+              <span class="skills-btn-text clr-primary-100">Soft</span>
               <button class="btn-skills--little btn-check btn-neon d-analysis" onclick="toggleCheckbox('.d-analysis')"></button>
             </div>
           </div>
-        
-        
+
+          <div class="center-bar big fw-bold fs-accent">
+            <div class="skills-menu-btn centered">
+              <span class="skills-btn-text clr-primary-100">Technical</span>
+              <button class="btn-skills btn-neon btn-check d-analysis" onclick="toggleCheckbox('.d-analysis')"></button>
+            </div>
+            <div class="skills-menu-btn centered fw-bold fs-accent">
+              <span class="skills-btn-text clr-primary-100">All</span>
+              <button class="btn-skills btn-neon btn-check all" onclick="toggleCheckbox('.all')"></button>
+            </div>
+            <div class="skills-menu-btn centered fw-bold fs-accent">
+              <span class="skills-btn-text clr-primary-100">Soft</span>
+              <button class="btn-skills btn-neon btn-check development" onclick="toggleCheckbox('.development')"></button>
+            </div>
+          </div>
+          
           <div class="skills-container">
             {% for skill in skills %}
               <div class="skill-card bg-mid">
@@ -162,7 +180,7 @@
         
         <aside class="right-bar big side-bar fw-bold fs-accent">
           <div class="skills-menu-btn centered">
-            <span class="skills-btn-text clr-primary-100">D. Analysis</span>
+            <span class="skills-btn-text clr-primary-100">Technical</span>
             <button class="btn-skills btn-neon btn-check d-analysis" onclick="toggleCheckbox('.d-analysis')"></button>
           </div>
           <div class="skills-menu-btn centered fw-bold fs-accent">
@@ -170,7 +188,7 @@
             <button class="btn-skills btn-neon btn-check all" onclick="toggleCheckbox('.all')"></button>
           </div>
           <div class="skills-menu-btn centered fw-bold fs-accent">
-            <span class="skills-btn-text clr-primary-100">Development</span>
+            <span class="skills-btn-text clr-primary-100">Soft</span>
             <button class="btn-skills btn-neon btn-check development" onclick="toggleCheckbox('.development')"></button>
           </div>
         </aside>
