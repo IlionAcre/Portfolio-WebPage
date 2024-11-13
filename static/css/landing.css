@@ -13,13 +13,16 @@ header {
 .main-nav {
     margin-top: 1em;
     display: flex;
-    padding: 1em 2em;
     justify-content: space-between;
-
     overflow-x: hidden;
 }
 
+.logo-icon {
+    margin-left: 2em;
+}
+
 .nav-bar {
+    padding: 1em 2em;
     flex-direction: row;
 }
 
@@ -362,9 +365,14 @@ header {
 
 .project-btns > * {
     flex-shrink: 0;
-    width: 90px;
     height: 35px;
+}
+
+.btn-default {
+    cursor: pointer;
+    width: 120px;
     border: none;
+    background: transparent;
 }
 
 .project-description {
@@ -414,14 +422,8 @@ header {
     flex-direction: column;
 }
 
-.btn-skills {
-    width: max(20svh, calc(var(--container-min-height)*0.20));
-    min-width: 180px;
-    height: 15px;
-    border-radius: 25px;
-}
 
-.btn-skills--little {
+.btn-skills {
     width: max(15svw, calc(var(--container-min-height)*0.20));
     max-width: 40vw;
     height: 15px;
@@ -452,16 +454,16 @@ header {
     overflow: auto;
 
     width: min(500px, 85vw);
-    grid-template-columns: repeat(auto-fit, 120px);
+    grid-template-columns: repeat(auto-fit, 170px);
     justify-content: center;
 }
 
 .center-bar {
+    display: flex;
     margin-top: 20px;
     flex-direction: row;
     justify-content: space-between;
-    gap: 15px;
-
+    gap: 5px;
 }
 
 .skill-card {
@@ -469,10 +471,10 @@ header {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-content: center;
+    align-items: center;
 
     
-    width: max(17.5vw, 120px);
+    width: max(17.5vw, 170px);
     height: auto;
     max-width: 240px;
     aspect-ratio: 1.25;
@@ -488,7 +490,6 @@ header {
 .skills-description {
     max-width: calc(max(50vw, 450px));
 }
-
 
 .btn-check {
     color: var(--clr-accent-200);
@@ -558,6 +559,15 @@ header {
 
 .skills {
     position: relative;
+}
+
+.skills-icon {
+    width: 50%; /* Ensures the SVG scales responsively */
+    height: 50%;
+    fill: #000; /* Override fill */
+    stroke: #000; 
+    /* transform-origin: center;
+    transform: scale(1); Adjust the scale factor if necessary */
 }
 
 .end-bar {
@@ -776,6 +786,19 @@ header {
 }
 
 @media (min-width: 47rem) {
+    .center-bar {
+        margin-top: 20px;
+        gap: 15px;
+    
+    }
+
+    .btn-skills {
+        width: max(20svh, calc(var(--container-min-height)*0.20));
+        min-width: 180px;
+        height: 15px;
+        border-radius: 25px;
+    }
+
     .little {
         display: none;
     }
@@ -786,7 +809,7 @@ header {
 
     .skills-container {
         width: 70vw;
-        grid-template-columns: repeat(auto-fit, min(17.5vw, 220px));
+        grid-template-columns: repeat(auto-fit, min(22vw, 220px));
         column-gap: max(2vw, 10px);
         row-gap: 50px;
         justify-content: center;

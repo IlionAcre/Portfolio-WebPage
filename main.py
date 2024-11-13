@@ -17,7 +17,7 @@ def home():
 def projects():
     return render_template('index.html', 
                            anchor='projects',
-                           skills=skill_list, 
+                               skills=skill_list, 
                            projects=project_list, 
                            ico_social=icons["social"], 
                            ico_skill=icons["skill"],
@@ -58,5 +58,4 @@ def contact():
                            icons=icons)
 
 if __name__ == "__main__":
-    print(icons)
     app.run(port=5500, host="0.0.0.0", debug=True)
