@@ -1,3 +1,12 @@
+function scrollToSection(sectionId) {
+  const section = document.getElementById(sectionId);
+  if (section) {
+      section.scrollIntoView({
+          behavior: 'smooth'
+      });
+  }
+}
+
 function adjustLine(containerId, lineContainerId, direction = 'left') {
   const container = document.getElementById(containerId);
   const line = document.getElementById(lineContainerId);
@@ -188,4 +197,25 @@ navToggle.addEventListener("click", () => {
 
 document.addEventListener('DOMContentLoaded', function () {
   filterSkills();
+});
+
+
+setTimeout(function() {
+  const flashMessages = document.querySelector('.flash-messages');
+  if (flashMessages) {
+    flashMessages.style.transition = 'opacity 4s';
+    flashMessages.style.opacity = '0';
+
+    setTimeout(() => flashMessages.remove(), 4000);
+  }
+}, 2000);
+
+document.querySelectorAll('.input-group input, .input-group textarea').forEach(input => {
+  input.addEventListener('input', function() {
+      if (input.value.trim() !== "") {
+          input.classList.add('has-text');
+      } else {
+          input.classList.remove('has-text');
+      }
+  });
 });

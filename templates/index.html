@@ -7,13 +7,14 @@
   <link rel="stylesheet" href="/static/css/landing.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="shortcut icon" href="/static/images/icon-logo.svg" type="image/x-icon">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
   <title>Document</title>
 </head>
 <body>
   <header class="primary-header">
     <div class="main-nav">
-      <svg class="social-icon logo-icon" width="50" height="50" viewBox="0 0 550 550" xmlns="http://www.w3.org/2000/svg">
+      <svg class="logo-icon" width="50" height="50" viewBox="0 0 550 550" xmlns="http://www.w3.org/2000/svg" onclick="scrollToSection('home')">
         {% for path_data in icons.social['icon-Logo'] %}
             <path d="{{ path_data }}"/>
         {% endfor %}
@@ -21,12 +22,12 @@
       <nav class="nav-bar">
         <button class="mobile-nav-toggle" aria-controls="primary-nav" aria-expanded="false"></button>
         <ul id="primary-nav" role="list" class="nav-list clr-primary-100 fs-accent fw-semi-bold" data-visible="false">
-          <li><a href="{{ url_for('.home', _anchor='home') }}" class="nav-btn">Home</a></li>
-          <li><a href="{{ url_for('.projects', _anchor='projects') }}" class="nav-btn">Projects</a></li>
-          <li><a href="{{ url_for('.skills', _anchor='skills') }}" class="nav-btn">Skills</a></li>
-          <li><a href="{{ url_for('.about', _anchor='about') }}" class="nav-btn">About</a></li>
-          <li><a href="{{ url_for('.contact', _anchor='contact') }}" class="nav-btn">Contact</a></li>
-        </ul>
+          <li><a href="#home" class="nav-btn" onclick="scrollToSection('home')">Home</a></li>
+          <li><a href="#projects" class="nav-btn" onclick="scrollToSection('projects')">Projects</a></li>
+          <li><a href="#skills" class="nav-btn" onclick="scrollToSection('skills')">Skills</a></li>
+          <li><a href="#about" class="nav-btn" onclick="scrollToSection('about')">About</a></li>
+          <li><a href="#contact" class="nav-btn" onclick="scrollToSection('contact')">Contact</a></li>
+      </ul>
       </nav>
     </div>
   </header>
@@ -41,22 +42,22 @@
         <h2 class="clr-primary-100 fs-secondary-header">Python Developer</h2>
       
       <aside class="socials">
-        <a href="#">
+        <a href="https://github.com/IlionAcre?tab=repositories">
           <svg class="social-icon" width="50" height="50" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             {% for path_data in icons.social['icon-Github'] %}
                 <path d="{{ path_data }}"/>
             {% endfor %}
           </svg>
         </a>
-        <a href="#">
+        <a href="https://discord.gg/CgRggbXF">
           <svg class="social-icon" width="50" height="50" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            {% for path_data in icons.social['icon-Linkedin'] %}
+            {% for path_data in icons.social['icon-Discord'] %}
                 <path d="{{ path_data }}"/>
             {% endfor %}
           </svg>
         </a>
       </aside>
-      <a href="{{ url_for('.contact', _anchor='contact') }}" class="btn-neon btn-accent contact-button fs-secondary-header fw-bold">Contact Me</a>
+      <a href="#contact" class="btn-neon btn-accent contact-button fs-secondary-header fw-bold">Contact Me</a>
       
       <div class="main-arrow">
         <img src="" alt="Downwards arrow">
@@ -229,13 +230,22 @@
       <div class="wrapper fs-txt">
         <div class="form-wrapper clr-primary-100 fs-txt">
           <h1 class="fs-section-title clr-neon-200 fw-semi-bold" onclick="toggleTextLight(this)">CONTACT</h1>
-          <form action="" class="contact-form fs-txt">
+          {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              <div class="flash-messages">
+                {% for category, message in messages %}
+                  <div class="flash-message {{ category }}">{{ message }}</div>
+                {% endfor %}
+              </div>
+            {% endif %}
+          {% endwith %}
+          <form action="/submit_contact" method="POST" class="contact-form fs-txt">
             <div class="input-group first-input">
               <input name="name" type="text" class="form-input bg-mid" required>
               <label for="">Name</label>
             </div>
             <div class="input-group">
-              <input name="email" type="text" class="form-input" required>
+              <input name="email" type="email" class="form-input" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" title="Please enter a valid email address.">
               <label for="">Email</label>
             </div>
             <div class="input-group">
@@ -246,7 +256,7 @@
               <textarea name="emailContent"class="form-input" required></textarea>
               <label for="">Message</label>
             </div>
-            <a name="submit" href="#" type="submit" class="contact-btn btn-neon btn-regular-200 fs-secondary-header fw-semi-bold">Contact Me</a>
+            <button name="submit"type="submit" class="contact-btn btn-neon btn-regular-200 fs-secondary-header fw-semi-bold">Contact Me</button>
           </form>
         </div>
       </div>
@@ -255,40 +265,42 @@
 
     <div class="footer">
       <div class="icons">
-        <a href="#">
+        <a href="https://github.com/IlionAcre?tab=repositories">
+          <svg class="social-icon footer-icon" width="50" height="50" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            {% for path_data in icons.social['icon-Github'] %}
+                <path d="{{ path_data }}"/>
+            {% endfor %}
+          </svg>
+        </a>
+        <a href="https://discord.gg/CgRggbXF">
           <svg class="social-icon footer-icon" width="50" height="50" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             {% for path_data in icons.social['icon-Discord'] %}
                 <path d="{{ path_data }}"/>
             {% endfor %}
           </svg>
         </a>
-        <a href="#">
+        <a href="https://x.com/falcon_treras">
           <svg class="social-icon footer-icon" width="50" height="50" xmlns="{{ svg_info }}" viewBox="0 0 512 512">
             <path d="M256 0c141.385 0 256 114.615 256 256S397.385 512 256 512 0 397.385 0 256 114.615 0 256 0z"/>
             <path fill="#000000" fill-rule="nonzero" d="M318.64 157.549h33.401l-72.973 83.407 85.85 113.495h-67.222l-52.647-68.836-60.242 68.836h-33.423l78.052-89.212-82.354-107.69h68.924l47.59 62.917 55.044-62.917zm-11.724 176.908h18.51L205.95 176.493h-19.86l120.826 157.964z"/>          </svg>
         </a>
-        <a href="#">
+        <a href="https://falcontreras.medium.com/">
           <svg class="social-icon footer-icon" width="50" height="50" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            {% for path_data in icons.social['icon-Linkedin'] %}
+            <g transform="scale(1.20)">
+            {% for path_data in icons.social['icon-Medium'] %}
                 <path d="{{ path_data }}"/>
             {% endfor %}
-          </svg>
-        </a>
-        <a href="#">
-          <svg class="social-icon footer-icon" width="50" height="50" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            {% for path_data in icons.social['icon-Discord'] %}
-                <path d="{{ path_data }}"/>
-            {% endfor %}
+            </g> 
           </svg>
         </a>
       </div>
       <div class="footer-nav">
         <ul class="footer-btns clr-primary-100">
-          <li><a href="{{ url_for('.home', _anchor='home') }}" class="nav-btn">Home</a></li>
-          <li><a href="{{ url_for('.projects', _anchor='projects') }}" class="nav-btn">Projects</a></li>
-          <li><a href="{{ url_for('.skills', _anchor='skills') }}" class="nav-btn">Skills</a></li>
-          <li><a href="{{ url_for('.about', _anchor='about') }}" class="nav-btn">About</a></li>
-          <li><a href="{{ url_for('.contact', _anchor='contact') }}" class="nav-btn">Contact</a></li>
+          <li><a href="#home" class="nav-btn" onclick="scrollToSection('home')">Home</a></li>
+          <li><a href="#projects"' class="nav-btn" onclick="scrollToSection('projects')">Projects</a></li>
+          <li><a href="#skills" class="nav-btn" onclick="scrollToSection('skills')">Skills</a></li>
+          <li><a href="#about" class="nav-btn" onclick="scrollToSection('about')">About</a></li>
+          <li><a href="#contact" class="nav-btn" onclick="scrollToSection('contact')">Contact</a></li>
         </ul>
       </div>
       <div class="copyright">

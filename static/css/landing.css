@@ -19,6 +19,8 @@ header {
 
 .logo-icon {
     margin-left: 2em;
+    fill: var(--clr-primary-100);
+    margin-block: 0.5rem;
 }
 
 .nav-bar {
@@ -766,14 +768,20 @@ header {
     color: var(--clr-primary-100)
 }
 
-.input-group input:focus~label,
-.input-group input:valid~label {
+.input-group input:focus ~ label,
+.input-group input:valid ~ label,
+.input-group input.has-text ~ label {
     top: -5px;
+    font-size: 0.85em;
+    color: var(--clr-primary-100);
 }
 
-.input-group textarea:focus~label,
-.input-group textarea:valid~label {
+.input-group textarea:focus ~ label,
+.input-group textarea:valid ~ label,
+.input-group textarea.has-text ~ label {
     top: -1em;
+    font-size: 0.85em;
+    color: var(--clr-primary-100);
 }
 
 .first-input {
@@ -783,6 +791,7 @@ header {
 .contact-btn {
     position: relative;
     width: 100%;
+    background: transparent;
 }
 
 @media (min-width: 47rem) {
@@ -902,4 +911,12 @@ header {
     width: 100%;
     margin-top: 1em;
     margin-bottom: 0;
+}
+
+.flash-message {
+    font-weight: var(--fw-semi-bold);
+}
+
+.flash-message.error {
+    color: #ff4d4d;
 }

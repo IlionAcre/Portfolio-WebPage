@@ -3,6 +3,7 @@ import json
 import boto3
 from dotenv import load_dotenv
 import base64
+import re
 
 load_dotenv()
 headers = {
@@ -34,14 +35,8 @@ project_list_raw = s3_client.get_object(Bucket=bucket_name, Key="data/projects.j
 project_list = json.loads(project_list_raw)
 
 def clean_path(raw_svg):
-    # Read the file, split by each `<path ... />` tag, and get only the `d` attributes.
-    path_data = []
-    lines = raw_svg.splitlines()
-    for line in lines:
-        if 'd="' in line:
-            start = line.find('d="') + 3
-            end = line.find('"', start)
-            path_data.append(line[start:end])
+    path_data = re.findall(r'<path[^>]*\sd=[\'"]([^\'"]+)[\'"]', raw_svg, re.DOTALL)
+    
     return path_data
 
 
@@ -52,7 +47,6 @@ def fetch_data(folder_path):
             file_name = obj["Key"]
             if file_name.endswith(".svg"):
                 obj_content = s3_client.get_object(Bucket=bucket_name, Key=file_name)["Body"].read().decode('utf-8')
-                
                 if "icon" in file_name:
                     icons["social"][file_name.replace(".svg", "").split('/')[-1]] = clean_path(obj_content)
                 elif "skill" in file_name:
