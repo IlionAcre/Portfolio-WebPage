@@ -15,17 +15,23 @@ header {
     display: flex;
     justify-content: space-between;
     overflow-x: hidden;
+
+    position: fixed;  /* Make sure it's fixed to move it smoothly */
+    top: -100px;      /* Initially hidden */
+    width: 100%;
+    transition: top 1s ease-in-out;  /* Smooth transition for showing/hiding */
+    z-index: 1000; 
 }
 
 .logo-icon {
     margin-left: 2em;
     fill: var(--clr-primary-100);
-    margin-block: 0.5rem;
+    margin-block: 1.1em;
 }
 
 .nav-bar {
     padding: 1em 2em;
-    flex-direction: row;
+    flex-direction: row;    
 }
 
 .nav-list {
@@ -62,7 +68,7 @@ header {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-top: max(15svh, calc(var(--container-min-height)*0.15));
+    margin-top: max(17.5svh, calc(var(--container-min-height)*0.175));
     max-width: 95%;
     height: 3.5em;
     padding-inline: 0.5em;
@@ -141,6 +147,19 @@ header {
 }
 
 @media (max-width: 47rem) {
+
+    .main-nav {
+        position: absolute;
+        top: 0;
+    }
+
+    .nav-bar {     
+        position: fixed;
+        top: -100px;
+        width: 100%;
+        transition: top 0.3s ease;
+        z-index: 1000;
+    }
 
     .nav-list {
         position: fixed;
@@ -268,6 +287,19 @@ header {
     top: 0;
     bottom: 0;
     height: 100%;
+}
+
+.featured div:first-child {
+    background: rgba(250, 194, 50, 0.2);
+}
+
+.featured h2 {
+    color: var(--clr-accent-200);
+    text-shadow: 
+    0.05em 0.05em 1em var(--clr-accent-200),
+    -0.05em -0.05em 1em var(--clr-accent-200),
+    0.12em 0.12em 0.4em var(--clr-accent-200),
+    -0.12em -0.12em 0.4em var(--clr-accent-200);
 }
 
 .carousel-btn {

@@ -178,10 +178,21 @@ function toggleTitleLight(element) {
 
 
 //nav-bar
+const navTransitionIn = "top 1s ease";
+const navTransitionOut = "top 2.5s ease";
+const navHideDelay = 2000;
 
 if (window.matchMedia("(max-width: 47rem)").matches) {
   const primaryNav = document.querySelector(".nav-list");
   const navToggle = document.querySelector(".mobile-nav-toggle");
+  const navBar = document.querySelector(".nav-bar");
+  let lastScrollY = window.scrollY;
+  let hideTimeout;
+
+  navBar.style.position = "fixed";
+  navBar.style.top = "0";
+  navBar.style.width = "100%";
+  navBar.style.transition = navTransitionIn;
 
   navToggle.addEventListener("click", () => {
     const visibility = primaryNav.getAttribute("data-visible");
@@ -189,12 +200,13 @@ if (window.matchMedia("(max-width: 47rem)").matches) {
       primaryNav.setAttribute("data-visible", true);
       navToggle.setAttribute("aria-expanded", true);
       navToggle.style.backgroundImage = "url('/static/images/menu-close.svg')";
-      primaryNav.style.transition = "transform 0.5s ease";
+      primaryNav.style.transition = navTransitionOut;
+      clearTimeout(hideTimeout);
     } else {
       primaryNav.setAttribute("data-visible", false);
       navToggle.setAttribute("aria-expanded", false);
       navToggle.style.backgroundImage = "url('/static/images/menu-open.svg')";
-      primaryNav.style.transition = "transform 1s ease";
+      primaryNav.style.transition = navTransitionOut;
     }
   });
 
@@ -205,7 +217,7 @@ if (window.matchMedia("(max-width: 47rem)").matches) {
       primaryNav.setAttribute("data-visible", false);
       navToggle.setAttribute("aria-expanded", false);
       navToggle.style.backgroundImage = "url('/static/images/menu-open.svg')";
-      primaryNav.style.transition = "transform 1s ease";
+      primaryNav.style.transition = navTransitionIn;
     });
   });
 
@@ -230,8 +242,52 @@ if (window.matchMedia("(max-width: 47rem)").matches) {
       primaryNav.style.transition = "transform 1s ease";
     }
   }
+
+  // Show nav-bar on scroll up and hide on scroll down, but do not hide if menu is open or at the top of the page
+  window.addEventListener('scroll', () => {
+    if (window.scrollY === 0 || window.scrollY < lastScrollY) { // If at the top of the page or scrolling up
+      navBar.style.top = '0';
+      clearTimeout(hideTimeout);
+      if (window.scrollY !== 0) { // Only hide after delay if not at the very top
+        hideTimeout = setTimeout(() => {
+          if (primaryNav.getAttribute("data-visible") === "false") {
+            navBar.style.top = '-100px';
+          }
+        }, navHideDelay);
+      }
+    } else if (primaryNav.getAttribute("data-visible") === "false") { // Scrolling down
+      navBar.style.top = '-100px';
+    }
+    lastScrollY = window.scrollY;
+  });
 }
 
+// Desktop nav-bar behavior (min-width: 47rem)
+if (window.matchMedia("(min-width: 47rem)").matches) {
+  const mainNav = document.querySelector(".main-nav");
+  let lastScrollY = window.scrollY;
+  let hideTimeout;
+
+  mainNav.style.position = "fixed";
+  mainNav.style.top = "0";
+  mainNav.style.width = "100%";
+  mainNav.style.transition = navTransitionIn;
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY === 0 || window.scrollY < lastScrollY) { // If at the top of the page or scrolling up
+      mainNav.style.top = '0';
+      clearTimeout(hideTimeout);
+      if (window.scrollY !== 0) { // Only hide after delay if not at the very top
+        hideTimeout = setTimeout(() => {
+          mainNav.style.top = '-100px';
+        }, navHideDelay);
+      }
+    } else { // Scrolling down
+      mainNav.style.top = '-100px';
+    }
+    lastScrollY = window.scrollY;
+  });
+}
 
 document.addEventListener('DOMContentLoaded', function () {
   filterSkills();
