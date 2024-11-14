@@ -179,21 +179,59 @@ function toggleTitleLight(element) {
 
 //nav-bar
 
-const primaryNav = document.querySelector(".nav-list");
-const navToggle = document.querySelector(".mobile-nav-toggle");
+if (window.matchMedia("(max-width: 47rem)").matches) {
+  const primaryNav = document.querySelector(".nav-list");
+  const navToggle = document.querySelector(".mobile-nav-toggle");
 
-navToggle.addEventListener("click", () => {
-  const visibility = primaryNav.getAttribute("data-visible");
-  if (visibility === "false") {
-    primaryNav.setAttribute("data-visible", true);
-    navToggle.setAttribute("area-expanded", true);
-  } else {
-    primaryNav.setAttribute("data-visible", false);
-    navToggle.setAttribute("area-expanded", false);
+  navToggle.addEventListener("click", () => {
+    const visibility = primaryNav.getAttribute("data-visible");
+    if (visibility === "false") {
+      primaryNav.setAttribute("data-visible", true);
+      navToggle.setAttribute("aria-expanded", true);
+      navToggle.style.backgroundImage = "url('/static/images/menu-close.svg')";
+      primaryNav.style.transition = "transform 0.5s ease";
+    } else {
+      primaryNav.setAttribute("data-visible", false);
+      navToggle.setAttribute("aria-expanded", false);
+      navToggle.style.backgroundImage = "url('/static/images/menu-open.svg')";
+      primaryNav.style.transition = "transform 1s ease";
+    }
+  });
+
+  // Close the menu when a nav button is clicked
+  const navButtons = document.querySelectorAll(".nav-btn");
+  navButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      primaryNav.setAttribute("data-visible", false);
+      navToggle.setAttribute("aria-expanded", false);
+      navToggle.style.backgroundImage = "url('/static/images/menu-open.svg')";
+      primaryNav.style.transition = "transform 1s ease";
+    });
+  });
+
+  // Close the menu on swipe to the right (for mobile)
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  primaryNav.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  });
+
+  primaryNav.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipeGesture();
+  });
+
+  function handleSwipeGesture() {
+    if (touchEndX > touchStartX + 50) { // Swipe right detection
+      primaryNav.setAttribute("data-visible", false);
+      navToggle.setAttribute("aria-expanded", false);
+      navToggle.style.backgroundImage = "url('/static/images/menu-open.svg')";
+      primaryNav.style.transition = "transform 1s ease";
+    }
   }
+}
 
-
-});
 
 document.addEventListener('DOMContentLoaded', function () {
   filterSkills();

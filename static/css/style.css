@@ -1,10 +1,10 @@
 @font-face {
-  font-family: 'digital_numbers';
-  src: url('digitalnumbers-regular-webfont.woff2') format('woff2'),
-       url('digitalnumbers-regular-webfont.woff') format('woff');
+  font-family: 'Digital Numbers';
+  src: url('/static/fonts/digital-numbers/digitalnumbers-regular-webfont.woff2') format('woff2'),
+       url('/static/fonts/digital-numbers/digitalnumbers-regular-webfont.woff') format('woff'),
+       url('/static/fonts/digital-numbers/DigitalNumbers-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
-
 }
 
 :root {
@@ -59,29 +59,6 @@
     --fs-900: 6rem;
   }
 }
-
-/*
-@media (min-width:61em) and (max-width:121.5em) {
-  :root{
-    --fs-400: 1.25rem;
-    --fs-500: 1.425rem;
-    --fs-600: 2rem;
-    --fs-700: 3.5rem;
-    --fs-900: 6rem;
-  }
-}
-
- @media (min-width: 121.5em) {
-  :root{
-    --fs-400: 1.5rem;
-    --fs-500: 1.75rem;
-    --fs-600: 3rem;
-    --fs-700: 4rem;
-    --fs-900: 9rem;
-  }
-    
- }
- */
 
 /* Box sizing rules */
 *,
