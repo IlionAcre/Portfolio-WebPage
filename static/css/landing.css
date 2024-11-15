@@ -68,7 +68,7 @@ header {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-top: max(17.5svh, calc(var(--container-min-height)*0.175));
+    margin-top: max(22.5svh, calc(var(--container-min-height)*0.175));
     max-width: 95%;
     height: 3.5em;
     padding-inline: 0.5em;
@@ -287,6 +287,7 @@ header {
     top: 0;
     bottom: 0;
     height: 100%;
+    width: 400px;
 }
 
 .featured div:first-child {
@@ -356,7 +357,7 @@ header {
     display: flex;
     flex-direction: column;
     border-radius: 60px;
-    width: 550px;
+    width: 450px;
     padding-block: 2em;
     
     justify-content: space-evenly;
@@ -379,8 +380,8 @@ header {
 
 .project-card {
     margin-top: 15px;
-    height: 250px;
     width: 100%;
+    background: transparent;
 }
 
 .project-img {
@@ -436,6 +437,7 @@ header {
 .side-bar {
     flex-direction: column;
     justify-content: space-between;
+    width: 120px;
     padding-top: max(7vh, calc(var(--container-min-height)*0.07));
     padding-bottom: max(5svh, calc(var(--container-min-height)*0.05));
     position: absolute;
@@ -464,8 +466,9 @@ header {
     border-radius: 25px;
 }
 
-.right-bar {
-    right: min(-140px, max(calc(15vw*-1), -250px));
+.right-bar
+ {
+    right: min(-120px, max(calc(13vw*-1), -200px));
 }
 
 .right-bar > * {
@@ -473,7 +476,7 @@ header {
 }
 
 .left-bar {
-    left: min(-140px, max(calc(15vw*-1), -200px));
+    left: min(-120px, max(calc(13vw*-1), -200px));
 }
 
 .left-bar > * {
@@ -483,12 +486,12 @@ header {
 .skills-container {
     display: grid;
     margin-top: 30px;
-    column-gap: 50px;
+    column-gap: max(5vw, 10px);
     row-gap: 10px;
     overflow: auto;
 
-    width: min(500px, 85vw);
-    grid-template-columns: repeat(auto-fit, 170px);
+    width: min(500px, 75vw);
+    grid-template-columns:repeat(auto-fit, min(200px, max(15vw, 140px)));
     justify-content: center;
 }
 
@@ -508,9 +511,9 @@ header {
     align-items: center;
 
     
-    width: max(17.5vw, 170px);
+    width: max(15vw, 140px);
     height: auto;
-    max-width: 240px;
+    max-width: 200px;
     aspect-ratio: 1.25;
 }
 
@@ -626,7 +629,7 @@ header {
 
 .trapezium {
     position: absolute;
-    width: min(97%, 1200px);
+    width: min(97%, 900px);
     height: max(20svh, calc(var(--container-min-height)*0.2));
     z-index: 1;
     clip-path: polygon(21% 0, 81% 0, 100% 10%, 0 10%);
@@ -645,7 +648,7 @@ header {
 .triangle {
     position: absolute;
     top: 0;
-    width: min(97%, 1200px);
+    width: min(97%, 900px);
     height: 75%;
     z-index: 0;
 }
@@ -850,8 +853,8 @@ header {
 
     .skills-container {
         width: 70vw;
-        grid-template-columns: repeat(auto-fit, min(22vw, 220px));
-        column-gap: max(2vw, 10px);
+        grid-template-columns: repeat(auto-fit, min(200px, max(15vw, 140px)));
+        column-gap: max(5vw, 20px);
         row-gap: 50px;
         justify-content: center;
     }
@@ -868,7 +871,7 @@ header {
 
     .about-main {
         margin-top: max(5svh, calc(var(--container-min-height)*0.05));
-        width: calc(min(70%, 680px));
+        width: calc(min(70%, 550px));
     }
 
     .wrapper {

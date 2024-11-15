@@ -52,11 +52,11 @@
 
 @media (min-width:47rem) {
   :root{
-    --fs-400: 1.25rem;
-    --fs-500: 1.425rem;
-    --fs-600: 2rem;
-    --fs-700: 3.5rem;
-    --fs-900: 6rem;
+    --fs-400: 1rem;
+    --fs-500: 1.2rem;
+    --fs-600: 1.5rem;
+    --fs-700: 2.625rem;
+    --fs-900: 4.5rem;
   }
 }
 
