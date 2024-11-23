@@ -380,13 +380,17 @@ header {
 
 .project-card {
     margin-top: 15px;
+    height: 35;
     width: 100%;
-    background: transparent;
+    background: rgba(0, 0, 0, 0.2);
 }
 
 .project-img {
-    max-height: 100%;
-    width: 100%;
+    height: 100%;
+    width: auto;
+    margin-inline: auto;
+    opacity: 90%;
+    border-radius: 10px;
 }
 
 .project-btns {
