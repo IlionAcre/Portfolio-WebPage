@@ -237,7 +237,7 @@
               </div>
             {% endif %}
           {% endwith %}
-          <form action="/submit_contact" method="POST" class="contact-form fs-txt">
+          <form action="/submit_contact" method="POST" class="contact-form fs-txt" id="contact-form">
             <div class="input-group first-input">
               <input name="name" type="text" class="form-input bg-mid" required>
               <label for="">Name</label>
@@ -295,7 +295,7 @@
       <div class="footer-nav">
         <ul class="footer-btns clr-primary-100">
           <li><a href="#home" class="nav-btn" onclick="scrollToSection('home')">Home</a></li>
-          <li><a href="#projects"' class="nav-btn" onclick="scrollToSection('projects')">Projects</a></li>
+          <li><a href="#projects" class="nav-btn" onclick="scrollToSection('projects')">Projects</a></li>
           <li><a href="#skills" class="nav-btn" onclick="scrollToSection('skills')">Skills</a></li>
           <li><a href="#about" class="nav-btn" onclick="scrollToSection('about')">About</a></li>
           <li><a href="#contact" class="nav-btn" onclick="scrollToSection('contact')">Contact</a></li>
@@ -307,6 +307,13 @@
     </div>
   </main>
 
+  {% if form_submitted %}
+    <script>
+      window.onload = function() {
+        window.location.hash = '#contact';
+      };
+    </script>
+  {% endif %}
   <script src="/static/js/static.js"></script>
   <script src="/static/js/carousel.js"></script>
 

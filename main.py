@@ -1,7 +1,8 @@
-from flask import Flask, render_template, request, flash, redirect, url_for
+from flask import Flask, render_template, request, flash
 from data import icons, skill_list, project_list
 from flask_mail import Mail, Message
 from dotenv import load_dotenv
+from flask import jsonify, get_flashed_messages
 import os
 
 load_dotenv()
@@ -58,12 +59,17 @@ def submit_contact():
         msg.body= f"Name: {name}\nEmail: {email}\nSubject: {subject}\n\nMessage:\n{message}"
         mail.send(msg)
         flash("Message sent successfully!", "success")
+        print("Message sent")
     except Exception:
         flash("An unexpected error occurred. Please try again later.", "error")
-        
-    redirect_url = url_for("home") + "#contact"
-    return redirect(redirect_url)
-
+    return render_template('index.html',
+                       skills=skill_list, 
+                       projects=project_list, 
+                       ico_social=icons["social"], 
+                       ico_skill=icons["skill"],
+                       svg_info="http://www.w3.org/2000/svg",
+                       icons=icons,
+                       form_submitted=True)
 
 
 if __name__ == "__main__":

@@ -1,4 +1,3 @@
-
 main {
     height: 100%;
 }
@@ -16,10 +15,10 @@ header {
     justify-content: space-between;
     overflow-x: hidden;
 
-    position: fixed;  /* Make sure it's fixed to move it smoothly */
-    top: -100px;      /* Initially hidden */
+    position: fixed;
+    top: -100px; 
     width: 100%;
-    transition: top 1s ease-in-out;  /* Smooth transition for showing/hiding */
+    transition: top 1s ease-in-out;
     z-index: 1000; 
 }
 
@@ -380,7 +379,7 @@ header {
 
 .project-card {
     margin-top: 15px;
-    height: 35;
+    height: 35%;
     width: 100%;
     background: rgba(0, 0, 0, 0.2);
 }

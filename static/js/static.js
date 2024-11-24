@@ -297,10 +297,10 @@ document.addEventListener('DOMContentLoaded', function () {
 setTimeout(function() {
   const flashMessages = document.querySelector('.flash-messages');
   if (flashMessages) {
-    flashMessages.style.transition = 'opacity 4s';
+    flashMessages.style.transition = 'opacity 5s';
     flashMessages.style.opacity = '0';
 
-    setTimeout(() => flashMessages.remove(), 4000);
+    setTimeout(() => flashMessages.remove(), 5000);
   }
 }, 2000);
 
