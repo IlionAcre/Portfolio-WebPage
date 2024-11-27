@@ -415,6 +415,7 @@ header {
 
 .project-description {
     width: 90%;
+    max-height: 40%;
 }
 
 .projects-end {
@@ -717,7 +718,7 @@ header {
 .description {
     width: 75%;
     margin-top: 2rem;
-    max-height: max(60svh, calc(var(--container-min-height)*0.6));
+    max-height: max(50svh, calc(var(--container-min-height)*0.5));
     overflow: auto;
     flex-shrink: 0;
 }

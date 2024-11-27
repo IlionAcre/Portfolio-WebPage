@@ -52,10 +52,10 @@ def fetch_data(folder_path):
                 elif "skill" in file_name:
                     base64_svg = base64.b64encode(obj_content.encode("utf-8")).decode("utf-8")
                     icons["skill"][file_name.replace(".svg", "").split('/')[-1]] = f"data:image/svg+xml;base64,{base64_svg}"
-            elif file_name.lower().endswith(".png") :
+            elif file_name.lower().endswith(".gif") :
                 obj_content = s3_client.get_object(Bucket=bucket_name, Key=file_name)["Body"].read()
-                base64_png = base64.b64encode(obj_content).decode("utf-8")
-                icons["projects"][file_name.lower().replace(".png","").split("_")[-1]] = f"data:image/png;base64,{base64_png}"
+                base64_gif = base64.b64encode(obj_content).decode("utf-8")
+                icons["projects"][file_name.lower().replace(".gif","").split("_")[-1]] = f"data:image/gif;base64,{base64_gif}"
                 
 
 fetch_data("images/")
