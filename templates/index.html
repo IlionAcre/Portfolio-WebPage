@@ -16,10 +16,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
   <title>Fabian's Website</title>
 </head>
-<body>
+<body{% if form_submitted %} data-form-submitted="true"{% endif %}>
   <header class="primary-header">
     <div class="main-nav">
-      <svg class="logo-icon" width="40" height="40" viewBox="0 0 550 550" xmlns="http://www.w3.org/2000/svg" onclick="scrollToSection('home')">
+      <svg class="logo-icon" width="40" height="40" viewBox="0 0 550 550" xmlns="http://www.w3.org/2000/svg">
         {% for path_data in icons.social['icon-Logo'] %}
             <path d="{{ path_data }}"/>
         {% endfor %}
@@ -27,11 +27,11 @@
       <nav class="nav-bar">
         <button class="mobile-nav-toggle" aria-controls="primary-nav" aria-expanded="false"></button>
         <ul id="primary-nav" role="list" class="nav-list clr-primary-100 fs-accent fw-semi-bold" data-visible="false">
-          <li><a href="#home" class="nav-btn" onclick="scrollToSection('home')">Home</a></li>
-          <li><a href="#projects" class="nav-btn" onclick="scrollToSection('projects')">Projects</a></li>
-          <li><a href="#skills" class="nav-btn" onclick="scrollToSection('skills')">Skills</a></li>
-          <li><a href="#about" class="nav-btn" onclick="scrollToSection('about')">About</a></li>
-          <li><a href="#contact" class="nav-btn" onclick="scrollToSection('contact')">Contact</a></li>
+          <li><a href="#home" class="nav-btn">Home</a></li>
+          <li><a href="#projects" class="nav-btn">Projects</a></li>
+          <li><a href="#skills" class="nav-btn">Skills</a></li>
+          <li><a href="#about" class="nav-btn">About</a></li>
+          <li><a href="#contact" class="nav-btn">Contact</a></li>
       </ul>
       </nav>
     </div>
@@ -39,7 +39,7 @@
 
   <main>
     <section class="home hero bg-grad centered container" id="home">
-      <div class="header-wrapper title-container centered fs-primary-header" onclick="toggleTitleLight(this)">
+      <div class="header-wrapper title-container centered fs-primary-header">
         <h1 class="header ff-header clr-neon-200 fs-primary-header">FABIAN CONTRERAS</h1></div>
       <div> 
       <div class="subtitle-container">
@@ -71,7 +71,7 @@
     </section>
 
     <section class="projects centered container bg-grad-inv" id="projects">
-      <h1 class="fs-section-title clr-neon-200 fw-bold margin-top-sm" onclick="toggleTextLight(this)">PROJECTS</h1>
+      <h1 class="fs-section-title clr-neon-200 fw-bold margin-top-sm">PROJECTS</h1>
 
       <div class="carousel">
         <button class="carousel-btn carousel-right">
@@ -135,36 +135,36 @@
         <aside class="left-bar big side-bar fw-bold fs-accent">
           <div class="skills-menu-btn centered">
             <span class="skills-btn-text clr-primary-100">Technical</span>
-            <button class="btn-skills btn-neon btn-check technical" onclick="toggleCheckbox('.technical')"></button>
+            <button class="btn-skills btn-neon btn-check technical"></button>
           </div>
           <div class="skills-menu-btn centered fw-bold fs-accent">
             <span class="skills-btn-text clr-primary-100">All</span>
-            <button class="btn-skills btn-neon btn-check all btn-check--checked" onclick="toggleCheckbox('.all')"></button>
+            <button class="btn-skills btn-neon btn-check all btn-check--checked"></button>
           </div>
           <div class="skills-menu-btn centered fw-bold fs-accent">
             <span class="skills-btn-text clr-primary-100">Soft</span>
-            <button class="btn-skills btn-neon btn-check soft" onclick="toggleCheckbox('.soft')"></button>
+            <button class="btn-skills btn-neon btn-check soft"></button>
           </div>
         </aside>
 
         <div class="skills-content container centered">
 
-          <h1 class="fs-section-title clr-neon-200 fw-bold margin-top-sm" onclick="toggleTextLight(this)">SKILLS</h1>
+          <h1 class="fs-section-title clr-neon-200 fw-bold margin-top-sm">SKILLS</h1>
           <p class="fs-txt clr-primary-100 fw-regular skills-description">Throughout my career, I've developed a strong set of technical abilities 
             alongside essential interpersonal skills, which helps me approach challenges with a balanced perspective.
           </p>
           <div class="center-bar fw-bold fs-accent">
             <div class="skills-menu-btn centered">
               <span class="skills-btn-text clr-primary-100">Technical</span>
-              <button class="btn-skills btn-neon btn-check technical" onclick="toggleCheckbox('.technical')"></button>
+              <button class="btn-skills btn-neon btn-check technical"></button>
             </div>
             <div class="skills-menu-btn centered fw-bold fs-accent">
               <span class="skills-btn-text clr-primary-100">All</span>
-              <button class="btn-skills btn-neon btn-check all btn-check--checked" onclick="toggleCheckbox('.all')"></button>
+              <button class="btn-skills btn-neon btn-check all btn-check--checked"></button>
             </div>
             <div class="skills-menu-btn centered fw-bold fs-accent">
               <span class="skills-btn-text clr-primary-100">Soft</span>
-              <button class="btn-skills btn-neon btn-check soft" onclick="toggleCheckbox('.soft')"></button>
+              <button class="btn-skills btn-neon btn-check soft"></button>
             </div>
           </div>
           
@@ -183,20 +183,20 @@
         <aside class="right-bar big side-bar fw-bold fs-accent">
           <div class="skills-menu-btn centered">
             <span class="skills-btn-text clr-primary-100">Technical</span>
-            <button class="btn-skills btn-neon btn-check technical" onclick="toggleCheckbox('.technical')"></button>
+            <button class="btn-skills btn-neon btn-check technical"></button>
           </div>
           <div class="skills-menu-btn centered fw-bold fs-accent">
             <span class="skills-btn-text clr-primary-100">All</span>
-            <button class="btn-skills btn-neon btn-check all btn-check--checked" onclick="toggleCheckbox('.all')"></button>
+            <button class="btn-skills btn-neon btn-check all btn-check--checked"></button>
           </div>
           <div class="skills-menu-btn centered fw-bold fs-accent">
             <span class="skills-btn-text clr-primary-100">Soft</span>
-            <button class="btn-skills btn-neon btn-check soft" onclick="toggleCheckbox('.soft')"></button>
+            <button class="btn-skills btn-neon btn-check soft"></button>
           </div>
         </aside>
       </div>
 
-      <div class="end-bar btn-neon btn-check enlightened" onclick="toggleLight(this)"></div>
+      <div class="end-bar btn-neon btn-check enlightened"></div>
 
     </section>
     
@@ -218,7 +218,7 @@
       </div>
 
       <div class="about-main border-neon-400 bg-dark container centered">
-        <h1 class="fs-section-title clr-neon-200 fw-semi-bold" onclick="toggleTextLight(this)">ABOUT ME</h1>
+        <h1 class="fs-section-title clr-neon-200 fw-semi-bold">ABOUT ME</h1>
         <p class="description clr-primary-100 fw-regular fs-txt">
           I'm a data analyst and software developer with a solid background in math and a strong sense of how businesses work. 
           I’m passionate about digging into data, solving problems, and delivering practical, user-friendly solutions that make a difference. 
@@ -233,7 +233,7 @@
     <section class="bg-dark contact container centered" id="contact">
       <div class="wrapper fs-txt">
         <div class="form-wrapper clr-primary-100 fs-txt">
-          <h1 class="fs-section-title clr-neon-200 fw-semi-bold" onclick="toggleTextLight(this)">CONTACT</h1>
+          <h1 class="fs-section-title clr-neon-200 fw-semi-bold">CONTACT</h1>
           {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
               <div class="flash-messages">
@@ -301,11 +301,11 @@
       </div>
       <div class="footer-nav">
         <ul class="footer-btns clr-primary-100">
-          <li><a href="#home" class="nav-btn" onclick="scrollToSection('home')">Home</a></li>
-          <li><a href="#projects" class="nav-btn" onclick="scrollToSection('projects')">Projects</a></li>
-          <li><a href="#skills" class="nav-btn" onclick="scrollToSection('skills')">Skills</a></li>
-          <li><a href="#about" class="nav-btn" onclick="scrollToSection('about')">About</a></li>
-          <li><a href="#contact" class="nav-btn" onclick="scrollToSection('contact')">Contact</a></li>
+          <li><a href="#home" class="nav-btn">Home</a></li>
+          <li><a href="#projects" class="nav-btn">Projects</a></li>
+          <li><a href="#skills" class="nav-btn">Skills</a></li>
+          <li><a href="#about" class="nav-btn">About</a></li>
+          <li><a href="#contact" class="nav-btn">Contact</a></li>
         </ul>
       </div>
       <div class="copyright">
@@ -314,13 +314,6 @@
     </div>
   </main>
 
-  {% if form_submitted %}
-    <script>
-      window.onload = function() {
-        window.location.hash = '#contact';
-      };
-    </script>
-  {% endif %}
   <script src="/static/js/static.js"></script>
   <script src="/static/js/carousel.js"></script>
 

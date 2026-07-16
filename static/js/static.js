@@ -146,6 +146,52 @@ function toggleTitleLight(element) {
   element.classList.toggle("enlightened-title");
 }
 
+// Delegated click handling - replaces inline onclick="" attributes so a
+// Content-Security-Policy without 'unsafe-inline' can be enforced on script-src.
+document.addEventListener('click', (event) => {
+  const navBtn = event.target.closest('.nav-btn');
+  if (navBtn) {
+    scrollToSection(navBtn.getAttribute('href').slice(1));
+    return;
+  }
+
+  if (event.target.closest('.logo-icon')) {
+    scrollToSection('home');
+    return;
+  }
+
+  const headerWrapper = event.target.closest('.header-wrapper');
+  if (headerWrapper) {
+    toggleTitleLight(headerWrapper);
+    return;
+  }
+
+  const sectionTitle = event.target.closest('.fs-section-title');
+  if (sectionTitle) {
+    toggleTextLight(sectionTitle);
+    return;
+  }
+
+  const skillsBtn = event.target.closest('.btn-skills');
+  if (skillsBtn) {
+    if (skillsBtn.classList.contains('technical')) toggleCheckbox('.technical');
+    else if (skillsBtn.classList.contains('soft')) toggleCheckbox('.soft');
+    else if (skillsBtn.classList.contains('all')) toggleCheckbox('.all');
+    return;
+  }
+
+  const endBar = event.target.closest('.end-bar');
+  if (endBar) {
+    toggleLight(endBar);
+  }
+});
+
+if (document.body.dataset.formSubmitted === 'true') {
+  window.addEventListener('load', () => {
+    window.location.hash = '#contact';
+  });
+}
+
 
 //nav-bar
 const navTransitionIn = "top 1s ease";
