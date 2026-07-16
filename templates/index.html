@@ -244,6 +244,7 @@
             {% endif %}
           {% endwith %}
           <form action="/submit_contact" method="POST" class="contact-form fs-txt" id="contact-form">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             <div class="input-group first-input">
               <input id="contact-name" name="name" type="text" class="form-input bg-mid" required>
               <label for="contact-name">Name</label>

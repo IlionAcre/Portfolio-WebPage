@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, flash
 from data import icons, skill_list, project_list
 from flask_mail import Mail, Message
+from flask_wtf import CSRFProtect
 from dotenv import load_dotenv
 from flask import jsonify, get_flashed_messages
 import os
@@ -11,6 +12,8 @@ load_dotenv()
 app = Flask(__name__)
 app.secret_key = os.getenv('FLASK_KEY')
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 86400
+
+csrf = CSRFProtect(app)
 
 app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER')
 app.config['MAIL_PORT'] = 587
