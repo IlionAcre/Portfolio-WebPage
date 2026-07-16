@@ -10,6 +10,7 @@ load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = os.getenv('FLASK_KEY')
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 86400
 
 app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER')
 app.config['MAIL_PORT'] = 587
@@ -20,27 +21,28 @@ app.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_DEFAULT_SENDER')
 
 mail = Mail(app)
 
+
+def render_index(**extra):
+    return render_template(
+        "index.html",
+        skills=skill_list,
+        projects=project_list,
+        ico_social=icons["social"],
+        ico_skill=icons["skill"],
+        svg_info="http://www.w3.org/2000/svg",
+        icons=icons,
+        **extra,
+    )
+
+
 @app.route("/")
 def home():
-    return render_template("index.html", 
-                           skills=skill_list, 
-                           projects=project_list, 
-                           ico_social=icons["social"], 
-                           ico_skill=icons["skill"],
-                           svg_info="http://www.w3.org/2000/svg",
-                           icons=icons)
+    return render_index()
 
 @app.route('/projects')
 def projects():
-    return render_template('index.html', 
-                           anchor='projects',
-                           skills=skill_list, 
-                           projects=project_list, 
-                           ico_social=icons["social"], 
-                           ico_skill=icons["skill"],
-                           svg_info="http://www.w3.org/2000/svg",
-                           icons=icons)
-    
+    return render_index()
+
 
 @app.route("/submit_contact", methods=["POST"])
 def submit_contact():
@@ -62,14 +64,7 @@ def submit_contact():
         print("Message sent")
     except Exception:
         flash("An unexpected error occurred. Please try again later.", "error")
-    return render_template('index.html',
-                       skills=skill_list, 
-                       projects=project_list, 
-                       ico_social=icons["social"], 
-                       ico_skill=icons["skill"],
-                       svg_info="http://www.w3.org/2000/svg",
-                       icons=icons,
-                       form_submitted=True)
+    return render_index(form_submitted=True)
 
 
 if __name__ == "__main__":

@@ -168,3 +168,6 @@ cython_debug/
 .svg
 .png
 .zip
+
+# Generated at runtime from S3, not source
+/static/generated/

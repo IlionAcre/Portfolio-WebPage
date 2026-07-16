@@ -1,5 +1,8 @@
 const track = document.querySelector(".carousel-track");
 const slides = Array.from(track.children);
+
+if (slides.length > 0) {
+
 const nextButton = document.querySelector(".carousel-right");
 const prevButton = document.querySelector(".carousel-left");
 const dotsNav = document.querySelector(".carousel-nav");
@@ -103,3 +106,5 @@ dotsNav.addEventListener("click", e => {
 
     updateDots(currentDot, targetDot);
 } )
+
+}

@@ -3,6 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Fabian Contreras — Creative Data Analyst and Python Developer. Portfolio showcasing projects, skills, and professional background.">
+  <meta property="og:title" content="Fabian Contreras">
+  <meta property="og:description" content="Creative Data Analyst and Python Developer. Portfolio showcasing projects, skills, and professional background.">
+  <meta property="og:type" content="website">
   <link rel="stylesheet" href="/static/css/style.css">
   <link rel="stylesheet" href="/static/css/landing.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -62,6 +66,8 @@
       
       <div class="main-arrow">
       </div>
+      </div>
+      </div>
     </section>
 
     <section class="projects centered container bg-grad-inv" id="projects">
@@ -86,7 +92,7 @@
                     <div class="project centered fs-txt">
                       <h2 class="fs-accent clr-primary-100 fw-semi-bold project-card-title">{{ project["title"] }}</h2>
                       <div class="project-card bg-mid">
-                        <img class= "project-img" src="{{ icons['projects'][project['id']  | string] }}" alt="project_page">
+                        <img class= "project-img" src="{{ url_for('static', filename=icons['projects'][project['id'] | string]) }}" alt="project_page">
                       </div>
                       <div class="project-btns">
                         {% for name, link in project["links"].items() %}
@@ -239,22 +245,22 @@
           {% endwith %}
           <form action="/submit_contact" method="POST" class="contact-form fs-txt" id="contact-form">
             <div class="input-group first-input">
-              <input name="name" type="text" class="form-input bg-mid" required>
-              <label for="">Name</label>
+              <input id="contact-name" name="name" type="text" class="form-input bg-mid" required>
+              <label for="contact-name">Name</label>
             </div>
             <div class="input-group">
-              <input name="email" type="email" class="form-input" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" title="Please enter a valid email address.">
-              <label for="">Email</label>
+              <input id="contact-email" name="email" type="email" class="form-input" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" title="Please enter a valid email address.">
+              <label for="contact-email">Email</label>
             </div>
             <div class="input-group">
-              <input name="subject" type="text" class="form-input" required>
-              <label for="">Subject</label>
+              <input id="contact-subject" name="subject" type="text" class="form-input" required>
+              <label for="contact-subject">Subject</label>
             </div>
             <div class="input-group message">
-              <textarea name="emailContent"class="form-input" required></textarea>
-              <label for="">Message</label>
+              <textarea id="contact-message" name="emailContent" class="form-input" required></textarea>
+              <label for="contact-message">Message</label>
             </div>
-            <button name="submit"type="submit" class="contact-btn btn-neon btn-regular-200 fs-secondary-header fw-semi-bold">Contact Me</button>
+            <button name="submit" type="submit" class="contact-btn btn-neon btn-regular-200 fs-secondary-header fw-semi-bold">Contact Me</button>
           </form>
         </div>
       </div>

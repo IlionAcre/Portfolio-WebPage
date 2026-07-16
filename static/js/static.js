@@ -82,36 +82,6 @@ function checkAll(){
   return true;
 }
 
-function filterSkills() {
-  const skillCards = document.querySelectorAll(".skill-card");
-
-  // Determine the active filters
-  const activeFilters = [];
-  if (skillsContainer.querySelector(".technical").classList.contains("btn-check--checked")) {
-    activeFilters.push("technical");
-  }
-  if (skillsContainer.querySelector(".soft").classList.contains("btn-check--checked")) {
-    activeFilters.push("soft");
-  }
-
-  // If "All" is checked or no specific filters are active, show all skills
-  if (activeFilters.length === 0 || skillsContainer.querySelector(".all").classList.contains("btn-check--checked")) {
-    skillCards.forEach(card => {
-      card.style.display = "flex";
-    });
-  } else {
-    // Filter the skill cards based on the active filters
-    skillCards.forEach(card => {
-      const skillType = card.getAttribute("data-type");
-      if (activeFilters.includes(skillType)) {
-        card.style.display = "flex";
-      } else {
-        card.style.display = "none";
-      }
-    });
-  }
-}
-
 function toggleCheckbox(tag) {
   // Get all buttons of the specified type (e.g., all technical or all soft)
   const targetButtons = skillsContainer.querySelectorAll(tag);
