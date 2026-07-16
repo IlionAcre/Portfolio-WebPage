@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, flash
 from data import icons, skill_list, project_list
 from flask_mail import Mail, Message
 from flask_wtf import CSRFProtect
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 from dotenv import load_dotenv
 from flask import jsonify, get_flashed_messages
 import os
@@ -14,6 +16,7 @@ app.secret_key = os.getenv('FLASK_KEY')
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 86400
 
 csrf = CSRFProtect(app)
+limiter = Limiter(get_remote_address, app=app)
 
 app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER')
 app.config['MAIL_PORT'] = 587
@@ -48,6 +51,7 @@ def projects():
 
 
 @app.route("/submit_contact", methods=["POST"])
+@limiter.limit("5 per minute")
 def submit_contact():
     name = request.form.get("name")
     email = request.form.get("email")
