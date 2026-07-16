@@ -28,6 +28,22 @@ app.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_DEFAULT_SENDER')
 mail = Mail(app)
 
 
+@app.after_request
+def set_security_headers(response):
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+    return response
+
+
+CONTACT_FIELD_MAX_LENGTHS = {
+    "name": 100,
+    "email": 254,
+    "subject": 150,
+    "emailContent": 5000,
+}
+
+
 def render_index(**extra):
     return render_template(
         "index.html",
@@ -57,8 +73,17 @@ def submit_contact():
     email = request.form.get("email")
     subject = request.form.get("subject")
     message = request.form.get("emailContent")
-    
-    
+
+    for field_name, value, max_length in (
+        ("name", name, CONTACT_FIELD_MAX_LENGTHS["name"]),
+        ("email", email, CONTACT_FIELD_MAX_LENGTHS["email"]),
+        ("subject", subject, CONTACT_FIELD_MAX_LENGTHS["subject"]),
+        ("message", message, CONTACT_FIELD_MAX_LENGTHS["emailContent"]),
+    ):
+        if value and len(value) > max_length:
+            flash("Your message is too long. Please shorten it and try again.", "error")
+            return render_index(form_submitted=True)
+
     try:
         msg = Message(
             subject=f"Contact Form: {subject}",
