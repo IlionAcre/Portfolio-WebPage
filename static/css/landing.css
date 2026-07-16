@@ -1,4 +1,3 @@
-
 main {
     height: 100%;
 }
@@ -13,14 +12,25 @@ header {
 .main-nav {
     margin-top: 1em;
     display: flex;
-    padding: 1em 2em;
     justify-content: space-between;
-
     overflow-x: hidden;
+
+    position: fixed;
+    top: -100px; 
+    width: 100%;
+    transition: top 1s ease-in-out;
+    z-index: 1000; 
+}
+
+.logo-icon {
+    margin-left: 2em;
+    fill: var(--clr-primary-100);
+    margin-block: 1.1em;
 }
 
 .nav-bar {
-    flex-direction: row;
+    padding: 1em 2em;
+    flex-direction: row;    
 }
 
 .nav-list {
@@ -57,7 +67,7 @@ header {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-top: max(15svh, calc(var(--container-min-height)*0.15));
+    margin-top: max(22.5svh, calc(var(--container-min-height)*0.175));
     max-width: 95%;
     height: 3.5em;
     padding-inline: 0.5em;
@@ -66,7 +76,6 @@ header {
 
 .header-wrapper {
     border: 2px solid var(--clr-accent-trn-200);
-    cursor: pointer;
 }
 
 .header-wrapper:hover,
@@ -112,7 +121,18 @@ header {
 .socials {
     position: absolute;
     left: 0;
-    margin-top: max(10px, calc(max(15svh, calc(var(--container-min-height)*0.15)) - var(--fs-primary-header)));
+    margin-top: max(6px, calc(max(6svh, calc(var(--container-min-height)*0.06)) - var(--fs-primary-header)));
+}
+
+.social-icon {
+    fill: var(--clr-primary-100);
+    margin-block: 0.5rem;
+}
+
+.social-icon:hover,
+.social-icon:focus {
+    fill: var(--clr-accent-200);
+    filter: drop-shadow(0px 0px 1em var(--clr-accent-200));
 }
 
 .contact-button {
@@ -126,6 +146,19 @@ header {
 }
 
 @media (max-width: 47rem) {
+
+    .main-nav {
+        position: absolute;
+        top: 0;
+    }
+
+    .nav-bar {     
+        position: fixed;
+        top: -100px;
+        width: 100%;
+        transition: top 0.3s ease;
+        z-index: 1000;
+    }
 
     .nav-list {
         position: fixed;
@@ -209,15 +242,15 @@ header {
     -webkit-mask: linear-gradient(
         90deg,
         transparent,
-        black 20%,
-        black 80%,
+        black 35%,
+        black 65%,
         transparent
     );
     mask: linear-gradient(
         90deg,
         transparent,
-        black 20%,
-        black 80%,
+        black 35%,
+        black 65%,
         transparent
     );
   }
@@ -253,6 +286,20 @@ header {
     top: 0;
     bottom: 0;
     height: 100%;
+    width: 475px;
+}
+
+.featured div:first-child {
+    background: rgba(250, 194, 50, 0.2);
+}
+
+.featured h2 {
+    color: var(--clr-accent-200);
+    text-shadow: 
+    0.05em 0.05em 1em var(--clr-accent-200),
+    -0.05em -0.05em 1em var(--clr-accent-200),
+    0.12em 0.12em 0.4em var(--clr-accent-200),
+    -0.12em -0.12em 0.4em var(--clr-accent-200);
 }
 
 .carousel-btn {
@@ -306,9 +353,10 @@ header {
 }
 
 .project {
+    display: flex;
     flex-direction: column;
     border-radius: 60px;
-    width: 550px;
+    width: 450px;
     padding-block: 2em;
     
     justify-content: space-evenly;
@@ -329,12 +377,19 @@ header {
     transform: translateX(8.5%);
 }
 
-
 .project-card {
     margin-top: 15px;
-    height: 250px;
-    padding: 2em 4em;
+    height: 35%;
     width: 100%;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.project-img {
+    height: 100%;
+    width: auto;
+    margin-inline: auto;
+    opacity: 90%;
+    border-radius: 10px;
 }
 
 .project-btns {
@@ -348,13 +403,23 @@ header {
 
 .project-btns > * {
     flex-shrink: 0;
-    width: 90px;
     height: 35px;
+}
+
+.btn-default {
+    cursor: pointer;
+    width: 120px;
     border: none;
+    background: transparent;
 }
 
 .project-description {
     width: 90%;
+    max-height: 40%;
+}
+
+.projects-end {
+    height: 10%;
 }
 
 @media (max-width:47em) {
@@ -376,6 +441,7 @@ header {
 .side-bar {
     flex-direction: column;
     justify-content: space-between;
+    width: 120px;
     padding-top: max(7vh, calc(var(--container-min-height)*0.07));
     padding-bottom: max(5svh, calc(var(--container-min-height)*0.05));
     position: absolute;
@@ -396,23 +462,17 @@ header {
     flex-direction: column;
 }
 
+
 .btn-skills {
-    width: max(20svh, calc(var(--container-min-height)*0.20));
-    min-width: 180px;
+    width: max(15svw, calc(var(--container-min-height)*0.20));
+    max-width: 40vw;
     height: 15px;
     border-radius: 25px;
 }
 
-.btn-skills--little {
-    width: max(20svh, calc(var(--container-min-height)*0.20));
-    max-width: 40vh;
-    height: 15px;
-    border-radius: 25px;
-}
-
-.right-bar {
-    right: 0;
-    transform: translateX(100%);
+.right-bar
+ {
+    right: min(-120px, max(calc(13vw*-1), -200px));
 }
 
 .right-bar > * {
@@ -420,8 +480,7 @@ header {
 }
 
 .left-bar {
-    left: 0;
-    transform: translateX(-100%);
+    left: min(-120px, max(calc(13vw*-1), -200px));
 }
 
 .left-bar > * {
@@ -431,13 +490,21 @@ header {
 .skills-container {
     display: grid;
     margin-top: 30px;
-    column-gap: 50px;
+    column-gap: max(5vw, 10px);
     row-gap: 10px;
     overflow: auto;
 
-    width: min(350px, 85vw);
-    grid-template-columns: repeat(auto-fit, 120px);
+    width: min(600px, 75vw);
+    grid-template-columns:repeat(auto-fit, min(200px, max(15vw, 135px)));
     justify-content: center;
+}
+
+.center-bar {
+    display: flex;
+    margin-top: 30px;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 5px;
 }
 
 .skill-card {
@@ -445,12 +512,12 @@ header {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-content: center;
+    align-items: center;
 
     
-    width: max(17.5vw, 120px);
+    width: max(11vw, 135px);
     height: auto;
-    max-width: 240px;
+    max-width: 200px;
     aspect-ratio: 1.25;
 }
 
@@ -464,7 +531,6 @@ header {
 .skills-description {
     max-width: calc(max(50vw, 450px));
 }
-
 
 .btn-check {
     color: var(--clr-accent-200);
@@ -536,6 +602,15 @@ header {
     position: relative;
 }
 
+.skills-icon {
+    width: 50%; /* Ensures the SVG scales responsively */
+    height: 50%;
+    fill: #000; /* Override fill */
+    stroke: #000; 
+    /* transform-origin: center;
+    transform: scale(1); Adjust the scale factor if necessary */
+}
+
 .end-bar {
     position: absolute;
     bottom: 5%;
@@ -558,7 +633,7 @@ header {
 
 .trapezium {
     position: absolute;
-    width: min(97%, 1200px);
+    width: min(97%, 900px);
     height: max(20svh, calc(var(--container-min-height)*0.2));
     z-index: 1;
     clip-path: polygon(21% 0, 81% 0, 100% 10%, 0 10%);
@@ -577,7 +652,7 @@ header {
 .triangle {
     position: absolute;
     top: 0;
-    width: min(97%, 1200px);
+    width: min(97%, 900px);
     height: 75%;
     z-index: 0;
 }
@@ -643,7 +718,7 @@ header {
 .description {
     width: 75%;
     margin-top: 2rem;
-    max-height: max(60svh, calc(var(--container-min-height)*0.6));
+    max-height: max(50svh, calc(var(--container-min-height)*0.5));
     overflow: auto;
     flex-shrink: 0;
 }
@@ -732,14 +807,20 @@ header {
     color: var(--clr-primary-100)
 }
 
-.input-group input:focus~label,
-.input-group input:valid~label {
+.input-group input:focus ~ label,
+.input-group input:valid ~ label,
+.input-group input.has-text ~ label {
     top: -5px;
+    font-size: 0.85em;
+    color: var(--clr-primary-100);
 }
 
-.input-group textarea:focus~label,
-.input-group textarea:valid~label {
+.input-group textarea:focus ~ label,
+.input-group textarea:valid ~ label,
+.input-group textarea.has-text ~ label {
     top: -1em;
+    font-size: 0.85em;
+    color: var(--clr-primary-100);
 }
 
 .first-input {
@@ -749,9 +830,23 @@ header {
 .contact-btn {
     position: relative;
     width: 100%;
+    background: transparent;
 }
 
 @media (min-width: 47rem) {
+    .center-bar {
+        margin-top: 20px;
+        gap: 15px;
+    
+    }
+
+    .btn-skills {
+        width: max(20svh, calc(var(--container-min-height)*0.20));
+        min-width: 180px;
+        height: 15px;
+        border-radius: 25px;
+    }
+
     .little {
         display: none;
     }
@@ -761,11 +856,16 @@ header {
     }
 
     .skills-container {
+        margin-top: 50px;
         width: 70vw;
-        grid-template-columns: repeat(auto-fit, min(17.5vw, 220px));
-        column-gap: max(2vw, 10px);
-        row-gap: 50px;
+        grid-template-columns: repeat(auto-fit, min(200px, max(11vw, 155px)));
+        column-gap: max(2.5vw, 20px);
+        row-gap: 40px;
         justify-content: center;
+    }
+
+    .skill-card {
+        width: max(11vw, 155px);
     }
 
     .skills-description {
@@ -780,7 +880,7 @@ header {
 
     .about-main {
         margin-top: max(5svh, calc(var(--container-min-height)*0.05));
-        width: calc(min(70%, 680px));
+        width: calc(min(70%, 550px));
     }
 
     .wrapper {
@@ -809,6 +909,7 @@ header {
 /* FOOTER */
 
 .footer {
+    font-size: var(--fs-txt);
     display: flex;
     position: relative;
     flex-direction: column;
@@ -818,12 +919,18 @@ header {
     background: var(--clr-bg-dark);
 }
 
-
 .icons {
-    margin-top: 2em;
-    border: 1px solid var(--clr-primary-100);
+    display: flex;
+    align-items: center;
+    margin-top: 3em;
+    margin-bottom: 1em;
     height: 30px;
-    width: 120px;
+}
+
+.footer-icon {
+    width: 40px;
+    height: 40px;
+    margin-inline: 1rem;
 }
 
 .footer-nav {
@@ -848,4 +955,12 @@ header {
     width: 100%;
     margin-top: 1em;
     margin-bottom: 0;
+}
+
+.flash-message {
+    font-weight: var(--fw-semi-bold);
+}
+
+.flash-message.error {
+    color: #ff4d4d;
 }

@@ -7,22 +7,28 @@
   <link rel="stylesheet" href="/static/css/landing.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="shortcut icon" href="/static/images/Vector.ico" type="image/x-icon">
+
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
-  <title>Document</title>
+  <title>Fabian's Website</title>
 </head>
 <body>
   <header class="primary-header">
     <div class="main-nav">
-      <a href="#" class="icon-logo"><h4 class="fs-accent fw-semi-bold">LOGO</h4></a>
+      <svg class="logo-icon" width="40" height="40" viewBox="0 0 550 550" xmlns="http://www.w3.org/2000/svg" onclick="scrollToSection('home')">
+        {% for path_data in icons.social['icon-Logo'] %}
+            <path d="{{ path_data }}"/>
+        {% endfor %}
+      </svg>
       <nav class="nav-bar">
         <button class="mobile-nav-toggle" aria-controls="primary-nav" aria-expanded="false"></button>
         <ul id="primary-nav" role="list" class="nav-list clr-primary-100 fs-accent fw-semi-bold" data-visible="false">
-          <li><a href="{{ url_for('.home', _anchor='home') }}" class="nav-btn">Home</a></li>
-          <li><a href="{{ url_for('.projects', _anchor='projects') }}" class="nav-btn">Projects</a></li>
-          <li><a href="{{ url_for('.skills', _anchor='skills') }}" class="nav-btn">Skills</a></li>
-          <li><a href="{{ url_for('.about', _anchor='about') }}" class="nav-btn">About</a></li>
-          <li><a href="{{ url_for('.contact', _anchor='contact') }}" class="nav-btn">Contact</a></li>
-        </ul>
+          <li><a href="#home" class="nav-btn" onclick="scrollToSection('home')">Home</a></li>
+          <li><a href="#projects" class="nav-btn" onclick="scrollToSection('projects')">Projects</a></li>
+          <li><a href="#skills" class="nav-btn" onclick="scrollToSection('skills')">Skills</a></li>
+          <li><a href="#about" class="nav-btn" onclick="scrollToSection('about')">About</a></li>
+          <li><a href="#contact" class="nav-btn" onclick="scrollToSection('contact')">Contact</a></li>
+      </ul>
       </nav>
     </div>
   </header>
@@ -33,17 +39,28 @@
         <h1 class="header ff-header clr-neon-200 fs-primary-header">FABIAN CONTRERAS</h1></div>
       <div> 
       <div class="subtitle-container">
-        <h2 class="clr-primary-100 fs-secondary-header">Full-Stack Developer</h2>
-        <h2 class="clr-primary-100 fs-secondary-header">Data Analyst</h2>
+        <h2 class="clr-primary-100 fs-secondary-header">Creative Data Analyst</h2>
+        <h2 class="clr-primary-100 fs-secondary-header">Python Developer</h2>
       
       <aside class="socials">
-        <a href="#"><h4 class="fs-txt fw-semi-bold">LOGO</h4></a>
-        <a href="#"><h4 class="fs-txt fw-semi-bold">LOGO</h4></a>
+        <a href="https://github.com/IlionAcre?tab=repositories">
+          <svg class="social-icon" width="40" height="40" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            {% for path_data in icons.social['icon-Github'] %}
+                <path d="{{ path_data }}"/>
+            {% endfor %}
+          </svg>
+        </a>
+        <a href="https://discord.gg/w3R8nj2ZMt">
+          <svg class="social-icon" width="40" height="40" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            {% for path_data in icons.social['icon-Discord'] %}
+                <path d="{{ path_data }}"/>
+            {% endfor %}
+          </svg>
+        </a>
       </aside>
-      <a href="{{ url_for('.contact', _anchor='contact') }}" class="btn-neon btn-accent contact-button fs-secondary-header fw-bold">Contact Me</a>
+      <a href="#contact" class="btn-neon btn-accent contact-button fs-secondary-header fw-bold">Contact Me</a>
       
       <div class="main-arrow">
-        <img src="" alt="Downwards arrow">
       </div>
     </section>
 
@@ -60,81 +77,28 @@
         <div class="mask-container">
           <div class="carousel-track-container">
             <ul class="carousel-track">
-              <li class="carousel-slide current-slide">
-                <div class="project centered fs-txt">
-                  <h2 class="fs-accent clr-primary-100 fw-semi-bold project-card-title">PROJECT TITLE</h2>
-                  <div class="project-card bg-mid">
-                    <img src="" alt="project_page">
-                  </div>
-                  <div class="project-btns">
-                    <button class="btn-default clr-primary-100">a</button>
-                    <button class="btn-default clr-primary-100">a</button>
-                    <button class="btn-default clr-primary-100">a</button>
-                    <button class="btn-default clr-primary-100">a</button>
-                  </div>
-                  <p class="project-description clr-primary-100 fs-txt">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis, ratione iure unde optio aspernatur magnam earum, reiciendis maxime, sed hic consequuntur labore vero laudantium mollitia ullam officia quod beatae. Quod adipisci a tempore quibusdam deserunt beatae!</p>
-                </div>
-              </li>
-              <li class="carousel-slide">
-                <div class="project centered fs-txt">
-                  <h2 class="fs-accent clr-primary-100 fw-semi-bold project-card-title">PROJECT TITLE</h2>
-                  <div class="project-card bg-mid">
-                    <img src="" alt="project_page">
-                  </div>
-                  <div class="project-btns">
-                    <button class="btn-default clr-primary-100">a</button>
-                    <button class="btn-default clr-primary-100">a</button>
-                    <button class="btn-default clr-primary-100">a</button>
-                    <button class="btn-default clr-primary-100">a</button>
-                  </div>
-                  <p class="project-description clr-primary-100 fs-txt">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis, ratione iure unde optio aspernatur magnam earum, reiciendis maxime, sed hic consequuntur labore vero laudantium mollitia ullam officia quod beatae. Quod adipisci a tempore quibusdam deserunt beatae!</p>
-                </div>
-              </li>
-              <li class="carousel-slide">
-                <div class="project centered fs-txt">
-                  <h2 class="fs-accent clr-primary-100 fw-semi-bold project-card-title">PROJECT TITLE</h2>
-                  <div class="project-card bg-mid">
-                    <img src="" alt="project_page">
-                  </div>
-                  <div class="project-btns">
-                    <button class="btn-default clr-primary-100">a</button>
-                    <button class="btn-default clr-primary-100">a</button>
-                    <button class="btn-default clr-primary-100">a</button>
-                    <button class="btn-default clr-primary-100">a</button>
-                  </div>
-                  <p class="project-description clr-primary-100 fs-txt">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis, ratione iure unde optio aspernatur magnam earum, reiciendis maxime, sed hic consequuntur labore vero laudantium mollitia ullam officia quod beatae. Quod adipisci a tempore quibusdam deserunt beatae!</p>
-                </div>
-              </li>
-              <li class="carousel-slide">
-                <div class="project centered fs-txt">
-                  <h2 class="fs-accent clr-primary-100 fw-semi-bold project-card-title">PROJECT TITLE</h2>
-                  <div class="project-card bg-mid">
-                    <img src="" alt="project_page">
-                  </div>
-                  <div class="project-btns">
-                    <button class="btn-default clr-primary-100">a</button>
-                    <button class="btn-default clr-primary-100">a</button>
-                    <button class="btn-default clr-primary-100">a</button>
-                    <button class="btn-default clr-primary-100">a</button>
-                  </div>
-                  <p class="project-description clr-primary-100 fs-txt">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis, ratione iure unde optio aspernatur magnam earum, reiciendis maxime, sed hic consequuntur labore vero laudantium mollitia ullam officia quod beatae. Quod adipisci a tempore quibusdam deserunt beatae!</p>
-                </div>
-              </li>
-              <li class="carousel-slide">
-                <div class="project centered fs-txt">
-                  <h2 class="fs-accent clr-primary-100 fw-semi-bold project-card-title">PROJECT TITLE</h2>
-                  <div class="project-card bg-mid">
-                    <img src="" alt="project_page">
-                  </div>
-                  <div class="project-btns">
-                    <button class="btn-default clr-primary-100">a</button>
-                    <button class="btn-default clr-primary-100">a</button>
-                    <button class="btn-default clr-primary-100">a</button>
-                    <button class="btn-default clr-primary-100">a</button>
-                  </div>
-                  <p class="project-description clr-primary-100 fs-txt">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis, ratione iure unde optio aspernatur magnam earum, reiciendis maxime, sed hic consequuntur labore vero laudantium mollitia ullam officia quod beatae. Quod adipisci a tempore quibusdam deserunt beatae!</p>
-                </div>
-              </li>
+              {% for project in projects %}
+                {% if project["id"] == 1%}
+                  <li class="carousel-slide current-slide featured">
+                {% else %}
+                  <li class="carousel-slide">
+                {% endif %}
+                    <div class="project centered fs-txt">
+                      <h2 class="fs-accent clr-primary-100 fw-semi-bold project-card-title">{{ project["title"] }}</h2>
+                      <div class="project-card bg-mid">
+                        <img class= "project-img" src="{{ icons['projects'][project['id']  | string] }}" alt="project_page">
+                      </div>
+                      <div class="project-btns">
+                        {% for name, link in project["links"].items() %}
+                          <a href="{{ link }}">
+                            <button class="btn-default btn-neon btn-regular-200 fw-semi-bold">{{ name }}</button>
+                          </a>                          
+                        {% endfor %}
+                      </div>
+                      <p class="project-description clr-primary-100 fs-txt">{{ project["description"] }}</p>
+                    </div>
+                  </li>
+              {% endfor %}
             </ul>
           </div>
         </div>
@@ -147,102 +111,81 @@
       </div>
       
       <div class="carousel-nav">
-        <button class="carousel-indicator current-slide-indicator"></button>
-        <button class="carousel-indicator"></button>
-        <button class="carousel-indicator"></button>
-        <button class="carousel-indicator"></button>
-        <button class="carousel-indicator"></button>
+        {% for project in projects %}
+          {% if project["id"] == 2 %}
+            <button class="carousel-indicator current-slide-indicator"></button>
+          {% else %}
+            <button class="carousel-indicator"></button>
+          {% endif %}        
+        {% endfor %}
       </div>
 
-      <div class="downwards-arrow">
-        <img src="" alt="Downwards arrow">
-      </div>
+      <div class="downwards-arrow projects-end"></div>
     </section>
 
-    <section class="skills container centered bg-dark" id="skills">
+    <section class="skills container centered bg-dark" id="skills"> 
 
       <div class="skills-wrapper">
         <aside class="left-bar big side-bar fw-bold fs-accent">
           <div class="skills-menu-btn centered">
-            <span class="skills-btn-text clr-primary-100">D. Analysis</span>
-            <button class="btn-skills btn-neon btn-check d-analysis" onclick="toggleCheckbox('.d-analysis')"></button>
+            <span class="skills-btn-text clr-primary-100">Technical</span>
+            <button class="btn-skills btn-neon btn-check technical" onclick="toggleCheckbox('.technical')"></button>
           </div>
           <div class="skills-menu-btn centered fw-bold fs-accent">
             <span class="skills-btn-text clr-primary-100">All</span>
-            <button class="btn-skills btn-neon btn-check all" onclick="toggleCheckbox('.all')"></button>
+            <button class="btn-skills btn-neon btn-check all btn-check--checked" onclick="toggleCheckbox('.all')"></button>
           </div>
           <div class="skills-menu-btn centered fw-bold fs-accent">
-            <span class="skills-btn-text clr-primary-100">Development</span>
-            <button class="btn-skills btn-neon btn-check development" onclick="toggleCheckbox('.development')"></button>
+            <span class="skills-btn-text clr-primary-100">Soft</span>
+            <button class="btn-skills btn-neon btn-check soft" onclick="toggleCheckbox('.soft')"></button>
           </div>
         </aside>
+
         <div class="skills-content container centered">
+
           <h1 class="fs-section-title clr-neon-200 fw-bold margin-top-sm" onclick="toggleTextLight(this)">SKILLS</h1>
-          <p class="fs-txt clr-primary-100 fw-regular skills-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.
-            Aliquam in hendrerit urna. Pellentesque sit amet sapien</p>
-          <div class="skills-menu little">
+          <p class="fs-txt clr-primary-100 fw-regular skills-description">Throughout my career, I've developed a strong set of technical abilities 
+            alongside essential interpersonal skills, which helps me approach challenges with a balanced perspective.
+          </p>
+          <div class="center-bar fw-bold fs-accent">
             <div class="skills-menu-btn centered">
-              <span class="skills-btn-text clr-primary-100">Web Dev</span>
-              <button class="btn-skills--little btn-check btn-neon development" onclick="toggleCheckbox('.development')"></button>
+              <span class="skills-btn-text clr-primary-100">Technical</span>
+              <button class="btn-skills btn-neon btn-check technical" onclick="toggleCheckbox('.technical')"></button>
             </div>
-            <div class="skills-menu-btn centered">
-              <span class="skills-btn-text clr-primary-100">Analyis</span>
-              <button class="btn-skills--little btn-check btn-neon d-analysis" onclick="toggleCheckbox('.d-analysis')"></button>
+            <div class="skills-menu-btn centered fw-bold fs-accent">
+              <span class="skills-btn-text clr-primary-100">All</span>
+              <button class="btn-skills btn-neon btn-check all btn-check--checked" onclick="toggleCheckbox('.all')"></button>
+            </div>
+            <div class="skills-menu-btn centered fw-bold fs-accent">
+              <span class="skills-btn-text clr-primary-100">Soft</span>
+              <button class="btn-skills btn-neon btn-check soft" onclick="toggleCheckbox('.soft')"></button>
             </div>
           </div>
-        
-        
+          
           <div class="skills-container">
-            <div class="skill-card bg-mid">
-              <img src="" alt="skill-image">
-              <p class="fs-txt clr-accent-900 fw-bold">Python</p>
-            </div>
-            <div class="skill-card bg-mid">
-              <img src="" alt="skill-image">
-              <p class="fs-txt clr-accent-900 fw-bold">Python</p>
-            </div>
-            <div class="skill-card bg-mid">
-              <img src="" alt="skill-image">
-              <p class="fs-txt clr-accent-900 fw-bold">Python</p>
-            </div>
-            <div class="skill-card bg-mid">
-              <img src="" alt="skill-image">
-              <p class="fs-txt clr-accent-900 fw-bold">Python</p>
-            </div>
-            <div class="skill-card bg-mid">
-              <img src="" alt="skill-image">
-              <p class="fs-txt clr-accent-900 fw-bold">Python</p>
-            </div>
-            <div class="skill-card bg-mid">
-              <img src="" alt="skill-image">
-              <p class="fs-txt clr-accent-900 fw-bold">Python</p>
-            </div>
-            <div class="skill-card bg-mid">
-              <img src="" alt="skill-image">
-              <p class="fs-txt clr-accent-900 fw-bold">Python</p>
-            </div>
-            <div class="skill-card bg-mid">
-              <img src="" alt="skill-image">
-              <p class="fs-txt clr-accent-900 fw-bold">Python</p>
-            </div>
+            {% for skill in skills %}
+              <div class="skill-card bg-mid" data-type="{{ skill['type'] }}">
+                <img src="{{ icons['skill']['skill-' ~ skill['name']] }}" alt="{{ skill['name'] }}-Icon" class="skills-icon">
+                <p class="fs-txt clr-accent-900 fw-bold">{{ skill["name"] }}</p>
+              </div>
+            {% endfor %}
           </div>
           <div class="downwards-arrow">
-            <img src="" alt="Downwards arrow">
           </div>
         </div>
         
         <aside class="right-bar big side-bar fw-bold fs-accent">
           <div class="skills-menu-btn centered">
-            <span class="skills-btn-text clr-primary-100">D. Analysis</span>
-            <button class="btn-skills btn-neon btn-check d-analysis" onclick="toggleCheckbox('.d-analysis')"></button>
+            <span class="skills-btn-text clr-primary-100">Technical</span>
+            <button class="btn-skills btn-neon btn-check technical" onclick="toggleCheckbox('.technical')"></button>
           </div>
           <div class="skills-menu-btn centered fw-bold fs-accent">
             <span class="skills-btn-text clr-primary-100">All</span>
-            <button class="btn-skills btn-neon btn-check all" onclick="toggleCheckbox('.all')"></button>
+            <button class="btn-skills btn-neon btn-check all btn-check--checked" onclick="toggleCheckbox('.all')"></button>
           </div>
           <div class="skills-menu-btn centered fw-bold fs-accent">
-            <span class="skills-btn-text clr-primary-100">Development</span>
-            <button class="btn-skills btn-neon btn-check development" onclick="toggleCheckbox('.development')"></button>
+            <span class="skills-btn-text clr-primary-100">Soft</span>
+            <button class="btn-skills btn-neon btn-check soft" onclick="toggleCheckbox('.soft')"></button>
           </div>
         </aside>
       </div>
@@ -271,14 +214,13 @@
       <div class="about-main border-neon-400 bg-dark container centered">
         <h1 class="fs-section-title clr-neon-200 fw-semi-bold" onclick="toggleTextLight(this)">ABOUT ME</h1>
         <p class="description clr-primary-100 fw-regular fs-txt">
-          I am a data analyst and software developer with a strong foundation in maths and a keen understanding of business.
-          My analytical prowess, coupled with my ability to problem-solve and deliver results, drives my work in creating innovative,
-          user-friendly solutions. I am deeply curious and easy-going, thriving in environments where I can collaborate and continuously learn,
-          always aiming to exceed expectations with my multifaceted expertise.
+          I'm a data analyst and software developer with a solid background in math and a strong sense of how businesses work. 
+          I’m passionate about digging into data, solving problems, and delivering practical, user-friendly solutions that make a difference. 
+          With a curious mindset and an easy-going approach, I thrive in collaborative environments where I can keep learning and growing. 
+          My goal is always to go above and beyond expectations, bringing my diverse skills to the table.
         </p>
       </div>
     <div class="downwards-arrow">
-      <img src="" alt="Downwards arrow">
     </div>
     </section>
 
@@ -286,13 +228,22 @@
       <div class="wrapper fs-txt">
         <div class="form-wrapper clr-primary-100 fs-txt">
           <h1 class="fs-section-title clr-neon-200 fw-semi-bold" onclick="toggleTextLight(this)">CONTACT</h1>
-          <form action="" class="contact-form fs-txt">
+          {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              <div class="flash-messages">
+                {% for category, message in messages %}
+                  <div class="flash-message {{ category }}">{{ message }}</div>
+                {% endfor %}
+              </div>
+            {% endif %}
+          {% endwith %}
+          <form action="/submit_contact" method="POST" class="contact-form fs-txt" id="contact-form">
             <div class="input-group first-input">
               <input name="name" type="text" class="form-input bg-mid" required>
               <label for="">Name</label>
             </div>
             <div class="input-group">
-              <input name="email" type="text" class="form-input" required>
+              <input name="email" type="email" class="form-input" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" title="Please enter a valid email address.">
               <label for="">Email</label>
             </div>
             <div class="input-group">
@@ -303,7 +254,7 @@
               <textarea name="emailContent"class="form-input" required></textarea>
               <label for="">Message</label>
             </div>
-            <a name="submit" href="#" type="submit" class="contact-btn btn-neon btn-regular-200 fs-secondary-header fw-semi-bold">Contact Me</a>
+            <button name="submit"type="submit" class="contact-btn btn-neon btn-regular-200 fs-secondary-header fw-semi-bold">Contact Me</button>
           </form>
         </div>
       </div>
@@ -312,23 +263,57 @@
 
     <div class="footer">
       <div class="icons">
-
+        <a href="https://github.com/IlionAcre?tab=repositories">
+          <svg class="social-icon footer-icon" width="50" height="50" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            {% for path_data in icons.social['icon-Github'] %}
+                <path d="{{ path_data }}"/>
+            {% endfor %}
+          </svg>
+        </a>
+        <a href="https://discord.gg/w3R8nj2ZMt">
+          <svg class="social-icon footer-icon" width="50" height="50" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            {% for path_data in icons.social['icon-Discord'] %}
+                <path d="{{ path_data }}"/>
+            {% endfor %}
+          </svg>
+        </a>
+        <a href="https://x.com/falcon_treras">
+          <svg class="social-icon footer-icon" width="50" height="50" xmlns="{{ svg_info }}" viewBox="0 0 512 512">
+            <path d="M256 0c141.385 0 256 114.615 256 256S397.385 512 256 512 0 397.385 0 256 114.615 0 256 0z"/>
+            <path fill="#000000" fill-rule="nonzero" d="M318.64 157.549h33.401l-72.973 83.407 85.85 113.495h-67.222l-52.647-68.836-60.242 68.836h-33.423l78.052-89.212-82.354-107.69h68.924l47.59 62.917 55.044-62.917zm-11.724 176.908h18.51L205.95 176.493h-19.86l120.826 157.964z"/>          </svg>
+        </a>
+        <a href="https://falcontreras.medium.com/">
+          <svg class="social-icon footer-icon" width="50" height="50" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <g transform="scale(1.20)">
+            {% for path_data in icons.social['icon-Medium'] %}
+                <path d="{{ path_data }}"/>
+            {% endfor %}
+            </g> 
+          </svg>
+        </a>
       </div>
       <div class="footer-nav">
         <ul class="footer-btns clr-primary-100">
-          <li><a href="{{ url_for('.home', _anchor='home') }}" class="nav-btn">Home</a></li>
-          <li><a href="{{ url_for('.projects', _anchor='projects') }}" class="nav-btn">Projects</a></li>
-          <li><a href="{{ url_for('.skills', _anchor='skills') }}" class="nav-btn">Skills</a></li>
-          <li><a href="{{ url_for('.about', _anchor='about') }}" class="nav-btn">About</a></li>
-          <li><a href="{{ url_for('.contact', _anchor='contact') }}" class="nav-btn">Contact</a></li>
+          <li><a href="#home" class="nav-btn" onclick="scrollToSection('home')">Home</a></li>
+          <li><a href="#projects" class="nav-btn" onclick="scrollToSection('projects')">Projects</a></li>
+          <li><a href="#skills" class="nav-btn" onclick="scrollToSection('skills')">Skills</a></li>
+          <li><a href="#about" class="nav-btn" onclick="scrollToSection('about')">About</a></li>
+          <li><a href="#contact" class="nav-btn" onclick="scrollToSection('contact')">Contact</a></li>
         </ul>
       </div>
       <div class="copyright">
-        <h3 class="fw-regular clr-primary-100">Copyright ©2024 Fabian Contreras.</h3>
+        <h3 class="fw-regular fs-txt clr-primary-100">Copyright ©2024 Fabian Contreras.</h3>
       </div>
     </div>
   </main>
 
+  {% if form_submitted %}
+    <script>
+      window.onload = function() {
+        window.location.hash = '#contact';
+      };
+    </script>
+  {% endif %}
   <script src="/static/js/static.js"></script>
   <script src="/static/js/carousel.js"></script>
 

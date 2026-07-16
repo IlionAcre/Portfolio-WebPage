@@ -1,37 +1,76 @@
-from flask import Flask, render_template, redirect, url_for, flash
-import os
+from flask import Flask, render_template, request, flash
+from data import icons, skill_list, project_list
+from flask_mail import Mail, Message
 from dotenv import load_dotenv
-import requests
+from flask import jsonify, get_flashed_messages
+import os
 
 load_dotenv()
-headers = {
-    "Authorization" : os.getenv('PT')
-}
-skills = requests.get(os.getenv("SP"), headers=headers).text
-projects = requests.get(os.getenv("PP"), headers=headers).text
 
 
 app = Flask(__name__)
+app.secret_key = os.getenv('FLASK_KEY')
+
+app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER')
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
+app.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_DEFAULT_SENDER')
+
+mail = Mail(app)
 
 @app.route("/")
 def home():
-    return render_template("index.html", skills=skills, projects=projects)
+    return render_template("index.html", 
+                           skills=skill_list, 
+                           projects=project_list, 
+                           ico_social=icons["social"], 
+                           ico_skill=icons["skill"],
+                           svg_info="http://www.w3.org/2000/svg",
+                           icons=icons)
 
 @app.route('/projects')
 def projects():
-    return render_template('index.html', anchor='projects')
+    return render_template('index.html', 
+                           anchor='projects',
+                           skills=skill_list, 
+                           projects=project_list, 
+                           ico_social=icons["social"], 
+                           ico_skill=icons["skill"],
+                           svg_info="http://www.w3.org/2000/svg",
+                           icons=icons)
+    
 
-@app.route('/skills')
-def skills():
-    return render_template('index.html', anchor='skills')
+@app.route("/submit_contact", methods=["POST"])
+def submit_contact():
+    name = request.form.get("name")
+    email = request.form.get("email")
+    subject = request.form.get("subject")
+    message = request.form.get("emailContent")
+    
+    
+    try:
+        msg = Message(
+            subject=f"Contact Form: {subject}",
+            sender=app.config["MAIL_DEFAULT_SENDER"],
+            recipients=[os.getenv('MAIL_DEFAULT_SENDER')]
+        )
+        msg.body= f"Name: {name}\nEmail: {email}\nSubject: {subject}\n\nMessage:\n{message}"
+        mail.send(msg)
+        flash("Message sent successfully!", "success")
+        print("Message sent")
+    except Exception:
+        flash("An unexpected error occurred. Please try again later.", "error")
+    return render_template('index.html',
+                       skills=skill_list, 
+                       projects=project_list, 
+                       ico_social=icons["social"], 
+                       ico_skill=icons["skill"],
+                       svg_info="http://www.w3.org/2000/svg",
+                       icons=icons,
+                       form_submitted=True)
 
-@app.route('/about')
-def about():
-    return render_template('index.html', anchor='about')
-
-@app.route('/contact')
-def contact():
-    return render_template('index.html', anchor='contact')
 
 if __name__ == "__main__":
-    app.run(port=5500, host="0.0.0.0")
+    app.run(host="0.0.0.0", port=8080)
