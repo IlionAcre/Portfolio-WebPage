@@ -9,6 +9,11 @@ import re
 load_dotenv()
 logger = logging.getLogger(__name__)
 
+REQUIRED_ENV_VARS = ["KEY_ID", "ACCESS_KEY", "REGION", "BUCKET"]
+missing_env_vars = [var for var in REQUIRED_ENV_VARS if not os.getenv(var)]
+if missing_env_vars:
+    raise RuntimeError(f"Missing required environment variable(s): {', '.join(missing_env_vars)}")
+
 s3_client = boto3.client(
     "s3",
     aws_access_key_id = os.getenv("KEY_ID"),

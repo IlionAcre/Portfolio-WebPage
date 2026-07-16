@@ -6,9 +6,17 @@ from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from dotenv import load_dotenv
 from flask import jsonify, get_flashed_messages
+import logging
 import os
 
 load_dotenv()
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+REQUIRED_ENV_VARS = ["FLASK_KEY", "MAIL_SERVER", "MAIL_USERNAME", "MAIL_PASSWORD", "MAIL_DEFAULT_SENDER"]
+missing_env_vars = [var for var in REQUIRED_ENV_VARS if not os.getenv(var)]
+if missing_env_vars:
+    raise RuntimeError(f"Missing required environment variable(s): {', '.join(missing_env_vars)}")
 
 
 app = Flask(__name__)
@@ -84,6 +92,10 @@ def submit_contact():
             flash("Your message is too long. Please shorten it and try again.", "error")
             return render_index(form_submitted=True)
 
+    if subject and ("\r" in subject or "\n" in subject):
+        flash("Subject cannot contain line breaks. Please remove them and try again.", "error")
+        return render_index(form_submitted=True)
+
     try:
         msg = Message(
             subject=f"Contact Form: {subject}",
@@ -93,8 +105,9 @@ def submit_contact():
         msg.body= f"Name: {name}\nEmail: {email}\nSubject: {subject}\n\nMessage:\n{message}"
         mail.send(msg)
         flash("Message sent successfully!", "success")
-        print("Message sent")
+        logger.info("Contact form message sent (subject=%r)", subject)
     except Exception:
+        logger.exception("Failed to send contact form message")
         flash("An unexpected error occurred. Please try again later.", "error")
     return render_index(form_submitted=True)
 
