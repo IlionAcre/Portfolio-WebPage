@@ -9,6 +9,7 @@ from flask import jsonify, get_flashed_messages
 import logging
 import os
 import secrets
+import signal
 
 load_dotenv()
 logging.basicConfig(level=logging.INFO)
@@ -86,12 +87,16 @@ def home():
 @csrf.exempt
 @limiter.limit("5 per hour")
 def refresh_content():
-    """Re-fetch skills/projects/icons from S3 without restarting the process.
+    """Re-fetch skills/projects/icons from S3 without restarting the container.
 
-    Note: with multiple gunicorn workers, this only refreshes the worker
-    process that handles the request - hit it a few times (or just wait
-    for normal traffic to cycle through workers) to bring all of them
-    up to date. There's no shared cache between workers.
+    Refreshes the current (gunicorn) worker in-process immediately, then -
+    when running under gunicorn - sends SIGHUP to the master process. Since
+    the Dockerfile runs gunicorn without --preload, each worker re-imports
+    data.py (re-fetching from S3) when it boots, so a SIGHUP-triggered
+    graceful reload replaces every worker with one that has fresh data,
+    retiring the old ones only once the new ones are ready. Under the local
+    Flask dev server there's no gunicorn master to signal - the in-process
+    refresh above is already the whole app in that case.
     """
     token = request.headers.get("X-Refresh-Token", "")
     if not secrets.compare_digest(token, os.getenv("REFRESH_TOKEN")):
@@ -103,8 +108,16 @@ def refresh_content():
         logger.exception("Failed to refresh site content from S3")
         return jsonify({"status": "error", "message": "Refresh failed, see logs"}), 500
 
-    logger.info("Site content refreshed from S3")
-    return jsonify({"status": "ok"})
+    reloading_all_workers = request.environ.get("SERVER_SOFTWARE", "").startswith("gunicorn")
+    if reloading_all_workers:
+        try:
+            os.kill(os.getppid(), signal.SIGHUP)
+        except OSError:
+            logger.exception("Failed to signal gunicorn master for a full worker reload")
+            reloading_all_workers = False
+
+    logger.info("Site content refreshed from S3 (all_workers_reloading=%s)", reloading_all_workers)
+    return jsonify({"status": "ok", "all_workers_reloading": reloading_all_workers})
 
 
 @app.route("/submit_contact", methods=["POST"])
