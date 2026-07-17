@@ -22,7 +22,6 @@ s3_client = boto3.client(
 )
 
 bucket_name = os.getenv("BUCKET")
-icon_path = os.getenv("ICONS_PATH")
 
 STATIC_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "static")
 PROJECT_GIFS_DIR = os.path.join(STATIC_DIR, "generated", "projects")

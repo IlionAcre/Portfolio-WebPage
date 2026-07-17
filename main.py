@@ -76,11 +76,8 @@ def render_index(**extra):
 
 
 @app.route("/")
+@app.route("/projects")
 def home():
-    return render_index()
-
-@app.route('/projects')
-def projects():
     return render_index()
 
 
