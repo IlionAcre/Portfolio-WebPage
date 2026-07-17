@@ -93,7 +93,7 @@
                     <div class="project centered fs-txt">
                       <h2 class="fs-accent clr-primary-100 fw-semi-bold project-card-title">{{ project["title"] }}</h2>
                       <div class="project-card bg-mid">
-                        <img class= "project-img" src="{{ url_for('static', filename=icons['projects'][project['id'] | string]) }}" alt="project_page">
+                        <img class= "project-img" src="{{ url_for('static', filename=icons['projects'][project['id'] | string]) }}" alt="project_page" loading="lazy" decoding="async">
                       </div>
                       <div class="project-btns">
                         {% for name, link in project["links"].items() %}

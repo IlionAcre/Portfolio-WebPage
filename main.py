@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, flash
-from data import icons, skill_list, project_list
+import data
 from flask_mail import Mail, Message
 from flask_wtf import CSRFProtect
 from flask_limiter import Limiter
@@ -8,12 +8,13 @@ from dotenv import load_dotenv
 from flask import jsonify, get_flashed_messages
 import logging
 import os
+import secrets
 
 load_dotenv()
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-REQUIRED_ENV_VARS = ["FLASK_KEY", "MAIL_SERVER", "MAIL_USERNAME", "MAIL_PASSWORD", "MAIL_DEFAULT_SENDER"]
+REQUIRED_ENV_VARS = ["FLASK_KEY", "MAIL_SERVER", "MAIL_USERNAME", "MAIL_PASSWORD", "MAIL_DEFAULT_SENDER", "REFRESH_TOKEN"]
 missing_env_vars = [var for var in REQUIRED_ENV_VARS if not os.getenv(var)]
 if missing_env_vars:
     raise RuntimeError(f"Missing required environment variable(s): {', '.join(missing_env_vars)}")
@@ -65,12 +66,12 @@ CONTACT_FIELD_MAX_LENGTHS = {
 def render_index(**extra):
     return render_template(
         "index.html",
-        skills=skill_list,
-        projects=project_list,
-        ico_social=icons["social"],
-        ico_skill=icons["skill"],
+        skills=data.skill_list,
+        projects=data.project_list,
+        ico_social=data.icons["social"],
+        ico_skill=data.icons["skill"],
         svg_info="http://www.w3.org/2000/svg",
-        icons=icons,
+        icons=data.icons,
         **extra,
     )
 
@@ -79,6 +80,31 @@ def render_index(**extra):
 @app.route("/projects")
 def home():
     return render_index()
+
+
+@app.route("/admin/refresh", methods=["POST"])
+@csrf.exempt
+@limiter.limit("5 per hour")
+def refresh_content():
+    """Re-fetch skills/projects/icons from S3 without restarting the process.
+
+    Note: with multiple gunicorn workers, this only refreshes the worker
+    process that handles the request - hit it a few times (or just wait
+    for normal traffic to cycle through workers) to bring all of them
+    up to date. There's no shared cache between workers.
+    """
+    token = request.headers.get("X-Refresh-Token", "")
+    if not secrets.compare_digest(token, os.getenv("REFRESH_TOKEN")):
+        return jsonify({"status": "error", "message": "Invalid or missing token"}), 403
+
+    try:
+        data.load_content()
+    except Exception:
+        logger.exception("Failed to refresh site content from S3")
+        return jsonify({"status": "error", "message": "Refresh failed, see logs"}), 500
+
+    logger.info("Site content refreshed from S3")
+    return jsonify({"status": "ok"})
 
 
 @app.route("/submit_contact", methods=["POST"])

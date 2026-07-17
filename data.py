@@ -31,6 +31,8 @@ icons = {
     "skill": {},
     "projects": {}
 }
+skill_list = []
+project_list = []
 
 
 def clean_path(raw_svg):
@@ -39,7 +41,7 @@ def clean_path(raw_svg):
     return path_data
 
 
-def fetch_data(folder_path):
+def fetch_data(folder_path, target_icons):
     response = s3_client.list_objects_v2(Bucket=bucket_name, Prefix=folder_path)
     if "Contents" in response:
         for obj in response["Contents"]:
@@ -47,10 +49,10 @@ def fetch_data(folder_path):
             if file_name.endswith(".svg"):
                 obj_content = s3_client.get_object(Bucket=bucket_name, Key=file_name)["Body"].read().decode('utf-8')
                 if "icon" in file_name:
-                    icons["social"][file_name.replace(".svg", "").split('/')[-1]] = clean_path(obj_content)
+                    target_icons["social"][file_name.replace(".svg", "").split('/')[-1]] = clean_path(obj_content)
                 elif "skill" in file_name:
                     base64_svg = base64.b64encode(obj_content.encode("utf-8")).decode("utf-8")
-                    icons["skill"][file_name.replace(".svg", "").split('/')[-1]] = f"data:image/svg+xml;base64,{base64_svg}"
+                    target_icons["skill"][file_name.replace(".svg", "").split('/')[-1]] = f"data:image/svg+xml;base64,{base64_svg}"
             elif file_name.lower().endswith(".gif"):
                 obj_content = s3_client.get_object(Bucket=bucket_name, Key=file_name)["Body"].read()
                 project_id = file_name.lower().replace(".gif", "").split("_")[-1]
@@ -62,17 +64,34 @@ def fetch_data(folder_path):
                     f.write(obj_content)
                 os.replace(tmp_path, dest_path)
 
-                icons["projects"][project_id] = f"generated/projects/{project_id}.gif"
+                target_icons["projects"][project_id] = f"generated/projects/{project_id}.gif"
+
+
+def load_content():
+    """(Re)load skill_list, project_list, and icons from S3.
+
+    Rebuilds icons from scratch each call so a removed S3 object doesn't
+    leave a stale entry behind. Only affects the process it runs in - see
+    the /admin/refresh route docstring for the multi-worker caveat.
+    """
+    global skill_list, project_list, icons
+
+    skill_list_raw = s3_client.get_object(Bucket=bucket_name, Key="data/skills.json")["Body"].read().decode("utf-8")
+    new_skill_list = json.loads(skill_list_raw)
+
+    project_list_raw = s3_client.get_object(Bucket=bucket_name, Key="data/projects.json")["Body"].read().decode("utf-8")
+    new_project_list = json.loads(project_list_raw)
+
+    new_icons = {"social": {}, "skill": {}, "projects": {}}
+    fetch_data("images/", new_icons)
+
+    skill_list = new_skill_list
+    project_list = new_project_list
+    icons = new_icons
 
 
 try:
-    skill_list_raw = s3_client.get_object(Bucket=bucket_name, Key="data/skills.json")["Body"].read().decode("utf-8")
-    skill_list = json.loads(skill_list_raw)
-
-    project_list_raw = s3_client.get_object(Bucket=bucket_name, Key="data/projects.json")["Body"].read().decode("utf-8")
-    project_list = json.loads(project_list_raw)
-
-    fetch_data("images/")
+    load_content()
 except Exception:
     logger.exception("Failed to load site content from S3 (bucket=%s). The app cannot start without this data.", bucket_name)
     raise
