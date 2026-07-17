@@ -25,6 +25,7 @@ bucket_name = os.getenv("BUCKET")
 
 STATIC_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "static")
 PROJECT_GIFS_DIR = os.path.join(STATIC_DIR, "generated", "projects")
+OPTIMIZED_PROJECTS_DIR = os.path.join(STATIC_DIR, "optimized_projects")
 
 icons = {
     "social": {},
@@ -54,8 +55,17 @@ def fetch_data(folder_path, target_icons):
                     base64_svg = base64.b64encode(obj_content.encode("utf-8")).decode("utf-8")
                     target_icons["skill"][file_name.replace(".svg", "").split('/')[-1]] = f"data:image/svg+xml;base64,{base64_svg}"
             elif file_name.lower().endswith(".gif"):
-                obj_content = s3_client.get_object(Bucket=bucket_name, Key=file_name)["Body"].read()
                 project_id = file_name.lower().replace(".gif", "").split("_")[-1]
+
+                # Prefer a pre-optimized WebP baked into the image/repo (see
+                # scripts/optimize_project_gifs.py) over fetching+writing the
+                # raw GIF - skips both the download and any runtime encoding.
+                optimized_path = os.path.join(OPTIMIZED_PROJECTS_DIR, f"{project_id}.webp")
+                if os.path.exists(optimized_path):
+                    target_icons["projects"][project_id] = f"optimized_projects/{project_id}.webp"
+                    continue
+
+                obj_content = s3_client.get_object(Bucket=bucket_name, Key=file_name)["Body"].read()
 
                 os.makedirs(PROJECT_GIFS_DIR, exist_ok=True)
                 dest_path = os.path.join(PROJECT_GIFS_DIR, f"{project_id}.gif")

@@ -7,11 +7,15 @@ from flask_limiter.util import get_remote_address
 from dotenv import load_dotenv
 from flask import jsonify, get_flashed_messages
 import logging
+import mimetypes
 import os
 import secrets
 import signal
 
 load_dotenv()
+# Not registered on every system's mimetypes database - without this, Flask
+# serves .webp as application/octet-stream instead of image/webp.
+mimetypes.add_type("image/webp", ".webp")
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
