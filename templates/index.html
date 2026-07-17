@@ -3,13 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Fabian Contreras — Creative Data Analyst and Python Developer. Portfolio showcasing projects, skills, and professional background.">
+  <meta name="description" content="Fabian Contreras — Fullstack Developer and IA Engineer. Portfolio showcasing projects, skills, and professional background.">
+  <link rel="canonical" href="https://falcontreras.com/">
   <meta property="og:title" content="Fabian Contreras">
-  <meta property="og:description" content="Creative Data Analyst and Python Developer. Portfolio showcasing projects, skills, and professional background.">
+  <meta property="og:description" content="Fullstack Developer and IA Engineer. Portfolio showcasing projects, skills, and professional background.">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://falcontreras.com/">
+  <meta property="og:image" content="https://falcontreras.com/static/images/Vector.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Fabian Contreras">
+  <meta name="twitter:description" content="Fullstack Developer and IA Engineer. Portfolio showcasing projects, skills, and professional background.">
+  <meta name="twitter:image" content="https://falcontreras.com/static/images/Vector.png">
   <link rel="stylesheet" href="/static/vendor/splide/splide-core.min.css">
-  <link rel="stylesheet" href="/static/css/style.css">
-  <link rel="stylesheet" href="/static/css/landing.css">
+  <link rel="stylesheet" href="/static/css/style.min.css">
+  <link rel="stylesheet" href="/static/css/landing.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="shortcut icon" href="/static/images/Vector.ico" type="image/x-icon">
@@ -26,7 +33,7 @@
         {% endfor %}
       </svg>
       <nav class="nav-bar">
-        <button class="mobile-nav-toggle" aria-controls="primary-nav" aria-expanded="false"></button>
+        <button class="mobile-nav-toggle" aria-controls="primary-nav" aria-expanded="false" aria-label="Toggle navigation menu"></button>
         <ul id="primary-nav" role="list" class="nav-list clr-primary-100 fs-accent fw-semi-bold" data-visible="false">
           <li><a href="#home" class="nav-btn">Home</a></li>
           <li><a href="#projects" class="nav-btn">Projects</a></li>
@@ -72,7 +79,7 @@
     </section>
 
     <section class="projects centered container bg-grad-inv" id="projects">
-      <h1 class="fs-section-title clr-neon-200 fw-bold margin-top-sm">PROJECTS</h1>
+      <h2 class="fs-section-title clr-neon-200 fw-bold margin-top-sm">PROJECTS</h2>
 
       <div class="carousel splide" id="project-carousel">
         <button class="carousel-btn carousel-right" aria-label="Next slide">
@@ -93,7 +100,7 @@
                     <div class="project centered fs-txt">
                       <h2 class="fs-accent clr-primary-100 fw-semi-bold project-card-title">{{ project["title"] }}</h2>
                       <div class="project-card bg-mid">
-                        <img class= "project-img" src="{{ url_for('static', filename=icons['projects'][project['id'] | string]) }}" alt="project_page" loading="lazy" decoding="async">
+                        <img class= "project-img" src="{{ url_for('static', filename=icons['projects'][project['id'] | string]) }}" alt="{{ project['title'] }} project preview" loading="lazy" decoding="async">
                       </div>
                       <div class="project-btns">
                         {% for name, link in project["links"].items() %}
@@ -146,7 +153,7 @@
 
         <div class="skills-content container centered">
 
-          <h1 class="fs-section-title clr-neon-200 fw-bold margin-top-sm">SKILLS</h1>
+          <h2 class="fs-section-title clr-neon-200 fw-bold margin-top-sm">SKILLS</h2>
           <p class="fs-txt clr-primary-100 fw-regular skills-description">Throughout my career, I've developed a strong set of technical abilities 
             alongside essential interpersonal skills, which helps me approach challenges with a balanced perspective.
           </p>
@@ -215,7 +222,7 @@
       </div>
 
       <div class="about-main border-neon-400 bg-dark container centered">
-        <h1 class="fs-section-title clr-neon-200 fw-semi-bold">ABOUT ME</h1>
+        <h2 class="fs-section-title clr-neon-200 fw-semi-bold">ABOUT ME</h2>
         <p class="description clr-primary-100 fw-regular fs-txt">
           I'm a data analyst and software developer with a solid background in math and a strong sense of how businesses work. 
           I’m passionate about digging into data, solving problems, and delivering practical, user-friendly solutions that make a difference. 
@@ -230,7 +237,7 @@
     <section class="bg-dark contact container centered" id="contact">
       <div class="wrapper fs-txt">
         <div class="form-wrapper clr-primary-100 fs-txt">
-          <h1 class="fs-section-title clr-neon-200 fw-semi-bold">CONTACT</h1>
+          <h2 class="fs-section-title clr-neon-200 fw-semi-bold">CONTACT</h2>
           {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
               <div class="flash-messages">
@@ -312,8 +319,8 @@
   </main>
 
   <script src="/static/vendor/splide/splide.min.js"></script>
-  <script src="/static/js/static.js"></script>
-  <script src="/static/js/carousel.js"></script>
+  <script src="/static/js/static.min.js"></script>
+  <script src="/static/js/carousel.min.js"></script>
 
 </body>
 </html>

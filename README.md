@@ -84,5 +84,15 @@ uv run --with pillow python scripts/optimize_project_gifs.py
 
 Re-run this after pulling the new GIF locally (start the app once so it downloads to `static/generated/projects/`), then commit whatever lands in `static/optimized_projects/`. This is a manual step by design - it doesn't run automatically.
 
+#### CSS/JS minification
+
+The templates serve `static/css/*.min.css` and `static/js/*.min.js`, not the plain source files. After editing `style.css`, `landing.css`, `static.js`, or `carousel.js`:
+
+```bash
+bash scripts/minify_assets.sh
+```
+
+Requires `npx` (Node). Commit the regenerated `.min` files alongside your source change - like the two scripts above, this is manual, not automatic.
+
 🛡️ License
 This project is licensed under the MIT License.

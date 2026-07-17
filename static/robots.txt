@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /submit_contact
+
+Sitemap: https://falcontreras.com/sitemap.xml

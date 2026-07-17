@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash
+from flask import Flask, render_template, request, flash, send_from_directory
 import data
 from flask_mail import Mail, Message
 from flask_wtf import CSRFProtect
@@ -86,6 +86,16 @@ def render_index(**extra):
 @app.route("/projects")
 def home():
     return render_index()
+
+
+@app.route("/robots.txt")
+def robots():
+    return send_from_directory(app.static_folder, "robots.txt")
+
+
+@app.route("/sitemap.xml")
+def sitemap():
+    return send_from_directory(app.static_folder, "sitemap.xml")
 
 
 @app.route("/admin/refresh", methods=["POST"])
