@@ -40,5 +40,49 @@ You can check it out at [https://falcontreras.com](https://falcontreras.com).
 #### 📂 Asset Management
 - ![AWS S3](https://img.shields.io/badge/AWS%20S3-232F3E?style=for-the-badge&logo=amazon-s3&logoColor=white)
 
+---
+
+### 🧑‍💻 Local Development
+
+Dependencies are managed with [uv](https://docs.astral.sh/uv/). Python version is pinned in `.python-version`.
+
+```bash
+uv sync
+uv run python main.py   # dev server on http://localhost:8080
+```
+
+The app won't start without a `.env` file (or equivalent environment variables in production) defining:
+
+| Variable | Purpose |
+|---|---|
+| `KEY_ID`, `ACCESS_KEY`, `REGION`, `BUCKET` | AWS S3 access - source of truth for skills/projects/icons |
+| `FLASK_KEY` | Session + CSRF signing secret |
+| `MAIL_SERVER`, `MAIL_USERNAME`, `MAIL_PASSWORD`, `MAIL_DEFAULT_SENDER` | Contact form email delivery (AWS SES) |
+| `REFRESH_TOKEN` | Auth token for `POST /admin/refresh` (see below) |
+
+In production these come from GCP Secret Manager / Cloud Run env vars, not a checked-in `.env`.
+
+**Container**: `Dockerfile` runs the app under gunicorn (2 workers). Build/run with Docker or [Podman](https://podman.io/) interchangeably - `podman build`/`podman run` accept the same flags.
+
+#### Refreshing content without a redeploy
+
+`skills.json`/`projects.json`/icons are fetched from S3 once at process startup. To pick up changes without restarting the container:
+
+```bash
+curl -X POST -H "X-Refresh-Token: <REFRESH_TOKEN>" https://<host>/admin/refresh
+```
+
+Under gunicorn this triggers a graceful reload of every worker (not just the one that handles the request) - verified end-to-end via Podman, see commit history for details.
+
+#### Project GIF images
+
+Project preview GIFs live in S3 and are fetched at startup like everything else, **except** where a pre-optimized version has been committed to `static/optimized_projects/` (WebP, smaller than the source GIF - not all of them compress better, so not every project has one). If you update a project's GIF on S3:
+
+```bash
+uv run --with pillow python scripts/optimize_project_gifs.py
+```
+
+Re-run this after pulling the new GIF locally (start the app once so it downloads to `static/generated/projects/`), then commit whatever lands in `static/optimized_projects/`. This is a manual step by design - it doesn't run automatically.
+
 🛡️ License
 This project is licensed under the MIT License.

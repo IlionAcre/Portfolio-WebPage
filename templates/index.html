@@ -44,8 +44,8 @@
         <h1 class="header ff-header clr-neon-200 fs-primary-header">FABIAN CONTRERAS</h1></div>
       <div> 
       <div class="subtitle-container">
-        <h2 class="clr-primary-100 fs-secondary-header">Creative Data Analyst</h2>
-        <h2 class="clr-primary-100 fs-secondary-header">Python Developer</h2>
+        <h2 class="clr-primary-100 fs-secondary-header">Fullstack Developer</h2>
+        <h2 class="clr-primary-100 fs-secondary-header">IA Engineer</h2>
       
       <aside class="socials">
         <a href="https://github.com/IlionAcre?tab=repositories">
@@ -75,8 +75,8 @@
       <h1 class="fs-section-title clr-neon-200 fw-bold margin-top-sm">PROJECTS</h1>
 
       <div class="carousel splide" id="project-carousel">
-        <button class="carousel-btn carousel-right">
-          <svg xmlns="http://www.w3.org/2000/svg" width="60" height="100%" viewBox="0 0 28 24">
+        <button class="carousel-btn carousel-right" aria-label="Next slide">
+          <svg xmlns="http://www.w3.org/2000/svg" width="60" height="100%" viewBox="0 0 28 24" aria-hidden="true">
             <path d="M7.293 4.707 14.586 12l-7.293 7.293 1.414 1.414L17.414 12 8.707 3.293 7.293 4.707z"/>
           </svg>
         </button>
@@ -110,16 +110,16 @@
           </div>
         </div>
 
-        <button class="carousel-btn carousel-left">
-          <svg xmlns="http://www.w3.org/2000/svg" width="60" height="100%" viewBox="0 0 28 24">
+        <button class="carousel-btn carousel-left" aria-label="Previous slide">
+          <svg xmlns="http://www.w3.org/2000/svg" width="60" height="100%" viewBox="0 0 28 24" aria-hidden="true">
             <path d="M15.293 3.293 6.586 12l8.707 8.707 1.414-1.414L9.414 12l7.293-7.293-1.414-1.414z"/>
-          </svg>      
+          </svg>
         </button>
       </div>
       
       <div class="carousel-nav">
         {% for project in projects %}
-          <button class="carousel-indicator"></button>
+          <button class="carousel-indicator" aria-label="Go to slide {{ loop.index }}"></button>
         {% endfor %}
       </div>
 
