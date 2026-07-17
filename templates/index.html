@@ -7,6 +7,7 @@
   <meta property="og:title" content="Fabian Contreras">
   <meta property="og:description" content="Creative Data Analyst and Python Developer. Portfolio showcasing projects, skills, and professional background.">
   <meta property="og:type" content="website">
+  <link rel="stylesheet" href="/static/vendor/splide/splide-core.min.css">
   <link rel="stylesheet" href="/static/css/style.css">
   <link rel="stylesheet" href="/static/css/landing.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -73,7 +74,7 @@
     <section class="projects centered container bg-grad-inv" id="projects">
       <h1 class="fs-section-title clr-neon-200 fw-bold margin-top-sm">PROJECTS</h1>
 
-      <div class="carousel">
+      <div class="carousel splide" id="project-carousel">
         <button class="carousel-btn carousel-right">
           <svg xmlns="http://www.w3.org/2000/svg" width="60" height="100%" viewBox="0 0 28 24">
             <path d="M7.293 4.707 14.586 12l-7.293 7.293 1.414 1.414L17.414 12 8.707 3.293 7.293 4.707z"/>
@@ -81,13 +82,13 @@
         </button>
 
         <div class="mask-container">
-          <div class="carousel-track-container">
-            <ul class="carousel-track">
+          <div class="carousel-track-container splide__track">
+            <ul class="carousel-track splide__list">
               {% for project in projects %}
                 {% if project["id"] == 1%}
-                  <li class="carousel-slide current-slide featured">
+                  <li class="carousel-slide splide__slide featured">
                 {% else %}
-                  <li class="carousel-slide">
+                  <li class="carousel-slide splide__slide">
                 {% endif %}
                     <div class="project centered fs-txt">
                       <h2 class="fs-accent clr-primary-100 fw-semi-bold project-card-title">{{ project["title"] }}</h2>
@@ -118,11 +119,7 @@
       
       <div class="carousel-nav">
         {% for project in projects %}
-          {% if project["id"] == 2 %}
-            <button class="carousel-indicator current-slide-indicator"></button>
-          {% else %}
-            <button class="carousel-indicator"></button>
-          {% endif %}        
+          <button class="carousel-indicator"></button>
         {% endfor %}
       </div>
 
@@ -314,6 +311,7 @@
     </div>
   </main>
 
+  <script src="/static/vendor/splide/splide.min.js"></script>
   <script src="/static/js/static.js"></script>
   <script src="/static/js/carousel.js"></script>
 

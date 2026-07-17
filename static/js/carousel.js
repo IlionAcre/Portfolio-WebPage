@@ -1,110 +1,54 @@
-const track = document.querySelector(".carousel-track");
-const slides = Array.from(track.children);
+const carouselEl = document.querySelector('#project-carousel');
 
-if (slides.length > 0) {
+if (carouselEl) {
+  // gap matches the measured original: 475px slide + 195px gap = 670px center-to-center spacing
+  const splide = new Splide(carouselEl, {
+    type: 'loop',
+    focus: 'center',
+    perPage: 1,
+    fixedWidth: '475px',
+    gap: '195px',
+    arrows: false,
+    pagination: false,
+    drag: true,
+    speed: 250,
+  });
 
-const nextButton = document.querySelector(".carousel-right");
-const prevButton = document.querySelector(".carousel-left");
-const dotsNav = document.querySelector(".carousel-nav");
-const dots = Array.from(dotsNav.children);
+  const nextButton = document.querySelector('.carousel-right');
+  const prevButton = document.querySelector('.carousel-left');
+  const dotsNav = document.querySelector('.carousel-nav');
+  const dots = dotsNav ? Array.from(dotsNav.children) : [];
+  const slides = Array.from(carouselEl.querySelectorAll('.splide__slide'));
 
-const slideWidth = slides[0].getBoundingClientRect().width + 100;
+  const setActiveIndex = (index) => {
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('current-slide', i === index);
+    });
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('current-slide-indicator', i === index);
+    });
+  };
 
+  // `move` fires right as the transition starts, so the scale-up/scale-down
+  // CSS transition on .current-slide runs alongside Splide's own slide transition
+  // instead of only after it finishes.
+  splide.on('move', (newIndex) => {
+    setActiveIndex(newIndex);
+  });
 
-const midpoint = Math.floor(slides.length / 2);
+  splide.on('mounted', () => {
+    setActiveIndex(splide.index);
+  });
 
-// Clone all slides
-const clonedSlides = slides.map(slide => {
-    const clone = slide.cloneNode(true);
-    clone.classList.remove("current-slide");
-    return clone;
-});
+  splide.mount();
 
-// Append cloned slides to the end of the track
-clonedSlides.forEach(clone => {
-    track.appendChild(clone);
-});
-
-const newSlides = Array.from(track.children);
-
-
-
-const lengthLimit = slides.length + (Math.floor(newSlides.length / 4));
-const halfLength = (Math.ceil(newSlides.length / 4));
-const rightLimit = (halfLength) * slideWidth * - 1;
-
-
-const setSlidePosition = (slide, index) => {
-
-    if (index < lengthLimit) {
-        slide.style.left = slideWidth * index + "px";
-    }
-    else {
-        const newIndex = index - (lengthLimit);
-        slide.style.left = rightLimit + slideWidth * newIndex + "px";
-    }
-}
-
-newSlides.forEach(setSlidePosition);
-
-
-const moveToSlide = (track, currentSlide, targetSlide) => { 
-    track.style.transform = "translateX(-" + targetSlide.style.left + ")";
-    currentSlide.classList.remove("current-slide");
-    targetSlide.classList.add("current-slide");
-}
-
-const updateDots = (currentDot, targetDot) => {
-    currentDot.classList.remove("current-slide-indicator");
-    targetDot.classList.add("current-slide-indicator");
-}
-
-prevButton.addEventListener("click", e => {
-    const currentSlide = track.querySelector(".current-slide");
-    const prevIndex = (slides.indexOf(currentSlide) - 1 + slides.length) % slides.length;
-    const prevSlide = slides[prevIndex];
-    const currentDot = dotsNav.querySelector(".current-slide-indicator");
-    const prevDot = dots[prevIndex];
-
-    moveToSlide(track, currentSlide, prevSlide);
-    updateDots(currentDot, prevDot);
-
-    if (prevIndex === slides.length - 1) {
-        // If previous slide is the last slide, move the last slide to the beginning
-        moveToSlide(track, nextSlide, slides[slides.length-1]);
-    }
-});
-
-nextButton.addEventListener("click", e => {
-    const currentSlide = track.querySelector(".current-slide");
-    const nextIndex = (slides.indexOf(currentSlide) + 1) % slides.length;
-    const nextSlide = slides[nextIndex];
-    const currentDot = dotsNav.querySelector(".current-slide-indicator");
-    const nextDot = dots[nextIndex];
-
-    moveToSlide(track, currentSlide, nextSlide);
-    updateDots(currentDot, nextDot);
-
-    if (nextIndex === 0) {
-        // If next slide is the first slide, reset track position to the original first slide
-        moveToSlide(track, nextSlide, slides[0]);
-    }
-})
-
-
-dotsNav.addEventListener("click", e => {
-    const targetDot = e.target.closest("button");
-
-    if (!targetDot) return;
-
-    const currentSlide = track.querySelector(".current-slide");
-    const currentDot = dotsNav.querySelector(".current-slide-indicator");
-    const targetIndex = dots.findIndex(dot => dot === targetDot);
-    const targetSlide = slides[targetIndex];
-
-    moveToSlide(track, currentSlide, targetSlide);
-
-    updateDots(currentDot, targetDot);
-} )
-
+  if (nextButton) {
+    nextButton.addEventListener('click', () => splide.go('>'));
+  }
+  if (prevButton) {
+    prevButton.addEventListener('click', () => splide.go('<'));
+  }
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => splide.go(i));
+  });
 }

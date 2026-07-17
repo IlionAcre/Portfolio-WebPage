@@ -276,17 +276,14 @@ header {
 
 .carousel-track {
     list-style: none;
-    position: relative;
-    left: 50%;
-    transition: transform 250ms ease-in;
 }
 
 .carousel-slide {
-    position: absolute;
-    top: 0;
-    bottom: 0;
     height: 100%;
     width: 475px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .featured div:first-child {
@@ -368,13 +365,12 @@ header {
     border: 1px solid rgba(255, 255, 255, 0.18);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 
-    transform: translateX(-50%) scale(0.8);
+    scale: 0.8;
 }
 
 .current-slide {
     transition: .5s;
     scale: 120%;
-    transform: translateX(8.5%);
 }
 
 .project-card {
