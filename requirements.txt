@@ -6,7 +6,7 @@ blinker==1.6.3
     #   flask-mail
 boto3==1.35.58
     # via 1-minimalistic-landing-page
-botocore==1.35.58
+botocore==1.43.50
     # via
     #   boto3
     #   s3transfer
