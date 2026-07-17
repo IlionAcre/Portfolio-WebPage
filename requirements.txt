@@ -67,7 +67,7 @@ typing-extensions==4.16.0
     #   limits
 urllib3==2.2.1
     # via botocore
-werkzeug==3.0.0
+werkzeug==3.1.8
     # via flask
 wrapt==2.2.2
     # via deprecated
