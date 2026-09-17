@@ -99,3 +99,10 @@ def get_csrf_token(client):
     start = html.index(marker) + len(marker)
     end = html.index('"', start)
     return html[start:end]
+
+
+def get_captcha_token(client):
+    """Fetch a signed captcha token from /api/captcha-token the way the frontend does."""
+    resp = client.get("/api/captcha-token")
+    return resp.get_json()["token"]
+

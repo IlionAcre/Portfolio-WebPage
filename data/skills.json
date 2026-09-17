@@ -1,0 +1,13 @@
+[
+  {"id": 1, "name": "AI & ML", "type": "technical"},
+  {"id": 2, "name": "Automation", "type": "technical"},
+  {"id": 3, "name": "ML & NLP", "type": "technical"},
+  {"id": 4, "name": "Deployment & Cloud", "type": "technical"},
+  {"id": 5, "name": "Visualization", "type": "technical"},
+  {"id": 6, "name": "Web dev", "type": "technical"},
+  {"id": 7, "name": "Communication", "type": "soft"},
+  {"id": 8, "name": "Leadership", "type": "soft"},
+  {"id": 9, "name": "Teamwork", "type": "soft"},
+  {"id": 10, "name": "Critical thinking", "type": "soft"},
+  {"id": 11, "name": "Adaptability", "type": "soft"}
+]

@@ -1,16 +1,19 @@
-from flask import Flask, render_template, request, flash, send_from_directory
+from flask import Flask, render_template, request, flash, send_from_directory, jsonify, get_flashed_messages, session
 import data
 from flask_mail import Mail, Message
 from flask_wtf import CSRFProtect
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from dotenv import load_dotenv
-from flask import jsonify, get_flashed_messages
 import logging
 import mimetypes
 import os
+import re
 import secrets
 import signal
+import time
+from werkzeug.middleware.proxy_fix import ProxyFix
+from itsdangerous import URLSafeTimedSerializer
 
 load_dotenv()
 # Not registered on every system's mimetypes database - without this, Flask
@@ -26,6 +29,7 @@ if missing_env_vars:
 
 
 app = Flask(__name__)
+app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1)
 app.secret_key = os.getenv('FLASK_KEY')
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 86400
 
@@ -69,7 +73,11 @@ CONTACT_FIELD_MAX_LENGTHS = {
 }
 
 
+EMAIL_REGEX = re.compile(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")
+
+
 def render_index(**extra):
+    session["form_loaded_at"] = time.time()
     return render_template(
         "index.html",
         skills=data.skill_list,
@@ -135,13 +143,67 @@ def refresh_content():
     return jsonify({"status": "ok", "all_workers_reloading": reloading_all_workers})
 
 
+def get_captcha_serializer():
+    return URLSafeTimedSerializer(app.secret_key, salt="captcha-verification")
+
+
+@app.route("/api/captcha-token", methods=["GET"])
+@limiter.limit("30 per minute")
+def get_captcha_token():
+    token = get_captcha_serializer().dumps({"verified": True, "created_at": time.time()})
+    return jsonify({"token": token})
+
+
 @app.route("/submit_contact", methods=["POST"])
 @limiter.limit("5 per minute")
 def submit_contact():
+    # 1. Captcha token verification
+    captcha_token = request.form.get("captcha_token")
+    if not captcha_token:
+        flash("Please verify you are human by clicking the captcha button.", "error")
+        return render_index(form_submitted=True)
+
+    try:
+        captcha_data = get_captcha_serializer().loads(captcha_token, max_age=600)
+        if not captcha_data.get("verified"):
+            raise ValueError("Unverified")
+    except Exception:
+        logger.warning("Invalid or expired captcha token submitted")
+        flash("Captcha verification expired or invalid. Please click the captcha button again.", "error")
+        return render_index(form_submitted=True)
+
+    # 2. Timing check: Humans take > 3 seconds to complete the form
+    loaded_at = session.get("form_loaded_at")
+    min_submit_seconds = 3.0
+    if loaded_at and not app.config.get("TESTING") and (time.time() - loaded_at) < min_submit_seconds:
+        logger.info(
+            "Bot detected via rapid submission (%.2fs < %.1fs).",
+            time.time() - loaded_at,
+            min_submit_seconds,
+        )
+        flash("Submission completed too quickly. Please try again.", "error")
+        return render_index(form_submitted=True)
+
     name = request.form.get("name")
     email = request.form.get("email")
     subject = request.form.get("subject")
     message = request.form.get("emailContent")
+
+    if not name or not email or not subject or not message:
+        flash("All fields are required. Please fill them out and try again.", "error")
+        return render_index(form_submitted=True)
+
+    # 3. Server-side email format validation
+    if not EMAIL_REGEX.match(email.strip()):
+        flash("Please enter a valid email address.", "error")
+        return render_index(form_submitted=True)
+
+    # 4. Link spam limit (max 2 URLs allowed)
+    url_count = len(re.findall(r"https?://", message, re.IGNORECASE))
+    if url_count > 2:
+        logger.info("Spam rejected: excessive URLs (%d) in message", url_count)
+        flash("Your message contains too many links. Please remove them and try again.", "error")
+        return render_index(form_submitted=True)
 
     for field_name, value, max_length in (
         ("name", name, CONTACT_FIELD_MAX_LENGTHS["name"]),

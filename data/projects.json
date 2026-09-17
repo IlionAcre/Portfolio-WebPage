@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "title": "Featured: Frontdesk",
+    "description": "Channel-agnostic multimodal AI receptionist for home-services businesses. Features real-time Twilio voice streaming (Deepgram STT, streaming TTS), WhatsApp integration, photo-based damage triage, deterministic conversation state machines, and booking calendar integration.",
+    "image": null,
+    "links": {
+      "github": "https://github.com/IlionAcre/frontdesk",
+      "request_demo": true
+    }
+  },
+  {
+    "id": 2,
+    "title": "Job Monitor",
+    "description": "Automated real-time job monitoring and alerting Telegram bot for freelance platforms like Upwork. Scrapes and filters incoming job postings based on skills, budget, and client history, delivering instant push notifications to mobile.",
+    "image": null,
+    "links": {
+      "github": "https://github.com/IlionAcre/jobs",
+      "request_demo": true
+    }
+  },
+  {
+    "id": 3,
+    "title": "culprit",
+    "description": "Root-cause failure diagnosis for production AI agents. Instead of dumping long traces into LLMs, culprit localizes divergence deterministically through a 21-class failure taxonomy, pgvector contrastive diffing against successful runs, and targeted adjudication. Validated on TRAIL and Who&When benchmarks.",
+    "image": "optimized_projects/3.webp",
+    "links": {
+      "github": "https://github.com/IlionAcre/culprit",
+      "request_demo": false
+    }
+  },
+  {
+    "id": 4,
+    "title": "Litmus",
+    "description": "Statistical LLM evaluation and regression testing framework. Uses McNemar's test and paired bootstrap confidence intervals to detect real regressions in pass rate, latency, and cost before code merges. Zero-infrastructure (JSON + DuckDB), integrated directly into GitHub Actions.",
+    "image": "optimized_projects/4.webp",
+    "links": {
+      "github": "https://github.com/IlionAcre/litmus",
+      "request_demo": false
+    }
+  },
+  {
+    "id": 5,
+    "title": "gmaps_leads",
+    "description": "Automated B2B lead generation pipeline extracting structured business intelligence from Google Maps. Built with SeleniumBase and anti-bot evasions, it extracts verified business details, contact info, ratings, and service areas, validating records with Pydantic and exporting to Excel, CSV, JSON, and SQL.",
+    "image": "optimized_projects/5.webp",
+    "links": {
+      "github": "https://github.com/IlionAcre/gmaps_leads",
+      "request_demo": true
+    }
+  },
+  {
+    "id": 6,
+    "title": "Marketmood",
+    "description": "Financial analytics dashboard tracking stocks alongside news and Reddit sentiment. Built with an automated scraping pipeline (Playwright, RSS), a fine-tuned Hugging Face transformer model, TA-Lib indicators, PostgreSQL on Render, and an interactive Dash interface containerized on GCP.",
+    "image": "optimized_projects/6.webp",
+    "links": {
+      "github": "https://github.com/IlionAcre/trend_analyzer",
+      "webpage": "https://marketmood.falcontreras.com/",
+      "request_demo": false
+    }
+  },
+  {
+    "id": 7,
+    "title": "Glassboard",
+    "description": "Automated data pipeline and interactive analytics dashboard transforming Glassdoor compensation and company review data into actionable market insights. Features robust headless browser scraping with Playwright, structured data cleaning, and containerized deployment on GCP.",
+    "image": "optimized_projects/7.webp",
+    "links": {
+      "github": "https://github.com/IlionAcre/glassdor-analysis",
+      "webpage": "https://glassboard.falcontreras.com/",
+      "request_demo": false
+    }
+  }
+]

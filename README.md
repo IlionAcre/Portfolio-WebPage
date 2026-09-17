@@ -74,15 +74,24 @@ curl -X POST -H "X-Refresh-Token: <REFRESH_TOKEN>" https://<host>/admin/refresh
 
 Under gunicorn this triggers a graceful reload of every worker (not just the one that handles the request) - verified end-to-end via Podman, see commit history for details.
 
-#### Project GIF images
+#### Updating projects, skills, and preview assets
 
-Project preview GIFs live in S3 and are fetched at startup like everything else, **except** where a pre-optimized version has been committed to `static/optimized_projects/` (WebP, smaller than the source GIF - not all of them compress better, so not every project has one). If you update a project's GIF on S3:
+All project details and skills are maintained locally in `data/projects.json` and `data/skills.json`.
 
-```bash
-uv run --with pillow python scripts/optimize_project_gifs.py
-```
+To update preview media or project content:
+1. **Media:** Drop any raw screen recording or image (`.gif`, `.mp4`, `.png`) into `media_inbox/` (named by project ID or name, e.g. `1.gif` or `culprit.gif`).
+2. **Metadata:** Edit `data/projects.json` or `data/skills.json` directly.
+3. **Sync:** Run the unified sync script:
+   ```bash
+   uv run python scripts/sync.py
+   ```
+   This automatically:
+   - Resizes and compresses media to animated WebP (capped at 640px width).
+   - Saves optimized files to `static/optimized_projects/`.
+   - Links the asset in `data/projects.json`.
+   - Backs up and uploads `data/projects.json`, `data/skills.json`, and optimized media to S3.
+   - Pings `/admin/refresh` on production if `REFRESH_URL` is set in `.env`.
 
-Re-run this after pulling the new GIF locally (start the app once so it downloads to `static/generated/projects/`), then commit whatever lands in `static/optimized_projects/`. This is a manual step by design - it doesn't run automatically.
 
 #### CSS/JS minification
 

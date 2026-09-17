@@ -171,3 +171,5 @@ cython_debug/
 
 # Generated at runtime from S3, not source
 /static/generated/
+data_backup/
+media_inbox/

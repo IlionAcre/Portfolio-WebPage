@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Fabian Contreras — Fullstack Developer and IA Engineer. Portfolio showcasing projects, skills, and professional background.">
+  <meta name="description" content="Fabian Contreras — AI/Automation Systems Engineer and Data Scientist. Portfolio showcasing agent systems, LLM evaluation, and production pipelines.">
   <link rel="canonical" href="https://falcontreras.com/">
   <meta property="og:title" content="Fabian Contreras">
-  <meta property="og:description" content="Fullstack Developer and IA Engineer. Portfolio showcasing projects, skills, and professional background.">
+  <meta property="og:description" content="AI/Automation Systems Engineer and Data Scientist. Portfolio showcasing agent systems, LLM evaluation, and production pipelines.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://falcontreras.com/">
   <meta property="og:image" content="https://falcontreras.com/static/images/Vector.png">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Fabian Contreras">
-  <meta name="twitter:description" content="Fullstack Developer and IA Engineer. Portfolio showcasing projects, skills, and professional background.">
+  <meta name="twitter:description" content="AI/Automation Systems Engineer and Data Scientist. Portfolio showcasing agent systems, LLM evaluation, and production pipelines.">
   <meta name="twitter:image" content="https://falcontreras.com/static/images/Vector.png">
   <link rel="stylesheet" href="/static/vendor/splide/splide-core.min.css">
   <link rel="stylesheet" href="/static/css/style.min.css">
@@ -51,8 +51,8 @@
         <h1 class="header ff-header clr-neon-200 fs-primary-header">FABIAN CONTRERAS</h1></div>
       <div> 
       <div class="subtitle-container">
-        <h2 class="clr-primary-100 fs-secondary-header">Fullstack Developer</h2>
-        <h2 class="clr-primary-100 fs-secondary-header">IA Engineer</h2>
+        <h2 class="clr-primary-100 fs-secondary-header">AI/Automation Systems Engineer</h2>
+        <h2 class="clr-primary-100 fs-secondary-header">Data Scientist</h2>
       
       <aside class="socials">
         <a href="https://github.com/IlionAcre?tab=repositories">
@@ -100,14 +100,38 @@
                     <div class="project centered fs-txt">
                       <h2 class="fs-accent clr-primary-100 fw-semi-bold project-card-title">{{ project["title"] }}</h2>
                       <div class="project-card bg-mid">
-                        <img class= "project-img" src="{{ url_for('static', filename=icons['projects'][project['id'] | string]) }}" alt="{{ project['title'] }} project preview" loading="lazy" decoding="async">
+                        {% set project_id_str = project['id'] | string %}
+                        {% if project.get('image') %}
+                          {% set project_img_src = project['image'] if project['image'].startswith('http') else url_for('static', filename=project['image']) %}
+                        {% elif 'image' not in project and icons['projects'].get(project_id_str) %}
+                          {% set project_img_src = url_for('static', filename=icons['projects'][project_id_str]) %}
+                        {% else %}
+                          {% set project_img_src = url_for('static', filename='images/Vector.png') %}
+                        {% endif %}
+                        {% if project_img_src.endswith('.mp4') or project_img_src.endswith('.webm') %}
+                          <video class="project-img" autoplay loop muted playsinline preload="metadata">
+                            <source src="{{ project_img_src }}" type="video/mp4">
+                          </video>
+                        {% else %}
+                          <img class="project-img" src="{{ project_img_src }}" alt="{{ project['title'] }} project preview" {% if loop.first %}fetchpriority="high"{% else %}loading="lazy"{% endif %} decoding="async">
+                        {% endif %}
                       </div>
                       <div class="project-btns">
-                        {% for name, link in project["links"].items() %}
-                          <a href="{{ link }}">
-                            <button class="btn-default btn-neon btn-regular-200 fw-semi-bold">{{ name }}</button>
-                          </a>                          
-                        {% endfor %}
+                        {% if project.get("links") %}
+                          {% for name, link in project["links"].items() %}
+                            {% if name == "request_demo" %}
+                              {% if link %}
+                                <a href="#contact" class="request-demo-btn" data-project="{{ project['title'] }}">
+                                  <button type="button" class="btn-default btn-neon btn-regular-200 fw-semi-bold">Request a demo</button>
+                                </a>
+                              {% endif %}
+                            {% elif link and (link is string) and link.strip() %}
+                              <a href="{{ link }}" target="_blank" rel="noopener noreferrer">
+                                <button type="button" class="btn-default btn-neon btn-regular-200 fw-semi-bold">{{ name }}</button>
+                              </a>                          
+                            {% endif %}
+                          {% endfor %}
+                        {% endif %}
                       </div>
                       <p class="project-description clr-primary-100 fs-txt">{{ project["description"] }}</p>
                     </div>
@@ -175,7 +199,7 @@
           <div class="skills-container">
             {% for skill in skills %}
               <div class="skill-card bg-mid" data-type="{{ skill['type'] }}">
-                <img src="{{ icons['skill']['skill-' ~ skill['name']] }}" alt="{{ skill['name'] }}-Icon" class="skills-icon">
+                <img src="{{ icons['skill'].get('skill-' ~ skill['name'], '') }}" alt="{{ skill['name'] }}-Icon" class="skills-icon">
                 <p class="fs-txt clr-accent-900 fw-bold">{{ skill["name"] }}</p>
               </div>
             {% endfor %}
@@ -224,10 +248,9 @@
       <div class="about-main border-neon-400 bg-dark container centered">
         <h2 class="fs-section-title clr-neon-200 fw-semi-bold">ABOUT ME</h2>
         <p class="description clr-primary-100 fw-regular fs-txt">
-          I'm a data analyst and software developer with a solid background in math and a strong sense of how businesses work. 
-          I’m passionate about digging into data, solving problems, and delivering practical, user-friendly solutions that make a difference. 
-          With a curious mindset and an easy-going approach, I thrive in collaborative environments where I can keep learning and growing. 
-          My goal is always to go above and beyond expectations, bringing my diverse skills to the table.
+          I am an AI Systems Engineer and Data Scientist specializing in agent architectures, LLM evaluation infrastructure, and end-to-end automation. 
+          With a solid foundation in mathematics and machine learning, I focus on building reliable systems: deterministic agent workflows, rigorous statistical regression testing, and resilient data extraction pipelines. 
+          I engineer practical, production-ready solutions designed for reliability, measurable performance, and real business value.
         </p>
       </div>
     <div class="downwards-arrow">
@@ -264,6 +287,13 @@
             <div class="input-group message">
               <textarea id="contact-message" name="emailContent" class="form-input" required maxlength="5000"></textarea>
               <label for="contact-message">Message</label>
+            </div>
+            <div class="captcha-container" id="captcha-container">
+              <button type="button" id="captcha-btn" class="captcha-btn btn-neon fs-txt" aria-pressed="false">
+                <span class="captcha-checkbox" id="captcha-box"></span>
+                <span class="captcha-text" id="captcha-label">I'm not a robot (Click to verify)</span>
+              </button>
+              <input type="hidden" name="captcha_token" id="captcha-token" value="">
             </div>
             <button name="submit" type="submit" class="contact-btn btn-neon btn-regular-200 fs-secondary-header fw-semi-bold">Contact Me</button>
           </form>
@@ -321,6 +351,7 @@
   <script src="/static/vendor/splide/splide.min.js"></script>
   <script src="/static/js/static.min.js"></script>
   <script src="/static/js/carousel.min.js"></script>
+  <script src="/static/js/captcha.js"></script>
 
 </body>
 </html>

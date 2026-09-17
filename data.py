@@ -77,6 +77,28 @@ def fetch_data(folder_path, target_icons):
                 target_icons["projects"][project_id] = f"generated/projects/{project_id}.gif"
 
 
+def fetch_optimized_projects():
+    """Download any missing optimized WebP project previews from S3."""
+    os.makedirs(OPTIMIZED_PROJECTS_DIR, exist_ok=True)
+    try:
+        response = s3_client.list_objects_v2(Bucket=bucket_name, Prefix="optimized_projects/")
+        if "Contents" in response:
+            for obj in response["Contents"]:
+                key = obj["Key"]
+                if key.lower().endswith(".webp"):
+                    fname = os.path.basename(key)
+                    if not fname:
+                        continue
+                    dest = os.path.join(OPTIMIZED_PROJECTS_DIR, fname)
+                    if not os.path.exists(dest):
+                        content = s3_client.get_object(Bucket=bucket_name, Key=key)["Body"].read()
+                        with open(dest, "wb") as f:
+                            f.write(content)
+                        logger.info("Downloaded %s from S3 to %s", key, dest)
+    except Exception:
+        logger.exception("Failed to fetch optimized projects from S3")
+
+
 def load_content():
     """(Re)load skill_list, project_list, and icons from S3.
 
@@ -94,14 +116,34 @@ def load_content():
 
     new_icons = {"social": {}, "skill": {}, "projects": {}}
     fetch_data("images/", new_icons)
+    fetch_optimized_projects()
 
     skill_list = new_skill_list
     project_list = new_project_list
     icons = new_icons
 
 
+def load_local_fallback():
+    global skill_list, project_list
+    local_projects = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "projects.json")
+    local_skills = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "skills.json")
+    if os.path.exists(local_projects) and os.path.exists(local_skills):
+        try:
+            with open(local_projects, "r", encoding="utf-8") as f:
+                project_list = json.load(f)
+            with open(local_skills, "r", encoding="utf-8") as f:
+                skill_list = json.load(f)
+            logger.info("Loaded site content from local data/ files.")
+            return True
+        except Exception:
+            logger.exception("Failed to read local data/ fallback files.")
+    return False
+
+
 try:
     load_content()
 except Exception:
-    logger.exception("Failed to load site content from S3 (bucket=%s). The app cannot start without this data.", bucket_name)
-    raise
+    logger.warning("Failed to load site content from S3 (bucket=%s). Attempting local fallback...", bucket_name)
+    if not load_local_fallback():
+        logger.exception("Failed to load site content from both S3 and local data/. The app cannot start without this data.")
+        raise

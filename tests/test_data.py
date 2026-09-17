@@ -84,3 +84,30 @@ def test_load_content_rebuilds_icons_from_scratch(data_module):
     data_module.s3_client.list_objects_v2.side_effect = lambda Bucket, Prefix: {"Contents": []}
     data_module.load_content()
     assert data_module.icons["social"] == {}
+
+
+def test_fetch_optimized_projects_downloads_missing_webp(data_module):
+    webp_bytes = b"fake-webp-bytes"
+    def fake_list(Bucket, Prefix):
+        if Prefix == "optimized_projects/":
+            return {"Contents": [{"Key": "optimized_projects/3.webp"}]}
+        return {"Contents": []}
+
+    def fake_get(Bucket, Key):
+        from unittest.mock import MagicMock
+        if Key == "data/skills.json":
+            return {"Body": MagicMock(read=MagicMock(return_value=b"[]"))}
+        if Key == "data/projects.json":
+            return {"Body": MagicMock(read=MagicMock(return_value=b"[]"))}
+        if Key == "optimized_projects/3.webp":
+            return {"Body": MagicMock(read=MagicMock(return_value=webp_bytes))}
+        return {"Body": MagicMock(read=MagicMock(return_value=b""))}
+
+    data_module.s3_client.list_objects_v2.side_effect = fake_list
+    data_module.s3_client.get_object.side_effect = fake_get
+
+    data_module.fetch_optimized_projects()
+    target_path = os.path.join(data_module.OPTIMIZED_PROJECTS_DIR, "3.webp")
+    assert os.path.exists(target_path)
+    with open(target_path, "rb") as f:
+        assert f.read() == webp_bytes

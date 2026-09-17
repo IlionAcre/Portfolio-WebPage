@@ -155,6 +155,23 @@ document.addEventListener('click', (event) => {
     return;
   }
 
+  const demoBtn = event.target.closest('.request-demo-btn');
+  if (demoBtn) {
+    event.preventDefault();
+    scrollToSection('contact');
+    const projectTitle = demoBtn.getAttribute('data-project');
+    const subjectInput = document.getElementById('contact-subject');
+    if (subjectInput && projectTitle) {
+      subjectInput.value = `Demo Request: ${projectTitle.replace(/^Featured:\s*/i, '')}`;
+      subjectInput.classList.add('has-text');
+    }
+    const nameInput = document.getElementById('contact-name');
+    if (nameInput) {
+      nameInput.focus();
+    }
+    return;
+  }
+
   if (event.target.closest('.logo-icon')) {
     scrollToSection('home');
     return;
