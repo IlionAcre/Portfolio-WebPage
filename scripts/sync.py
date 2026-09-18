@@ -195,6 +195,19 @@ def validate_data():
     return projects, skills
 
 
+def empty_bucket(s3, bucket):
+    """Delete all objects from the S3 bucket."""
+    logger.info("Emptying S3 bucket %s...", bucket)
+    paginator = s3.get_paginator("list_objects_v2")
+    deleted_count = 0
+    for page in paginator.paginate(Bucket=bucket):
+        objects = [{"Key": obj["Key"]} for obj in page.get("Contents", [])]
+        if objects:
+            s3.delete_objects(Bucket=bucket, Delete={"Objects": objects})
+            deleted_count += len(objects)
+    logger.info("Emptied bucket %s (deleted %d objects)", bucket, deleted_count)
+
+
 def upload_to_s3(s3, bucket, projects, skills, uploaded_assets):
     # Backup remote files first
     os.makedirs(BACKUP_DIR, exist_ok=True)
@@ -222,18 +235,36 @@ def upload_to_s3(s3, bucket, projects, skills, uploaded_assets):
     )
     logger.info("Uploaded data/projects.json and data/skills.json to S3 bucket %s", bucket)
 
-    # Upload any new optimized media to S3
-    for asset_path in uploaded_assets:
-        fname = os.path.basename(asset_path)
-        s3_key = f"optimized_projects/{fname}"
-        with open(asset_path, "rb") as f:
-            s3.put_object(
-                Bucket=bucket,
-                Key=s3_key,
-                Body=f.read(),
-                ContentType="image/webp",
-            )
-        logger.info("Uploaded %s to s3://%s/%s", fname, bucket, s3_key)
+    # Upload SVG icons from data/icons/ to images/
+    icons_dir = os.path.join(DATA_DIR, "icons")
+    if os.path.isdir(icons_dir):
+        for icon_name in os.listdir(icons_dir):
+            if icon_name.endswith(".svg"):
+                icon_path = os.path.join(icons_dir, icon_name)
+                s3_key = f"images/{icon_name}"
+                with open(icon_path, "rb") as f:
+                    s3.put_object(
+                        Bucket=bucket,
+                        Key=s3_key,
+                        Body=f.read(),
+                        ContentType="image/svg+xml",
+                    )
+        logger.info("Uploaded SVG icons to s3://%s/images/", bucket)
+
+    # Upload all optimized project media to S3
+    if os.path.isdir(OPTIMIZED_DIR):
+        for fname in os.listdir(OPTIMIZED_DIR):
+            if fname.endswith(".webp"):
+                asset_path = os.path.join(OPTIMIZED_DIR, fname)
+                s3_key = f"optimized_projects/{fname}"
+                with open(asset_path, "rb") as f:
+                    s3.put_object(
+                        Bucket=bucket,
+                        Key=s3_key,
+                        Body=f.read(),
+                        ContentType="image/webp",
+                    )
+                logger.info("Uploaded %s to s3://%s/%s", fname, bucket, s3_key)
 
 
 def trigger_refresh(refresh_url):
@@ -261,6 +292,7 @@ def main():
     parser = argparse.ArgumentParser(description="Synchronize portfolio projects, skills, and preview assets.")
     parser.add_argument("--media", help="Optional path to a single media file to optimize and attach.")
     parser.add_argument("--project", type=int, help="Project ID for the --media file.")
+    parser.add_argument("--empty-bucket", action="store_true", help="Empty the S3 bucket before uploading fresh content.")
     parser.add_argument("--skip-s3", action="store_true", help="Skip S3 upload (local optimization only).")
     parser.add_argument("--dry-run", action="store_true", help="Preview actions without modifying files or S3.")
     parser.add_argument("--refresh-url", default=os.getenv("REFRESH_URL", "https://falcontreras.com"), help="URL of running web app to trigger /admin/refresh.")
@@ -308,10 +340,14 @@ def main():
         return
 
     if not args.dry_run:
+        if args.empty_bucket:
+            empty_bucket(s3, bucket)
         upload_to_s3(s3, bucket, projects, skills, modified_assets)
         if args.refresh_url:
             trigger_refresh(args.refresh_url)
     else:
+        if args.empty_bucket:
+            logger.info("[DRY RUN] Would empty S3 bucket %s", bucket)
         logger.info("[DRY RUN] Would upload projects.json, skills.json, and %d assets to S3", len(modified_assets))
 
     logger.info("Sync completed successfully!")

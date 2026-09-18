@@ -3,7 +3,7 @@
     "id": 1,
     "title": "Featured: Frontdesk",
     "description": "Channel-agnostic multimodal AI receptionist for home-services businesses. Features real-time Twilio voice streaming (Deepgram STT, streaming TTS), WhatsApp integration, photo-based damage triage, deterministic conversation state machines, and booking calendar integration.",
-    "image": null,
+    "image": "optimized_projects/1.webp",
     "links": {
       "github": "https://github.com/IlionAcre/frontdesk",
       "request_demo": true
@@ -13,7 +13,7 @@
     "id": 2,
     "title": "Job Monitor",
     "description": "Automated real-time job monitoring and alerting Telegram bot for freelance platforms like Upwork. Scrapes and filters incoming job postings based on skills, budget, and client history, delivering instant push notifications to mobile.",
-    "image": null,
+    "image": "optimized_projects/2.webp",
     "links": {
       "github": "https://github.com/IlionAcre/jobs",
       "request_demo": true
