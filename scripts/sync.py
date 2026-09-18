@@ -19,6 +19,7 @@ import argparse
 import json
 import logging
 import os
+import re
 import shutil
 import urllib.error
 import urllib.request
@@ -124,6 +125,14 @@ def match_project(file_stem, projects):
     return None
 
 
+def get_project_slug(project):
+    """Generate a clean alphanumeric slug from project title."""
+    title = project["title"].lower().replace("featured:", "").strip()
+    slug = re.sub(r"[^\w\s-]", "", title)
+    slug = re.sub(r"[-\s]+", "_", slug).strip("_")
+    return slug
+
+
 def process_inbox(projects, dry_run=False):
     """Scan media_inbox/ for raw assets, optimize them, and update projects."""
     if not os.path.isdir(MEDIA_INBOX):
@@ -150,8 +159,11 @@ def process_inbox(projects, dry_run=False):
             logger.warning("Skipping %s: no matching project found in data/projects.json", fname)
             continue
 
-        out_name = f"{matched_proj['id']}.webp"
+        slug = get_project_slug(matched_proj)
+        out_name = f"{slug}.webp"
+        id_name = f"{matched_proj['id']}.webp"
         dest_path = os.path.join(OPTIMIZED_DIR, out_name)
+        id_path = os.path.join(OPTIMIZED_DIR, id_name)
         rel_path = f"optimized_projects/{out_name}"
 
         if dry_run:
@@ -159,10 +171,12 @@ def process_inbox(projects, dry_run=False):
             continue
 
         orig_size, new_size, savings = optimize_image_or_animation(src_path, dest_path)
+        shutil.copy2(dest_path, id_path)
         logger.info(
-            "Optimized %s -> %s (%.2f MB -> %.2f MB, %.1f%% reduction)",
+            "Optimized %s -> %s & %s (%.2f MB -> %.2f MB, %.1f%% reduction)",
             fname,
             out_name,
+            id_name,
             orig_size / (1024 * 1024),
             new_size / (1024 * 1024),
             savings,
@@ -177,6 +191,7 @@ def process_inbox(projects, dry_run=False):
         shutil.move(src_path, os.path.join(archive_dir, fname))
 
         processed.append(dest_path)
+        processed.append(id_path)
 
     return processed
 
