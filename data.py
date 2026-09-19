@@ -5,6 +5,7 @@ import boto3
 from dotenv import load_dotenv
 import base64
 import re
+import sys
 
 load_dotenv()
 logger = logging.getLogger(__name__)
@@ -100,13 +101,53 @@ def fetch_optimized_projects():
 
 
 def load_content():
-    """(Re)load skill_list, project_list, and icons from S3.
+    """(Re)load skill_list, project_list, and icons from S3 or local files.
 
-    Rebuilds icons from scratch each call so a removed S3 object doesn't
-    leave a stale entry behind. Only affects the process it runs in - see
-    the /admin/refresh route docstring for the multi-worker caveat.
+    In local development (when not running under pytest and not on Cloud Run),
+    prefers local data/projects.json and data/skills.json so local edits are
+    immediately reflected without requiring a remote S3 sync.
     """
     global skill_list, project_list, icons
+
+    is_testing = "PYTEST_CURRENT_TEST" in os.environ or "pytest" in sys.modules
+    local_projects = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "projects.json")
+    local_skills = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "skills.json")
+
+    if not is_testing and not os.getenv("K_SERVICE") and os.path.exists(local_projects) and os.path.exists(local_skills):
+        try:
+            with open(local_projects, "r", encoding="utf-8") as f:
+                new_project_list = json.load(f)
+            with open(local_skills, "r", encoding="utf-8") as f:
+                new_skill_list = json.load(f)
+
+            new_icons = {"social": {}, "skill": {}, "projects": {}}
+            try:
+                fetch_data("images/", new_icons)
+                fetch_optimized_projects()
+            except Exception:
+                logger.warning("Could not fetch remote media; continuing with local assets.")
+
+            local_icons = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "icons")
+            if os.path.isdir(local_icons):
+                for fname in os.listdir(local_icons):
+                    if fname.endswith(".svg"):
+                        fpath = os.path.join(local_icons, fname)
+                        with open(fpath, "r", encoding="utf-8") as svg_f:
+                            content = svg_f.read()
+                        stem = fname.replace(".svg", "")
+                        if "icon" in fname:
+                            new_icons["social"][stem] = clean_path(content)
+                        elif "skill" in fname:
+                            base64_svg = base64.b64encode(content.encode("utf-8")).decode("utf-8")
+                            new_icons["skill"][stem] = f"data:image/svg+xml;base64,{base64_svg}"
+
+            skill_list = new_skill_list
+            project_list = new_project_list
+            icons = new_icons
+            logger.info("Loaded site content from local data/ files for local development.")
+            return
+        except Exception:
+            logger.exception("Failed to load local data files; falling back to S3.")
 
     skill_list_raw = s3_client.get_object(Bucket=bucket_name, Key="data/skills.json")["Body"].read().decode("utf-8")
     new_skill_list = json.loads(skill_list_raw)
@@ -124,15 +165,28 @@ def load_content():
 
 
 def load_local_fallback():
-    global skill_list, project_list
+    global skill_list, project_list, icons
     local_projects = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "projects.json")
     local_skills = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "skills.json")
+    local_icons = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "icons")
     if os.path.exists(local_projects) and os.path.exists(local_skills):
         try:
             with open(local_projects, "r", encoding="utf-8") as f:
                 project_list = json.load(f)
             with open(local_skills, "r", encoding="utf-8") as f:
                 skill_list = json.load(f)
+            if os.path.isdir(local_icons):
+                for fname in os.listdir(local_icons):
+                    if fname.endswith(".svg"):
+                        fpath = os.path.join(local_icons, fname)
+                        with open(fpath, "r", encoding="utf-8") as svg_f:
+                            content = svg_f.read()
+                        stem = fname.replace(".svg", "")
+                        if "icon" in fname:
+                            icons["social"][stem] = clean_path(content)
+                        elif "skill" in fname:
+                            base64_svg = base64.b64encode(content.encode("utf-8")).decode("utf-8")
+                            icons["skill"][stem] = f"data:image/svg+xml;base64,{base64_svg}"
             logger.info("Loaded site content from local data/ files.")
             return True
         except Exception:

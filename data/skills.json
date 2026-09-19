@@ -1,13 +1,98 @@
 [
-  {"id": 1, "name": "AI & ML", "type": "technical"},
-  {"id": 2, "name": "Automation", "type": "technical"},
-  {"id": 3, "name": "ML & NLP", "type": "technical"},
-  {"id": 4, "name": "Deployment & Cloud", "type": "technical"},
-  {"id": 5, "name": "Visualization", "type": "technical"},
-  {"id": 6, "name": "Web dev", "type": "technical"},
-  {"id": 7, "name": "Communication", "type": "soft"},
-  {"id": 8, "name": "Leadership", "type": "soft"},
-  {"id": 9, "name": "Teamwork", "type": "soft"},
-  {"id": 10, "name": "Critical thinking", "type": "soft"},
-  {"id": 11, "name": "Adaptability", "type": "soft"}
+  {
+    "id": 1,
+    "name": "Multi-Agent Systems",
+    "type": "technical",
+    "details": "Orchestration, dynamic routing, and collaborative agent architectures."
+  },
+  {
+    "id": 2,
+    "name": "AI Agent & LLM Evaluation",
+    "type": "technical",
+    "details": "Agent benchmarks, trajectory analysis, hallucination detection, and statistical testing."
+  },
+  {
+    "id": 3,
+    "name": "Multimodal AI",
+    "type": "technical",
+    "details": "Vision-language processing, audio pipelines, and document understanding."
+  },
+  {
+    "id": 4,
+    "name": "Prompt Engineering & Guardrails",
+    "type": "technical",
+    "details": "Structured schema outputs, few-shot prompting, and safety boundary enforcement."
+  },
+  {
+    "id": 5,
+    "name": "Web Scraping",
+    "type": "technical",
+    "details": "Dynamic SPA rendering, proxy rotation, anti-bot mitigation, and DOM parsing."
+  },
+  {
+    "id": 6,
+    "name": "ETL Data Pipelines",
+    "type": "technical",
+    "details": "PostgreSQL, DuckDB, Redis, automated ingestion, schema validation, and SQL pipelines."
+  },
+  {
+    "id": 7,
+    "name": "Backend Engineering",
+    "type": "technical",
+    "details": "Python (FastAPI, Flask), Node.js, Java (Spring Boot), REST APIs, and worker queues."
+  },
+  {
+    "id": 8,
+    "name": "CI-CD & Cloud Deployment",
+    "type": "technical",
+    "details": "Docker, Google Cloud Run, GitHub Actions, and AWS S3 storage."
+  },
+  {
+    "id": 9,
+    "name": "Root Cause Diagnosis",
+    "type": "practices",
+    "details": "First-principles debugging, isolating core defects, and failure reproduction."
+  },
+  {
+    "id": 10,
+    "name": "Fault-Tolerant Pipelines",
+    "type": "practices",
+    "details": "Exponential backoff, retry mechanisms, circuit breaking, and failure recovery."
+  },
+  {
+    "id": 11,
+    "name": "System Observability",
+    "type": "practices",
+    "details": "Structured logging, error telemetry, audit trails, and runtime metrics."
+  },
+  {
+    "id": 12,
+    "name": "Benchmark-Driven Development",
+    "type": "practices",
+    "details": "Standardized scorecards, regression baselines, and quantitative targets."
+  },
+  {
+    "id": 13,
+    "name": "Automated Regression Testing",
+    "type": "practices",
+    "details": "Unit, integration, and end-to-end testing suites with CI assertions."
+  },
+  {
+    "id": 14,
+    "name": "Statistical Significance Testing",
+    "type": "practices",
+    "details": "Confidence intervals, A/B hypothesis verification, and variance control."
+  },
+  {
+    "id": 15,
+    "name": "Zero-to-One Prototyping",
+    "type": "practices",
+    "details": "Rapid proof-of-concept delivery, architectural spikes, and viable solutions."
+  },
+  {
+    "id": 16,
+    "name": "Autonomous Project Execution",
+    "type": "practices",
+    "details": "End-to-end task delivery, ambiguity resolution, and self-directed execution."
+  }
 ]
