@@ -463,8 +463,6 @@ header {
 .skills-menu-btn {
     display: flex;
     flex-direction: column;
-    cursor: pointer;
-    user-select: none;
 }
 
 
