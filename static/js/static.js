@@ -204,17 +204,6 @@ document.addEventListener('click', (event) => {
     return;
   }
 
-  const skillsMenuBtn = event.target.closest('.skills-menu-btn');
-  if (skillsMenuBtn) {
-    const btn = skillsMenuBtn.querySelector('.btn-skills');
-    if (btn) {
-      if (btn.classList.contains('technical')) toggleCheckbox('.technical');
-      else if (btn.classList.contains('practices') || btn.classList.contains('soft')) toggleCheckbox('.practices, .soft');
-      else if (btn.classList.contains('all')) toggleCheckbox('.all');
-      return;
-    }
-  }
-
   const skillsBtn = event.target.closest('.btn-skills');
   if (skillsBtn) {
     if (skillsBtn.classList.contains('technical')) toggleCheckbox('.technical');
