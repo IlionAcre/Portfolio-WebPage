@@ -402,6 +402,10 @@ header {
     height: 35px;
 }
 
+.project-btns button {
+    text-transform: lowercase;
+}
+
 .btn-default {
     cursor: pointer;
     min-width: 120px;

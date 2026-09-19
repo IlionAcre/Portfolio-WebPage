@@ -21,7 +21,7 @@
   },
   {
     "id": 3,
-    "title": "culprit",
+    "title": "Culprit",
     "description": "Root-cause failure diagnosis for production AI agents. Instead of dumping long traces into LLMs, culprit localizes divergence deterministically through a 21-class failure taxonomy, pgvector contrastive diffing against successful runs, and targeted adjudication. Validated on TRAIL and Who&When benchmarks.",
     "image": "optimized_projects/culprit.webp",
     "links": {
@@ -41,7 +41,7 @@
   },
   {
     "id": 5,
-    "title": "gmaps_leads",
+    "title": "GMaps Leads",
     "description": "Automated B2B lead generation pipeline extracting structured business intelligence from Google Maps. Built with SeleniumBase and anti-bot evasions, it extracts verified business details, contact info, ratings, and service areas, validating records with Pydantic and exporting to Excel, CSV, JSON, and SQL.",
     "image": "optimized_projects/gmaps_leads.webp",
     "links": {

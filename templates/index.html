@@ -16,7 +16,7 @@
   <meta name="twitter:image" content="https://falcontreras.com/static/images/Vector.png">
   <link rel="stylesheet" href="/static/vendor/splide/splide-core.min.css">
   <link rel="stylesheet" href="/static/css/style.min.css">
-  <link rel="stylesheet" href="/static/css/landing.min.css">
+  <link rel="stylesheet" href="/static/css/landing.min.css?v=2">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="shortcut icon" href="/static/images/Vector.ico" type="image/x-icon">
@@ -122,12 +122,12 @@
                             {% if name == "request_demo" %}
                               {% if link %}
                                 <a href="#contact" class="request-demo-btn" data-project="{{ project['title'] }}">
-                                  <button type="button" class="btn-default btn-neon btn-regular-200 fw-semi-bold">Request a demo</button>
+                                  <button type="button" class="btn-default btn-neon btn-regular-200 fw-semi-bold">request a demo</button>
                                 </a>
                               {% endif %}
                             {% elif link and (link is string) and link.strip() %}
                               <a href="{{ link }}" target="_blank" rel="noopener noreferrer">
-                                <button type="button" class="btn-default btn-neon btn-regular-200 fw-semi-bold">{{ name }}</button>
+                                <button type="button" class="btn-default btn-neon btn-regular-200 fw-semi-bold">{{ name | lower }}</button>
                               </a>                          
                             {% endif %}
                           {% endfor %}
