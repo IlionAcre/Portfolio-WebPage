@@ -105,32 +105,28 @@ function filterSkills() {
   const skillCards = document.querySelectorAll(".skill-card");
 
   // Determine which filter is active
-  let activeFilter = null;
-  if (skillsContainer.querySelector(".technical").classList.contains("btn-check--checked")) {
+  let activeFilter = "all";
+  if (skillsContainer.querySelector(".technical")?.classList.contains("btn-check--checked")) {
     activeFilter = "technical";
-  } else if (skillsContainer.querySelector(".soft").classList.contains("btn-check--checked")) {
-    activeFilter = "soft";
-  } else if (skillsContainer.querySelector(".all").classList.contains("btn-check--checked")) {
+  } else if (skillsContainer.querySelector(".practices")?.classList.contains("btn-check--checked") ||
+             skillsContainer.querySelector(".soft")?.classList.contains("btn-check--checked")) {
+    activeFilter = "practices";
+  } else if (skillsContainer.querySelector(".all")?.classList.contains("btn-check--checked")) {
     activeFilter = "all";
   }
 
+  // Reset flipped state when filter changes
+  skillCards.forEach(card => card.classList.remove("is-flipped"));
+
   // Show/hide skill cards based on the active filter
-  if (activeFilter === "all" || activeFilter === null) {
-    // Show all skills if "All" is active or if no filter is selected
-    skillCards.forEach(card => {
-      card.style.display = "flex";
-    });
-  } else {
-    // Show only the skills that match the active filter type
-    skillCards.forEach(card => {
-      const skillType = card.getAttribute("data-type");
-      if (skillType === activeFilter) {
-        card.style.display = "flex";
-      } else {
-        card.style.display = "none";
-      }
-    });
-  }
+  skillCards.forEach(card => {
+    const skillType = card.getAttribute("data-type");
+    if (activeFilter === "all" || skillType === activeFilter || (activeFilter === "practices" && skillType === "soft")) {
+      card.style.display = "block";
+    } else {
+      card.style.display = "none";
+    }
+  });
 }
 
 
@@ -189,10 +185,27 @@ document.addEventListener('click', (event) => {
     return;
   }
 
+  const skillCard = event.target.closest('.skill-card');
+  if (skillCard) {
+    skillCard.classList.toggle('is-flipped');
+    return;
+  }
+
+  const skillsMenuBtn = event.target.closest('.skills-menu-btn');
+  if (skillsMenuBtn) {
+    const btn = skillsMenuBtn.querySelector('.btn-skills');
+    if (btn) {
+      if (btn.classList.contains('technical')) toggleCheckbox('.technical');
+      else if (btn.classList.contains('practices') || btn.classList.contains('soft')) toggleCheckbox('.practices, .soft');
+      else if (btn.classList.contains('all')) toggleCheckbox('.all');
+    }
+    return;
+  }
+
   const skillsBtn = event.target.closest('.btn-skills');
   if (skillsBtn) {
     if (skillsBtn.classList.contains('technical')) toggleCheckbox('.technical');
-    else if (skillsBtn.classList.contains('soft')) toggleCheckbox('.soft');
+    else if (skillsBtn.classList.contains('practices') || skillsBtn.classList.contains('soft')) toggleCheckbox('.practices, .soft');
     else if (skillsBtn.classList.contains('all')) toggleCheckbox('.all');
     return;
   }
@@ -200,6 +213,16 @@ document.addEventListener('click', (event) => {
   const endBar = event.target.closest('.end-bar');
   if (endBar) {
     toggleLight(endBar);
+  }
+});
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter' || event.key === ' ') {
+    const activeCard = document.activeElement ? document.activeElement.closest('.skill-card') : null;
+    if (activeCard) {
+      event.preventDefault();
+      activeCard.classList.toggle('is-flipped');
+    }
   }
 });
 

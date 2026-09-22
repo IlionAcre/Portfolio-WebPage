@@ -16,7 +16,7 @@
   <meta name="twitter:image" content="https://falcontreras.com/static/images/Vector.png">
   <link rel="stylesheet" href="/static/vendor/splide/splide-core.min.css">
   <link rel="stylesheet" href="/static/css/style.min.css">
-  <link rel="stylesheet" href="/static/css/landing.min.css?v=2">
+  <link rel="stylesheet" href="/static/css/landing.min.css?v=3">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="shortcut icon" href="/static/images/Vector.ico" type="image/x-icon">
@@ -170,16 +170,15 @@
             <button class="btn-skills btn-neon btn-check all btn-check--checked"></button>
           </div>
           <div class="skills-menu-btn centered fw-bold fs-accent">
-            <span class="skills-btn-text clr-primary-100">Soft</span>
-            <button class="btn-skills btn-neon btn-check soft"></button>
+            <span class="skills-btn-text clr-primary-100">Practices</span>
+            <button class="btn-skills btn-neon btn-check practices"></button>
           </div>
         </aside>
 
         <div class="skills-content container centered">
 
           <h2 class="fs-section-title clr-neon-200 fw-bold margin-top-sm">SKILLS</h2>
-          <p class="fs-txt clr-primary-100 fw-regular skills-description">Throughout my career, I've developed a strong set of technical abilities 
-            alongside essential interpersonal skills, which helps me approach challenges with a balanced perspective.
+          <p class="fs-txt clr-primary-100 fw-regular skills-description">Core technical capabilities and engineering practices developed through building production systems, agent architectures, and data pipelines.
           </p>
           <div class="center-bar fw-bold fs-accent">
             <div class="skills-menu-btn centered">
@@ -191,16 +190,25 @@
               <button class="btn-skills btn-neon btn-check all btn-check--checked"></button>
             </div>
             <div class="skills-menu-btn centered fw-bold fs-accent">
-              <span class="skills-btn-text clr-primary-100">Soft</span>
-              <button class="btn-skills btn-neon btn-check soft"></button>
+              <span class="skills-btn-text clr-primary-100">Practices</span>
+              <button class="btn-skills btn-neon btn-check practices"></button>
             </div>
           </div>
           
           <div class="skills-container">
             {% for skill in skills %}
-              <div class="skill-card bg-mid" data-type="{{ skill['type'] }}">
-                <img src="{{ icons['skill'].get('skill-' ~ skill['name'], '') }}" alt="{{ skill['name'] }}-Icon" class="skills-icon">
-                <p class="fs-txt clr-accent-900 fw-bold">{{ skill["name"] }}</p>
+              <div class="skill-card" data-type="{{ skill['type'] }}" tabindex="0" role="button" aria-label="{{ skill['name'] }} - click to view details">
+                <div class="skill-card-inner">
+                  <div class="skill-card-front bg-mid">
+                    <img src="{{ icons['skill'].get('skill-' ~ skill['name'], '') }}" alt="{{ skill['name'] }}-Icon" class="skills-icon">
+                    <p class="fs-txt clr-accent-900 fw-bold skill-name">{{ skill["name"] }}</p>
+                    <span class="skill-hint">tap to flip</span>
+                  </div>
+                  <div class="skill-card-back">
+                    <p class="skill-back-title fw-bold clr-accent-200">{{ skill["name"] }}</p>
+                    <p class="skill-back-details clr-primary-100">{{ skill.get("details", "") }}</p>
+                  </div>
+                </div>
               </div>
             {% endfor %}
           </div>
@@ -218,8 +226,8 @@
             <button class="btn-skills btn-neon btn-check all btn-check--checked"></button>
           </div>
           <div class="skills-menu-btn centered fw-bold fs-accent">
-            <span class="skills-btn-text clr-primary-100">Soft</span>
-            <button class="btn-skills btn-neon btn-check soft"></button>
+            <span class="skills-btn-text clr-primary-100">Practices</span>
+            <button class="btn-skills btn-neon btn-check practices"></button>
           </div>
         </aside>
       </div>
@@ -349,7 +357,7 @@
   </main>
 
   <script src="/static/vendor/splide/splide.min.js"></script>
-  <script src="/static/js/static.min.js"></script>
+  <script src="/static/js/static.min.js?v=3"></script>
   <script src="/static/js/carousel.min.js"></script>
   <script src="/static/js/captcha.js"></script>
 
