@@ -16,7 +16,7 @@
   <meta name="twitter:image" content="https://falcontreras.com/static/images/Vector.png">
   <link rel="stylesheet" href="/static/vendor/splide/splide-core.min.css">
   <link rel="stylesheet" href="/static/css/style.min.css">
-  <link rel="stylesheet" href="/static/css/landing.v3.min.css">
+  <link rel="stylesheet" href="/static/css/landing.v4.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="shortcut icon" href="/static/images/Vector.ico" type="image/x-icon">
@@ -197,12 +197,11 @@
           
           <div class="skills-container">
             {% for skill in skills %}
-              <div class="skill-card" data-type="{{ skill['type'] }}" tabindex="0" role="button" aria-label="{{ skill['name'] }} - click to view details">
+              <div class="skill-card" data-type="{{ skill['type'] }}" tabindex="0" role="button" aria-label="{{ skill['name'] }}">
                 <div class="skill-card-inner">
                   <div class="skill-card-front bg-mid">
                     <img src="{{ icons['skill'].get('skill-' ~ skill['name'], '') }}" alt="{{ skill['name'] }}-Icon" class="skills-icon">
                     <p class="fs-txt clr-accent-900 fw-bold skill-name">{{ skill["name"] }}</p>
-                    <span class="skill-hint">tap to flip</span>
                   </div>
                   <div class="skill-card-back">
                     <p class="skill-back-title fw-bold clr-accent-200">{{ skill["name"] }}</p>
@@ -357,7 +356,7 @@
   </main>
 
   <script src="/static/vendor/splide/splide.min.js"></script>
-  <script src="/static/js/static.v3.min.js"></script>
+  <script src="/static/js/static.v4.min.js"></script>
   <script src="/static/js/carousel.min.js"></script>
   <script src="/static/js/captcha.js"></script>
 
