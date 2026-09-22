@@ -16,9 +16,11 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 
 npx --yes terser static/js/static.js -c -m -o static/js/static.min.js
+cp static/js/static.min.js static/js/static.v3.min.js
 npx --yes terser static/js/carousel.js -c -m -o static/js/carousel.min.js
 
 npx --yes lightningcss-cli --minify static/css/style.css -o static/css/style.min.css
 npx --yes lightningcss-cli --minify static/css/landing.css -o static/css/landing.min.css
+cp static/css/landing.min.css static/css/landing.v3.min.css
 
 echo "Done. Diff the .min files and commit alongside the source changes that prompted this run."
