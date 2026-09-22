@@ -88,11 +88,5 @@
     "name": "Zero-to-One Prototyping",
     "type": "practices",
     "details": "Rapid proof-of-concept delivery, architectural spikes, and viable solutions."
-  },
-  {
-    "id": 16,
-    "name": "Autonomous Project Execution",
-    "type": "practices",
-    "details": "End-to-end task delivery, ambiguity resolution, and self-directed execution."
   }
 ]
