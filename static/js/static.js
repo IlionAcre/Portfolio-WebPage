@@ -127,6 +127,11 @@ function filterSkills() {
       card.style.display = "none";
     }
   });
+
+  const sc = document.querySelector(".skills-container");
+  if (sc) {
+    sc.scrollTop = 0;
+  }
 }
 
 
