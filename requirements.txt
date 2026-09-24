@@ -30,7 +30,7 @@ flask-wtf==1.3.0
     # via 1-minimalistic-landing-page
 gunicorn==26.0.0
     # via 1-minimalistic-landing-page
-itsdangerous==2.1.2
+itsdangerous==2.2.0
     # via
     #   flask
     #   flask-wtf
